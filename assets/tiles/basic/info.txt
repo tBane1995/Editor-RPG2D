@@ -1,0 +1,20 @@
+Any tile is a part of whole set. 
+
+/////////////////////////////////////////
+
+set parts:
+0_1_2
+3_4_5
+6_7_8
+
+/////////////////////////////////////////
+
+tile_0		left top corner
+tile_1		top horizontal
+tile_2		right top corner
+tile_3		left vertical
+tile_4		center
+tile_5		right vertical
+tile_6		bottom left corner
+tile_7		bottom horizontal
+tile_8		bottom right corner

@@ -1,0 +1,160 @@
+name "testBuilding"
+size 36 40
+door "doors/wooden_door"
+top_walls "walls/wooden_wall"
+center_walls "walls/wooden_wall"
+bottom_walls "walls/wooden_wall"
+windows "buildings/parts/window"
+
+// FLOORS
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0
+0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0
+0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0
+0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0
+0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0
+0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0
+0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+// WALLS
+Wall "walls/stone_wall" 336 624
+Wall "walls/stone_wall" 368 624
+Wall "walls/stone_wall" 400 624
+Wall "walls/stone_wall" 432 592
+Wall "walls/stone_wall" 464 560
+Wall "walls/stone_wall" 496 528
+Wall "walls/stone_wall" 528 496
+Wall "walls/stone_wall" 560 464
+Wall "walls/stone_wall" 240 624
+Wall "walls/stone_wall" 208 624
+Wall "walls/stone_wall" 176 624
+Wall "walls/stone_wall" 144 592
+Wall "walls/stone_wall" 112 560
+Wall "walls/stone_wall" 80 528
+Wall "walls/stone_wall" 48 496
+Wall "walls/stone_wall" 16 464
+Wall "walls/stone_wall" 528 208
+Wall "walls/stone_wall" 496 176
+Wall "walls/stone_wall" 464 144
+Wall "walls/stone_wall" 432 112
+Wall "walls/stone_wall" 400 80
+Wall "walls/stone_wall" 176 80
+Wall "walls/stone_wall" 144 112
+Wall "walls/stone_wall" 112 144
+Wall "walls/stone_wall" 80 176
+Wall "walls/stone_wall" 48 208
+Wall "walls/stone_wall" 208 48
+Wall "walls/stone_wall" 240 48
+Wall "walls/stone_wall" 272 48
+Wall "walls/stone_wall" 304 48
+Wall "walls/stone_wall" 336 48
+Wall "walls/stone_wall" 368 48
+Wall "walls/set_stone_wall_2" 560 176
+Wall "walls/set_stone_wall_2" 528 144
+Wall "walls/set_stone_wall_2" 496 112
+Wall "walls/set_stone_wall_2" 464 80
+Wall "walls/set_stone_wall_2" 432 48
+Wall "walls/set_stone_wall_2" 400 16
+Wall "walls/set_stone_wall_2" 176 560
+Wall "walls/set_stone_wall_2" 144 528
+Wall "walls/set_stone_wall_2" 112 496
+Wall "walls/set_stone_wall_2" 80 464
+Wall "walls/set_stone_wall_2" 48 432
+Wall "walls/set_stone_wall_0" 176 16
+Wall "walls/set_stone_wall_0" 144 48
+Wall "walls/set_stone_wall_0" 112 80
+Wall "walls/set_stone_wall_0" 80 112
+Wall "walls/set_stone_wall_0" 48 144
+Wall "walls/set_stone_wall_0" 16 176
+Wall "walls/set_stone_wall_0" 400 560
+Wall "walls/set_stone_wall_0" 432 528
+Wall "walls/set_stone_wall_0" 464 496
+Wall "walls/set_stone_wall_0" 496 464
+Wall "walls/set_stone_wall_0" 528 432
+Wall "walls/set_stone_wall_8" 560 432
+Wall "walls/set_stone_wall_8" 528 464
+Wall "walls/set_stone_wall_8" 496 496
+Wall "walls/set_stone_wall_8" 464 528
+Wall "walls/set_stone_wall_8" 432 560
+Wall "walls/set_stone_wall_8" 400 592
+Wall "walls/set_stone_wall_8" 48 176
+Wall "walls/set_stone_wall_8" 80 144
+Wall "walls/set_stone_wall_8" 112 112
+Wall "walls/set_stone_wall_8" 144 80
+Wall "walls/set_stone_wall_8" 176 48
+Wall "walls/set_stone_wall_5" 528 176
+Wall "walls/set_stone_wall_5" 496 144
+Wall "walls/set_stone_wall_5" 464 112
+Wall "walls/set_stone_wall_5" 432 80
+Wall "walls/set_stone_wall_5" 400 48
+Wall "walls/set_stone_wall_5" 16 432
+Wall "walls/set_stone_wall_5" 48 464
+Wall "walls/set_stone_wall_5" 80 496
+Wall "walls/set_stone_wall_5" 112 528
+Wall "walls/set_stone_wall_5" 144 560
+Wall "walls/set_stone_wall_5" 176 592
+Wall "walls/set_stone_wall_6" 240 592
+Wall "walls/set_stone_wall_7" 336 592
+Wall "walls/set_stone_wall_3" 560 400
+Wall "walls/set_stone_wall_3" 560 368
+Wall "walls/set_stone_wall_3" 560 336
+Wall "walls/set_stone_wall_3" 560 304
+Wall "walls/set_stone_wall_3" 560 272
+Wall "walls/set_stone_wall_3" 560 240
+Wall "walls/set_stone_wall_3" 560 208
+Wall "walls/set_stone_wall_3" 16 400
+Wall "walls/set_stone_wall_3" 16 368
+Wall "walls/set_stone_wall_3" 16 336
+Wall "walls/set_stone_wall_3" 16 304
+Wall "walls/set_stone_wall_3" 16 272
+Wall "walls/set_stone_wall_3" 16 240
+Wall "walls/set_stone_wall_3" 16 208
+Wall "walls/set_stone_wall_1" 368 592
+Wall "walls/set_stone_wall_1" 208 592
+Wall "walls/set_stone_wall_1" 208 16
+Wall "walls/set_stone_wall_1" 240 16
+Wall "walls/set_stone_wall_1" 272 16
+Wall "walls/set_stone_wall_1" 304 16
+Wall "walls/set_stone_wall_1" 336 16
+Wall "walls/set_stone_wall_1" 368 16
+Wall "walls/stone_wall" 400 432
+Wall "walls/stone_wall" 176 432
+Wall "walls/stone_wall" 176 208
+Wall "walls/stone_wall" 400 224
+Wall "walls/set_stone_wall_4" 400 192
+Wall "walls/set_stone_wall_4" 400 400
+Wall "walls/set_stone_wall_4" 176 400
+Wall "walls/set_stone_wall_4" 176 176
+
