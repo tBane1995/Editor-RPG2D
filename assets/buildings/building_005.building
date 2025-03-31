@@ -1,0 +1,95 @@
+name "testBuilding"
+size 20 20
+door "doors/wooden_door"
+top_walls "walls/stone_wall"
+center_walls "walls/stone_wall"
+bottom_walls "walls/stone_wall_overgrown"
+windows "buildings/parts/window_2"
+
+// FLOORS
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+// FURNITURES
+Furniture "furnitures/bookshelf" 64 80
+Furniture "furnitures/bookshelf" 256 80
+Furniture "furnitures/bookshelf" 256 240
+Furniture "furnitures/bookshelf" 64 240
+Furniture "furnitures/lectern" 112 80
+Furniture "furnitures/lectern" 160 80
+Furniture "furnitures/lectern" 208 80
+Furniture "furnitures/bookshelf" 256 160
+Furniture "furnitures/bookshelf" 64 160
+Furniture "furnitures/lectern" 112 160
+Furniture "furnitures/lectern" 208 160
+Furniture "furnitures/lectern" 208 240
+Furniture "furnitures/lectern" 112 240
+
+// WALLS
+Wall "walls/set_stone_wall_0" 16 16
+Wall "walls/set_stone_wall_2" 304 16
+Wall "walls/set_stone_wall_1" 272 16
+Wall "walls/set_stone_wall_1" 240 16
+Wall "walls/set_stone_wall_1" 208 16
+Wall "walls/set_stone_wall_1" 176 16
+Wall "walls/set_stone_wall_1" 144 16
+Wall "walls/set_stone_wall_1" 112 16
+Wall "walls/set_stone_wall_1" 80 16
+Wall "walls/set_stone_wall_1" 48 16
+Wall "walls/set_stone_wall_3" 16 48
+Wall "walls/set_stone_wall_3" 16 80
+Wall "walls/set_stone_wall_3" 16 112
+Wall "walls/set_stone_wall_3" 16 144
+Wall "walls/set_stone_wall_3" 16 176
+Wall "walls/set_stone_wall_3" 16 208
+Wall "walls/set_stone_wall_3" 16 240
+Wall "walls/set_stone_wall_3" 304 48
+Wall "walls/set_stone_wall_3" 304 80
+Wall "walls/set_stone_wall_3" 304 112
+Wall "walls/set_stone_wall_3" 304 144
+Wall "walls/set_stone_wall_3" 304 176
+Wall "walls/set_stone_wall_3" 304 208
+Wall "walls/set_stone_wall_3" 304 240
+Wall "walls/set_stone_wall_8" 304 272
+Wall "walls/set_stone_wall_5" 16 272
+Wall "walls/set_stone_wall_1" 48 272
+Wall "walls/set_stone_wall_1" 80 272
+Wall "walls/set_stone_wall_1" 272 272
+Wall "walls/set_stone_wall_1" 240 272
+Wall "walls/set_stone_wall_6" 112 272
+Wall "walls/set_stone_wall_7" 208 272
+Wall "walls/stone_wall" 48 48
+Wall "walls/stone_wall" 80 48
+Wall "walls/stone_wall" 112 48
+Wall "walls/stone_wall" 144 48
+Wall "walls/stone_wall" 176 48
+Wall "walls/stone_wall" 208 48
+Wall "walls/stone_wall" 240 48
+Wall "walls/stone_wall" 272 48
+Wall "walls/stone_wall_overgrown" 112 304
+Wall "walls/stone_wall_overgrown" 80 304
+Wall "walls/stone_wall_overgrown" 48 304
+Wall "walls/stone_wall_overgrown" 16 304
+Wall "walls/stone_wall_overgrown" 208 304
+Wall "walls/stone_wall_overgrown" 240 304
+Wall "walls/stone_wall_overgrown" 272 304
+Wall "walls/stone_wall_overgrown" 304 304
+
