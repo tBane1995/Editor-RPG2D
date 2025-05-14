@@ -1,0 +1,3 @@
+"Bardzo chętnie, dam ci za nią miksturę leczniczą."
+9, "Proszę, oto skóra wilczura."
+5, "Może innym razem ... "
