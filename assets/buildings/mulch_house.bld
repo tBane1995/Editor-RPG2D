@@ -1,0 +1,64 @@
+name "testBuilding"
+size 16 16
+door "doors\wooden_door"
+top_walls "walls\mulch_wall"
+center_walls "walls\mulch_wall"
+bottom_walls "walls\mulch_wall_overgrown"
+windows "buildings\parts\window_2"
+
+// FLOORS
+0 0 0 0 0 0 0 0 0 0 0 0 3 3 3 0
+0 0 2 2 2 2 2 2 0 3 3 3 3 3 3 3
+3 3 3 3 3 1 1 1 1 1 1 1 1 1 1 1
+3 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3
+3 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+
+// WALLS
+Wall "walls\mulch_wall_overgrown" 176 240
+Wall "walls\mulch_wall_overgrown" 208 240
+Wall "walls\mulch_wall_overgrown" 240 240
+Wall "walls\mulch_wall_overgrown" 80 240
+Wall "walls\mulch_wall_overgrown" 48 240
+Wall "walls\mulch_wall_overgrown" 16 240
+Wall "walls\mulch_wall_overgrown" 48 48
+Wall "walls\mulch_wall_overgrown" 80 48
+Wall "walls\mulch_wall_overgrown" 112 48
+Wall "walls\mulch_wall_overgrown" 144 48
+Wall "walls\mulch_wall_overgrown" 176 48
+Wall "walls\mulch_wall_overgrown" 208 48
+Wall "walls\set_mulch_wall_0" 16 16
+Wall "walls\set_mulch_wall_5" 16 208
+Wall "walls\set_mulch_wall_6" 80 208
+Wall "walls\set_mulch_wall_7" 176 208
+Wall "walls\set_mulch_wall_8" 240 208
+Wall "walls\set_mulch_wall_2" 240 16
+Wall "walls\set_mulch_wall_1" 208 16
+Wall "walls\set_mulch_wall_1" 176 16
+Wall "walls\set_mulch_wall_1" 144 16
+Wall "walls\set_mulch_wall_1" 112 16
+Wall "walls\set_mulch_wall_1" 80 16
+Wall "walls\set_mulch_wall_1" 48 16
+Wall "walls\set_mulch_wall_1" 48 208
+Wall "walls\set_mulch_wall_1" 208 208
+Wall "walls\set_mulch_wall_3" 240 176
+Wall "walls\set_mulch_wall_3" 240 144
+Wall "walls\set_mulch_wall_3" 240 112
+Wall "walls\set_mulch_wall_3" 240 80
+Wall "walls\set_mulch_wall_3" 240 48
+Wall "walls\set_mulch_wall_3" 16 48
+Wall "walls\set_mulch_wall_3" 16 80
+Wall "walls\set_mulch_wall_3" 16 112
+Wall "walls\set_mulch_wall_3" 16 144
+Wall "walls\set_mulch_wall_3" 16 176
+

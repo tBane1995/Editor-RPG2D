@@ -1,0 +1,2 @@
+"Czego chcesz od starego Johna. Daj mi spokój."
+12, "Ja tylko chciałem..."

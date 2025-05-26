@@ -1,0 +1,4 @@
+"Nazywam się Jack i jestem handlarzem, chcesz może rzucić okiem na moje towary?"
+2, "Kim Jesteś?"
+3, "Co tutaj robisz?"
+-1, "Żegnaj."

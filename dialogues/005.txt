@@ -1,0 +1,7 @@
+"Czego chcesz? Jeśli masz jakieś skóry, to chętnie je od Ciebie odkupię."
+6, "Kim jesteś?"
+7, "Co tutaj robisz?"
+10, "Nauczysz mnie czegoś o polowaniu?"
+8, "Mam skórę wilczura, chcesz ją odkupić?"
+11, "Testowa opcja dialogowa."
+-1, "Żegnaj."

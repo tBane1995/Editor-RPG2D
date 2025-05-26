@@ -1,0 +1,13 @@
+# Files and directories ignored when uploading the repository to GitHub
+
+# Visual Studio Projects Files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Directories generater by Visual Studio
+.vs/
+x64/
+Debug/
+Release/

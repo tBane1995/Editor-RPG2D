@@ -1,0 +1,4 @@
+"Witaj w czym mogę Ci pomóc?"
+2, "Kim Jesteś?"
+3, "Co tutaj robisz?"
+-1, "Żegnaj."
