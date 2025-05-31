@@ -16,7 +16,7 @@ public:
 
 	StatsPanel() {
 		panel = sf::Sprite();
-		panel.setTexture(*getSingleTexture("GUI\\bigPanel")->texture);
+		panel.setTexture(*getSingleTexture(L"GUI\\bigPanel")->texture);
 		panel.setOrigin(300, 200);
 
 		LEVEL = sf::Text();

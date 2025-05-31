@@ -57,20 +57,17 @@ public:
 				if (rect.getGlobalBounds().contains(worldMousePosition)) {
 
 					rect.setFillColor(panelColor_medium);
-					stat_name->setBackgroundColor(panelColor_medium);
 					stat_name->setRectColor(panelColor_medium);
-					stat_value->setBackgroundColor(panelColor_medium);
-					stat_value->setRectColor(panelColor_medium);
+					stat_value->setRectColor(sf::Color::Transparent);
 				}
 				else {
 					rect.setFillColor(panelColor_dark);
-					stat_name->setBackgroundColor(panelColor_dark);
 					stat_name->setRectColor(panelColor_dark);
-					stat_value->setBackgroundColor(panelColor_dark);
-					stat_value->setRectColor(panelColor_dark);
+					stat_value->setRectColor(sf::Color::Transparent);
 				}
 
 				stat_value->handleEvent(event);
+				
 			}
 
 			virtual void draw() {
@@ -80,29 +77,69 @@ public:
 			}
 		};
 
+		class TextStat : public Stat {
+		public:
+			std::wstring& value;
+		
+			TextStat(std::wstring name, std::wstring& value, short maxCharacters = -1) : Stat(name, value, maxCharacters), value(value) {
+
+			}
+
+			~TextStat() {
+
+			}
+
+			void cursorHover() {
+
+			}
+
+			void update() {
+				stat_value->update();
+			}
+
+			void handleEvent(sf::Event& event) {
+				if (rect.getGlobalBounds().contains(worldMousePosition)) {
+
+					rect.setFillColor(panelColor_medium);
+					stat_name->setRectColor(panelColor_medium);
+					stat_value->setRectColor(sf::Color::Transparent);
+				}
+				else {
+					rect.setFillColor(panelColor_dark);
+					stat_name->setRectColor(panelColor_dark);
+					stat_value->setRectColor(sf::Color::Transparent);
+				}
+
+				stat_value->handleEvent(event);
+				value = stat_value->lines[0];
+			}
+
+			void draw() {
+				Stat::draw();
+			}
+		};
+
 		class NumbSelector : public Stat {
 		public:
-			short value;
+			int& value;
 			sf::Sprite less_sprite;
 			sf::Sprite more_sprite;
 			ButtonWithImage* less_btn;
 			ButtonWithImage* more_btn;
 
-			NumbSelector(std::wstring name, short& value, short step) : Stat(name, std::to_wstring(value)) {
+			NumbSelector(std::wstring name, int& value, short step) : Stat(name, std::to_wstring(value)), value(value) {
 
-				this->value = value;
-				stat_value->setRectColor(sf::Color::Red);
-				stat_value->setRectSize(sf::Vector2f(80, getLineHeight(17)));
-				std::cout << getLineHeight(17) << "\n";
+				stat_value->setRectColor(sf::Color::Transparent);
+				stat_value->setRectSize(sf::Vector2f(80, stat_value->font.getLineSpacing(17)));
 				stat_value->setWstring(std::to_wstring(this->value));
 				stat_value->setAlignment(TextAlignment::Center);
 
 				sf::Vector2f pos(cam->position);
 
-				less_sprite.setTexture(*getSingleTexture("GUI\\character_menu\\value_less")->texture);
-				more_sprite.setTexture(*getSingleTexture("GUI\\character_menu\\value_more")->texture);
+				less_sprite.setTexture(*getSingleTexture(L"GUI\\character_menu\\value_less")->texture);
+				more_sprite.setTexture(*getSingleTexture(L"GUI\\character_menu\\value_more")->texture);
 
-				less_btn = new ButtonWithImage(getSingleTexture("GUI\\character_menu\\value_less"));
+				less_btn = new ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\value_less"));
 				less_btn->onclick_func = [this, step]() {
 					this->value -= step;
 					if (this->value < 0)
@@ -111,7 +148,7 @@ public:
 					stat_value->setWstring(std::to_wstring(this->value));
 					};
 
-				more_btn = new ButtonWithImage(getSingleTexture("GUI\\character_menu\\value_more"));
+				more_btn = new ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\value_more"));
 				more_btn->onclick_func = [this, step]() {
 					this->value += step;
 					stat_value->setWstring(std::to_wstring(this->value));
@@ -137,17 +174,13 @@ public:
 				if (rect.getGlobalBounds().contains(worldMousePosition)) {
 
 					rect.setFillColor(panelColor_medium);
-					stat_name->setBackgroundColor(panelColor_medium);
 					stat_name->setRectColor(panelColor_medium);
-					stat_value->setBackgroundColor(panelColor_medium);
-					stat_value->setRectColor(panelColor_medium);
+					stat_value->setRectColor(sf::Color::Transparent);
 				}
 				else {
 					rect.setFillColor(panelColor_dark);
-					stat_name->setBackgroundColor(panelColor_dark);
 					stat_name->setRectColor(panelColor_dark);
-					stat_value->setBackgroundColor(panelColor_dark);
-					stat_value->setRectColor(panelColor_dark);
+					stat_value->setRectColor(sf::Color::Transparent);
 				}
 
 				less_btn->handleEvent(event);
@@ -188,14 +221,16 @@ public:
 			rect.setPosition(rect_position + cam->position);
 			
 			// new stats
-			stats.push_back(new Stat(L"NAME", ConvertUtf8ToWide(parent->_character->name), 16));
-			stats.push_back(new Stat(L"ID", L"0"));
+			stats.push_back(new TextStat(L"NAME", parent->_character->name, 16));
+			stats.push_back(new Stat(L"ID", std::to_wstring(parent->_character->id)));
 
 			stats.push_back(nullptr);
 
 			stats.push_back(new NumbSelector(L"LEVEL", parent->_character->LEVEL, 1));
 			stats.push_back(new NumbSelector(L"EXPERIENCE", parent->_character->EXPERIENCE, 50));
 			stats.push_back(new NumbSelector(L"SKILL POINTS", parent->_character->SKILL_POINTS, 1));
+
+			std::cout << parent->_character->EXPERIENCE;
 
 			stats.push_back(nullptr);
 
@@ -226,12 +261,14 @@ public:
 				
 				if (stats[i] != nullptr) {
 
+					float line_height = stats[i]->stat_name->font.getLineSpacing(17);
+
 					sf::Vector2f pos;
-					pos.y = start_pos_y + i * getLineHeight(17) + m;
+					pos.y = start_pos_y + i * line_height + m;
 
 					// rect
 					stats[i]->rect.setFillColor(panelColor_dark);
-					stats[i]->rect.setSize(sf::Vector2f( parent->rect.getSize().x - 4*corner_size, stats[0]->stat_name->getSize().y));
+					stats[i]->rect.setSize(sf::Vector2f( parent->rect.getSize().x - 4*corner_size, line_height));
 					sf::Vector2f rect_pos;
 					rect_pos.x = cam->position.x - parent->rect.getSize().x/2.0f + 2*corner_size;
 					rect_pos.y = pos.y + cam->position.y;
@@ -239,12 +276,10 @@ public:
 
 					// stat name
 					pos.x = parent->position.x - parent->rect.getSize().x / 2.0f + corner_size + corner_size + m;
-					stats[i]->stat_name->setBackgroundColor(panelColor_dark);
 					stats[i]->stat_name->setPosition(pos);
 
 					// stat value 
 					pos.x = parent->position.x + parent->rect.getSize().x / 2.0f - corner_size - corner_size - stats[i]->stat_value->getSize().x - m;
-					stats[i]->stat_value->setBackgroundColor(panelColor_dark);
 					stats[i]->stat_value->setPosition(pos);
 					
 					if (dynamic_cast<NumbSelector*>(stats[i]) != nullptr) {
@@ -285,12 +320,14 @@ public:
 			float start_pos_y = parent->position.y - panel_height / 2.0f + margin + corner_size + menu_height + margin + corner_size;
 			float m = 8.0f;	// margin
 
+			float line_height = stats[0]->stat_name->font.getLineSpacing(17);
+
 			for (short i = 0; i < stats.size(); i++) {
 
 				if (stats[i] != nullptr) {
 
 					sf::Vector2f pos;
-					pos.y = start_pos_y + i * getLineHeight(17) + m;
+					pos.y = start_pos_y + i * line_height + m;
 
 					// stat name
 					pos.x = parent->position.x - parent->rect.getSize().x / 2.0f + corner_size + corner_size + m;
@@ -300,7 +337,7 @@ public:
 					if(dynamic_cast<NumbSelector*>(stats[i]))
 						pos.x = parent->position.x + parent->rect.getSize().x / 2.0f - corner_size - corner_size - stats[i]->stat_value->getSize().x - m;
 					else
-						pos.x = parent->position.x + parent->rect.getSize().x / 2.0f - corner_size - corner_size - stats[i]->stat_value->background.getSize().x - m;
+						pos.x = parent->position.x + parent->rect.getSize().x / 2.0f - corner_size - corner_size - stats[i]->stat_value->texts[0].getGlobalBounds().width - m;
 
 					stats[i]->stat_value->setPosition(pos);
 					
@@ -362,7 +399,7 @@ public:
 		public:
 			sf::Sprite sprite;
 
-			DirectionButton(SingleTexture* texture, sf::Vector2f position, CharacterInfoPanel* parent, short direction) : ButtonWithImage(getSingleTexture("GUI\\character_menu\\layout_slot"), position) {
+			DirectionButton(SingleTexture* texture, sf::Vector2f position, CharacterInfoPanel* parent, short direction) : ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\layout_slot"), position) {
 
 				sprite = sf::Sprite();
 				sprite.setTexture(*texture->texture);
@@ -402,12 +439,12 @@ public:
 		class LayoutButton : public ButtonWithImage {
 		public:
 			
-			std::string body;
-			std::string head;
+			std::wstring body;
+			std::wstring head;
 			sf::RenderTexture* render_texture = nullptr;
 			sf::Sprite sprite;
 
-			LayoutButton(sf::Vector2f position, std::string body, std::string head ) : ButtonWithImage(getSingleTexture("GUI\\character_menu\\layout_slot"), position) {
+			LayoutButton(sf::Vector2f position, std::wstring body, std::wstring head ) : ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\layout_slot"), position) {
 
 				this->body = body;
 				this->head = head;
@@ -429,8 +466,8 @@ public:
 
 				sf::Sprite body_spr, head_spr;
 
-				body_spr.setTexture(*getSingleTexture(body + "\\attackBottom0")->texture);
-				head_spr.setTexture(*getSingleTexture(head + "\\attackBottom0")->texture);
+				body_spr.setTexture(*getSingleTexture(body + L"\\attackBottom0")->texture);
+				head_spr.setTexture(*getSingleTexture(head + L"\\attackBottom0")->texture);
 
 				render_texture->draw(body_spr);
 				render_texture->draw(head_spr);
@@ -495,43 +532,43 @@ public:
 			btn_pos.y = start_pos.y;
 
 			btn_pos.x = start_pos.x + (0) * (btn_size.x);
-			DirectionButton* left = new DirectionButton(getSingleTexture("GUI\\character_menu\\direction_left"), btn_pos, parent, 3);
+			DirectionButton* left = new DirectionButton(getSingleTexture(L"GUI\\character_menu\\direction_left"), btn_pos, parent, 3);
 			buttons.push_back(left);
 
 			btn_pos.x = start_pos.x + (1) * (btn_size.x);
-			DirectionButton* bottom = new DirectionButton(getSingleTexture("GUI\\character_menu\\direction_bottom"), btn_pos, parent, 2);
+			DirectionButton* bottom = new DirectionButton(getSingleTexture(L"GUI\\character_menu\\direction_bottom"), btn_pos, parent, 2);
 			buttons.push_back(bottom);
 
 			btn_pos.x = start_pos.x + (2) * (btn_size.x);
-			DirectionButton* top = new DirectionButton(getSingleTexture("GUI\\character_menu\\direction_top"), btn_pos, parent, 0);
+			DirectionButton* top = new DirectionButton(getSingleTexture(L"GUI\\character_menu\\direction_top"), btn_pos, parent, 0);
 			buttons.push_back(top);
 
 			btn_pos.x = start_pos.x + (3) * (btn_size.x);
-			DirectionButton* right = new DirectionButton(getSingleTexture("GUI\\character_menu\\direction_right"), btn_pos, parent, 1);
+			DirectionButton* right = new DirectionButton(getSingleTexture(L"GUI\\character_menu\\direction_right"), btn_pos, parent, 1);
 			buttons.push_back(right);
 
 			// load the Bodies
-			std::vector < std::string > bodies;
-			bodies.push_back("sets\\body\\man");
-			bodies.push_back("sets\\body\\man");
-			bodies.push_back("sets\\body\\woman");
+			std::vector < std::wstring > bodies;
+			bodies.push_back(L"sets\\body\\man");
+			bodies.push_back(L"sets\\body\\man");
+			bodies.push_back(L"sets\\body\\woman");
 
 			// load the Heads
-			std::vector < std::string > heads;
-			heads.push_back("sets\\head\\man-black-haired");
-			heads.push_back("sets\\head\\man-brown-haired");
-			heads.push_back("sets\\head\\man-gray-haired");
-			heads.push_back("sets\\head\\man-red-haired");
+			std::vector < std::wstring > heads;
+			heads.push_back(L"sets\\head\\man-black-haired");
+			heads.push_back(L"sets\\head\\man-brown-haired");
+			heads.push_back(L"sets\\head\\man-gray-haired");
+			heads.push_back(L"sets\\head\\man-red-haired");
 
-			heads.push_back("sets\\head\\boy-black-haired");
-			heads.push_back("sets\\head\\boy-brown-haired");
-			heads.push_back("sets\\head\\boy-gray-haired");
-			heads.push_back("sets\\head\\boy-red-haired");
+			heads.push_back(L"sets\\head\\boy-black-haired");
+			heads.push_back(L"sets\\head\\boy-brown-haired");
+			heads.push_back(L"sets\\head\\boy-gray-haired");
+			heads.push_back(L"sets\\head\\boy-red-haired");
 
-			heads.push_back("sets\\head\\woman-black-haired");
-			heads.push_back("sets\\head\\woman-brown-haired");
-			heads.push_back("sets\\head\\woman-gray-haired");
-			heads.push_back("sets\\head\\woman-red-haired");
+			heads.push_back(L"sets\\head\\woman-black-haired");
+			heads.push_back(L"sets\\head\\woman-brown-haired");
+			heads.push_back(L"sets\\head\\woman-gray-haired");
+			heads.push_back(L"sets\\head\\woman-red-haired");
 
 
 
@@ -557,8 +594,7 @@ public:
 						pos.y = btn->position.y + btn->render_texture->getTexture().getSize().y / 4.0f;
 						if (tip != nullptr)
 							delete tip;
-						std::string tip_text = getShortName(btn->head);
-						tip = new Tip(ConvertUtf8ToWide(tip_text), pos, btn);
+						tip = new Tip(getShortName(btn->head), pos, btn);
 					}
 					};
 
@@ -685,7 +721,7 @@ public:
 			rect.setPosition(rect_position + cam->position);
 
 			// 
-			SingleTexture* slot_texture = getSingleTexture("GUI\\character_menu\\item_slot");
+			SingleTexture* slot_texture = getSingleTexture(L"GUI\\character_menu\\item_slot");
 			sf::Vector2f preview_size(parent->_character->texture->texture->getSize().x * 2.0f, parent->_character->texture->texture->getSize().y * 2.0f);
 			float preview_margin = margin;
 			sf::Vector2f slot_size(slot_texture->texture->getSize());
@@ -722,7 +758,7 @@ public:
 								pos.y = slot->position.y + slot->texture->texture->getSize().y / 4.0f;
 								if (tip != nullptr)
 									delete tip;
-								tip = new Tip(ConvertUtf8ToWide(getShortName(slot->_item->name)), pos, slot);
+								tip = new Tip(getShortName(slot->_item->name), pos, slot);
 							}
 						}
 						};
@@ -840,14 +876,12 @@ public:
 
 			void unclick() {
 				state = ButtonState::Idle;
-				setBackgroundColor(panelColor_medium);
 				setRectColor(panelColor_medium);
 			}
 
 			void hover() {
 
 				state = ButtonState::Hover;
-				setBackgroundColor(panelColor_normal);
 				setRectColor(panelColor_normal);
 				GUIwasHover = true;
 			}
@@ -855,7 +889,6 @@ public:
 			void click() {
 
 				state = ButtonState::Pressed;
-				setBackgroundColor(panelColor_medium);
 				setRectColor(panelColor_medium);
 				GUIwasClicked = true;
 				clickTime = currentTime;
@@ -952,7 +985,7 @@ public:
 
 			// dialogue
 			dialogue = parent->_character->dialogue;
-			current_dialogue_option = dialogue->options.front();
+			(dialogue != nullptr) ? current_dialogue_option = dialogue->options.front() : current_dialogue_option = nullptr;
 			selected_dialogue_option_index = -1;
 
 			// dialogue text
@@ -961,14 +994,17 @@ public:
 			dialogue_textarea_position = sf::Vector2f(-dialogue_textarea_size.x / 2, -parent->rect.getSize().y/2.0f + dialog_border_width + corner_size + menu_height + corner_size + margin);			
 			delete test_text;
 
-			dialogue_textarea = new TextArea(current_dialogue_option->text, dialogue_textarea_position, dialogue_textarea_size.x, dialogue_textarea_size);
+
+			std::wstring dialogue_text;
+			(current_dialogue_option != nullptr) ? dialogue_text = current_dialogue_option->text : dialogue_text = L"";
+			dialogue_textarea = new TextArea(dialogue_text, dialogue_textarea_position, dialogue_textarea_size.x, dialogue_textarea_size);
 			dialogue_textarea->setFont(dialogueFont);
-			dialogue_textarea->setBackgroundColor(panelColor_medium);
 			dialogue_textarea->setRectColor(panelColor_medium);
+			dialogue_textarea->setVerticalAlignment(VerticalAlignment::Top);
 
 			// prev and next buttons
-			btn_prev = new ButtonWithImage(getSingleTexture("GUI\\character_menu\\dialogue_prev"));
-			btn_next = new ButtonWithImage(getSingleTexture("GUI\\character_menu\\dialogue_next"));
+			btn_prev = new ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\dialogue_prev"));
+			btn_next = new ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\dialogue_next"));
 			
 			float pos_y = dialogue_textarea->position.y + dialogue_textarea->getSize().y + corner_size + btn_prev->texture->texture->getSize().y/2 + margin;
 			float dx = parent->rect.getSize().x / 2 - 64;
@@ -1003,10 +1039,29 @@ public:
 			change_dialogue_btn = new ButtonWithText("change", 17, TextAlignment::Center, btn_size);
 			change_dialogue_btn->setColors(panelColor_medium, panelColor_normal, panelColor_medium, textColor);
 			change_dialogue_btn->setPosition(sf::Vector2f(-pos_x - change_dialogue_btn->getSize().x/2, pos_y));
+			change_dialogue_btn->onclick_func = [this, parent]() {
+				int dial_id = 0;
+				if (dialogue != nullptr) {
+					dial_id = dialogue->id;
+					(dial_id < dialogues.size()) ? dial_id += 1 : dial_id = 0;
+				}
+
+				dialogue = getDialogue(dial_id);
+				parent->_character->dialogue = dialogue;
+				(dialogue != nullptr) ? current_dialogue_option = dialogue->options.front() : current_dialogue_option = nullptr;
+				loadDialogueOptionText();
+				loadDialogueAnswersTexts();
+				
+
+			};
+
 
 			edit_dialogue_btn = new ButtonWithText("edit", 17, TextAlignment::Center, btn_size);
 			edit_dialogue_btn->setColors(panelColor_medium, panelColor_normal, panelColor_medium, textColor);
 			edit_dialogue_btn->setPosition(sf::Vector2f(pos_x - edit_dialogue_btn->getSize().x/2, pos_y));
+			edit_dialogue_btn->onclick_func = [this]() {
+				dialogs.push_back(new DialogueEditor(dialogue));
+			};
 			
 		}
 
@@ -1024,11 +1079,23 @@ public:
 		}
 
 		void loadDialogueOptionText() {
-			this->dialogue_textarea->setWstring(current_dialogue_option->text);
+			if(current_dialogue_option != nullptr)
+				this->dialogue_textarea->setWstring(current_dialogue_option->text);
+			else
+				this->dialogue_textarea->setWstring(L"");
 		}
 
 		void loadDialogueAnswersTexts() {
 			
+			if (current_dialogue_option == nullptr) {
+				for (short i = 0; i < dialogues_answers_count; i++) {
+					dialogue_answers[i]->setWstring(L"");
+					dialogue_answers[i]->onclick_func = []() {};
+				}
+				return;
+			}
+				
+
 			if (current_dialogue_option->answers.empty()) {
 
 				dialogue_answers.front()->setWstring(L"continue");
@@ -1164,7 +1231,7 @@ public:
 
 		_character = character;
 
-		SingleTexture* menu_button_texture = getSingleTexture("GUI\\character_menu\\menu_slot");
+		SingleTexture* menu_button_texture = getSingleTexture(L"GUI\\character_menu\\menu_slot");
 
 		float btn_wdt = menu_button_texture->texture->getSize().x;
 		float btn_hgh = menu_button_texture->texture->getSize().y;
@@ -1174,39 +1241,39 @@ public:
 		pos.y = position.y - size.y / 2.0f + btn_hgh/2.0f + margin + corner_size;
 		
 		// create menu buttons
-		ButtonWithImage* menu_statistics = new ButtonWithImage(getSingleTexture("GUI\\character_menu\\menu_statistics"), sf::Vector2f(pos.x, pos.y));
+		ButtonWithImage* menu_statistics = new ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\menu_statistics"), sf::Vector2f(pos.x, pos.y));
 		menu_statistics->onclick_func = [this]() {
 			active_page = pages[0];
 			};
 
-		ButtonWithImage* menu_layout = new ButtonWithImage(getSingleTexture("GUI\\character_menu\\menu_layout"), sf::Vector2f(pos.x + btn_wdt, pos.y));
+		ButtonWithImage* menu_layout = new ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\menu_layout"), sf::Vector2f(pos.x + btn_wdt, pos.y));
 		menu_layout->onclick_func = [this]() {
 			active_page = pages[1];
 			};
 
-		ButtonWithImage* menu_equipment = new ButtonWithImage(getSingleTexture("GUI\\character_menu\\menu_equipment"), sf::Vector2f(pos.x + 2*btn_wdt, pos.y));
+		ButtonWithImage* menu_equipment = new ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\menu_equipment"), sf::Vector2f(pos.x + 2*btn_wdt, pos.y));
 		menu_equipment->onclick_func = [this]() {
 			active_page = pages[2];
 			};
 
-		ButtonWithImage* menu_inventory = new ButtonWithImage(getSingleTexture("GUI\\character_menu\\menu_inventory"), sf::Vector2f(pos.x + 3*btn_wdt, pos.y));
+		ButtonWithImage* menu_inventory = new ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\menu_inventory"), sf::Vector2f(pos.x + 3*btn_wdt, pos.y));
 		menu_inventory->onclick_func = [this]() {
 			active_page = pages[3];
 			};
 
-		ButtonWithImage* menu_dialogues = new ButtonWithImage(getSingleTexture("GUI\\character_menu\\menu_dialogues"), sf::Vector2f(pos.x + 4*btn_wdt, pos.y));
+		ButtonWithImage* menu_dialogues = new ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\menu_dialogues"), sf::Vector2f(pos.x + 4*btn_wdt, pos.y));
 		menu_dialogues->onclick_func = [this]() {
 			active_page = pages[4];
 			};
 
-		ButtonWithImage* menu_quests = new ButtonWithImage(getSingleTexture("GUI\\character_menu\\menu_quests"), sf::Vector2f(pos.x + 5*btn_wdt, pos.y));
+		ButtonWithImage* menu_quests = new ButtonWithImage(getSingleTexture(L"GUI\\character_menu\\menu_quests"), sf::Vector2f(pos.x + 5*btn_wdt, pos.y));
 		menu_quests->onclick_func = [this]() {
 			active_page = pages[5];
 			};
 
 
-		left_sider = sf::Sprite(*getSingleTexture("GUI\\character_menu\\menu_sider_left")->texture);
-		right_sider = sf::Sprite(*getSingleTexture("GUI\\character_menu\\menu_sider_right")->texture);
+		left_sider = sf::Sprite(*getSingleTexture(L"GUI\\character_menu\\menu_sider_left")->texture);
+		right_sider = sf::Sprite(*getSingleTexture(L"GUI\\character_menu\\menu_sider_right")->texture);
 		
 		left_sider.setOrigin(left_sider.getTexture()->getSize().x/2, left_sider.getTexture()->getSize().y/2);
 		right_sider.setOrigin(right_sider.getTexture()->getSize().x/2, right_sider.getTexture()->getSize().y/2);

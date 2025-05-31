@@ -18,7 +18,7 @@ public:
 
 		this->maxCharacters = maxCharacters;
 
-		cursor = sf::RectangleShape(sf::Vector2f(2, getLineHeight(17)));
+		cursor = sf::RectangleShape(sf::Vector2f(2, font.getLineSpacing(characterSize)));
 		cursor.setFillColor(textColor);
 		cursor_position = lines[0].size();
 
@@ -34,7 +34,6 @@ public:
 	void setPosition(sf::Vector2f position) {
 		this->position = position;
 
-		background.setPosition(position + cam->position);
 		generateText();
 		rect.setPosition(position + cam->position);
 
@@ -152,7 +151,6 @@ public:
 
 		window->draw(rect);
 
-		window->draw(background);
 		for (auto& t : texts)
 			window->draw(t);
 

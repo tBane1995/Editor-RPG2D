@@ -162,7 +162,7 @@ public:
         bar.setFillColor(sf::Color(32, 32, 32));
 
         logo = sf::Sprite();
-        logo.setTexture(*getSingleTexture("GUI\\icons\\MapEditor_small_ico")->texture);
+        logo.setTexture(*getSingleTexture(L"GUI\\icons\\MapEditor_small_ico")->texture);
         logo.setPosition(-screenWidth / 2.0f + cam->position.x, -screenHeight / 2.0f + cam->position.y);
 
         createButtons();
@@ -596,9 +596,11 @@ public:
             menu[2]->addOption(instructionsMEBtn);
             menu[2]->addOption(aboutMEBtn);
             menu[2]->addOption(settingsMEBtn);
-        }
+        }   
+    }
 
-        
+    sf::Vector2f getSize() {
+        return bar.getSize();
     }
 
     bool bar_is_hover() {
@@ -613,14 +615,16 @@ public:
     }
 
     void cursorHover() {
+        if (dialogs.empty()) {
+            for (auto& m : menu)
+                m->cursorHover();
 
-        for (auto& m : menu)
-            m->cursorHover();
-
-        if (clickedMenuButton) {
-            for (auto& o : clickedMenuButton->options)
-                o->cursorHover();
+            if (clickedMenuButton) {
+                for (auto& o : clickedMenuButton->options)
+                    o->cursorHover();
+            }
         }
+        
 
     }
 

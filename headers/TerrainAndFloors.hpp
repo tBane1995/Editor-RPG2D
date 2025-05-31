@@ -7,7 +7,7 @@ class TerrainPrefab : public GameObject {
 public:
 	short id;
 
-	TerrainPrefab(std::string name, short id) : GameObject(name) {
+	TerrainPrefab(std::wstring name, short id) : GameObject(name) {
 		type = GameObjectType::Terrain;
 		texture = getSingleTexture(name);
 		this->id = id;
@@ -35,7 +35,7 @@ class FloorPrefab : public GameObject {
 public:
 	short id;
 
-	FloorPrefab(std::string name, short id) : GameObject(name) {
+	FloorPrefab(std::wstring name, short id) : GameObject(name) {
 		type = GameObjectType::Floor;
 		texture = getSingleTexture(name);
 		this->id = id;
@@ -76,7 +76,7 @@ public:
 		this->width = width;
 		this->height = height;
 
-		tileset = getSingleTexture("tiles\\0_tileset");
+		tileset = getSingleTexture(L"tiles\\0_tileset");
 
 		tiles.resize(width * height, 2);
 
@@ -207,7 +207,7 @@ public:
 		this->width = width;
 		this->height = height;
 
-		floorset = getSingleTexture("floors\\0_floorset");
+		floorset = getSingleTexture(L"floors\\0_floorset");
 
 		vertexes.setPrimitiveType(sf::Quads);
 		vertexes.resize(width * height * 4); // widthMap * heightMap * TwoTrianglesVertices
@@ -240,7 +240,7 @@ public:
 		this->width = flo->width;
 		this->height = flo->height;
 
-		floorset = getSingleTexture("floors\\0_floorset");
+		floorset = getSingleTexture(L"floors\\0_floorset");
 
 		vertexes.setPrimitiveType(sf::Quads);
 		vertexes.resize(width * height * 4); // widthMap * heightMap * TwoTrianglesVertices
@@ -364,27 +364,27 @@ void createTerrainPrefabs() {
 
 	terrainGameObjects.clear();
 
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_0_water", 0));           // 1
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_1_sands", 1));           // 2
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_2_grass", 2));           // 3
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_3_gravel", 3));           // 4
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_4_steps", 4));           // 5
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_5_highlands", 5));       // 6
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_6", 6));                 // 7
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_7", 7));                 // 8
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_8", 8));                 // 9
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_9", 9));                 // 10
-	terrainGameObjects.push_back(new TerrainPrefab("tiles\\tile_10", 10));               // 11
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_0_water", 0));           // 1
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_1_sands", 1));           // 2
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_2_grass", 2));           // 3
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_3_gravel", 3));           // 4
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_4_steps", 4));           // 5
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_5_highlands", 5));       // 6
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_6", 6));                 // 7
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_7", 7));                 // 8
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_8", 8));                 // 9
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_9", 9));                 // 10
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_10", 10));               // 11
 
 	countOfBasicTerrain = terrainGameObjects.size();
 
-	std::vector < std::string > sets_names;
-	sets_names.push_back("tiles\\set_0_water_sands");
-	sets_names.push_back("tiles\\set_0_sands_water");
-	sets_names.push_back("tiles\\set_1_sands_grass");
-	sets_names.push_back("tiles\\set_1_grass_sands");
-	sets_names.push_back("tiles\\set_2_grass_gravel");
-	sets_names.push_back("tiles\\set_2_gravel_grass");
+	std::vector < std::wstring > sets_names;
+	sets_names.push_back(L"tiles\\set_0_water_sands");
+	sets_names.push_back(L"tiles\\set_0_sands_water");
+	sets_names.push_back(L"tiles\\set_1_sands_grass");
+	sets_names.push_back(L"tiles\\set_1_grass_sands");
+	sets_names.push_back(L"tiles\\set_2_grass_gravel");
+	sets_names.push_back(L"tiles\\set_2_gravel_grass");
 
 	short id = countOfBasicTerrain;
 
@@ -418,16 +418,16 @@ void createTerrainPrefabs() {
 	rtex.display();
 
 	sf::Texture tileset = rtex.getTexture();
-	*getSingleTexture("tiles\\0_tileset")->texture = tileset;
+	*getSingleTexture(L"tiles\\0_tileset")->texture = tileset;
 
 }
 
 void createFloorsPrefabs() {
 	floorGameObjects.clear();
-	floorGameObjects.push_back(new FloorPrefab("floors\\floor_0", 0));
-	floorGameObjects.push_back(new FloorPrefab("floors\\floor_1", 1));
-	floorGameObjects.push_back(new FloorPrefab("floors\\floor_2", 2));
-	floorGameObjects.push_back(new FloorPrefab("floors\\floor_3", 3));
+	floorGameObjects.push_back(new FloorPrefab(L"floors\\floor_0", 0));
+	floorGameObjects.push_back(new FloorPrefab(L"floors\\floor_1", 1));
+	floorGameObjects.push_back(new FloorPrefab(L"floors\\floor_2", 2));
+	floorGameObjects.push_back(new FloorPrefab(L"floors\\floor_3", 3));
 
 }
 

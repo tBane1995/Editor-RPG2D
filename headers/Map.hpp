@@ -564,6 +564,36 @@ public:
             
     }
 
+    short generateNewCharacterId() {
+        std::vector < short > ids;
+        ids.clear();
+
+        for (auto& chunk : chunks) {
+            for (auto& character : chunk->_characters) {
+                ids.push_back(character->id);
+            }
+        }
+
+        std::erase_if(ids, [](const auto& id) { return id < 0; });
+
+        if (ids.size() == 0) {
+            return 0;
+        }
+        else {
+            std::sort(ids.begin(), ids.end(), [](const auto& a, const auto& b) { return a < b; });
+
+            short i;
+            for (i = 0; i < ids.size(); i++) {
+                if (ids[i] != i) {
+                    break;
+                }
+            }
+
+            return i;
+        }
+
+    }
+
     Chunk* getChunk(short x, short y) {
         for (auto& chunk : chunks) {
             if (short(chunk->coords.x) == x && short(chunk->coords.y) == y) {
@@ -621,31 +651,31 @@ public:
             }
 
             for (auto& nature : chunk->_natures)
-                file  << "Nature \"" << nature->name << "\" y=" << int(nature->position.y) << " x=" << int(nature->position.x) << "\n";
+                file  << "Nature \"" << ConvertWideToUtf8(nature->name) << "\" y=" << int(nature->position.y) << " x=" << int(nature->position.x) << "\n";
 
             for (auto& object : chunk->_objects)
-                file << "Object \"" << object->name << "\" y=" << int(object->position.y) << " x=" << int(object->position.x) << "\n";
+                file << "Object \"" << ConvertWideToUtf8(object->name) << "\" y=" << int(object->position.y) << " x=" << int(object->position.x) << "\n";
 
             for (auto& item : chunk->_items)
-                file << "Item \"" << item->name << "\" y=" << int(item->position.y) << " x=" << int(item->position.x) << "\n";
+                file << "Item \"" << ConvertWideToUtf8(item->name) << "\" y=" << int(item->position.y) << " x=" << int(item->position.x) << "\n";
 
             for (auto& inventory : chunk->_inventories)
-                file << "Inventory \"" << inventory->name << "\" y=" << int(inventory->position.y) << " x=" << int(inventory->position.x) << "\n";
+                file << "Inventory \"" << ConvertWideToUtf8(inventory->name) << "\" y=" << int(inventory->position.y) << " x=" << int(inventory->position.x) << "\n";
 
             for (auto& flat : chunk->_flatObjects)
-                file << "FlatObject \"" << flat->name << "\" y=" << int(flat->position.y) << " x=" << int(flat->position.x) << "\n";
+                file << "FlatObject \"" << ConvertWideToUtf8(flat->name) << "\" y=" << int(flat->position.y) << " x=" << int(flat->position.x) << "\n";
 
             for (auto& monster : chunk->_monsters)
-                file << "Monster \"" << monster->name << "\" y=" << int(monster->base.y) << " x=" << int(monster->base.x) << "\n";
+                file << "Monster \"" << ConvertWideToUtf8(monster->name) << "\" y=" << int(monster->base.y) << " x=" << int(monster->base.x) << "\n";
 
             for (auto& object : chunk->_smallObjects)
-                file << "SmallObject \"" << object->name << "\" y=" << int(object->position.y) << " x=" << int(object->position.x) << "\n";
+                file << "SmallObject \"" << ConvertWideToUtf8(object->name) << "\" y=" << int(object->position.y) << " x=" << int(object->position.x) << "\n";
 
             for (auto& object : chunk->_doors)
-                file << "Door \"" << object->name << "\" y=" << int(object->position.y) << " x=" << int(object->position.x) << "\n";
+                file << "Door \"" << ConvertWideToUtf8(object->name) << "\" y=" << int(object->position.y) << " x=" << int(object->position.x) << "\n";
 
             for (auto& character : chunk->_characters)
-                file << "Character \"" << character->name << "\" y=" << int(character->position.y) << " x=" << int(character->position.x) << "\n";
+                file << "Character \"" << to_string(character->id) << "\" y=" << int(character->position.y) << " x=" << int(character->position.x) << "\n";
 
             for (auto& building : chunk->_buildings)
                 file << "Building \"" << to_string(building->id) << "\" y=" << int(building->position.y) << " x=" << int(building->position.x) << "\n";
@@ -656,6 +686,7 @@ public:
         file << "#MapEnd\n";
 
 
+        // SAVE BUILDINGS
         for (auto& chunk : chunks) {
             for (auto& building : chunk->_buildings) {
 
@@ -664,11 +695,11 @@ public:
                 file << "id " << std::to_string(building->id) << "\n";
                 file << "name \"testBuilding\"\n";
                 file << "size " << std::to_string(building->size.x) << " " << std::to_string(building->size.y) << "\n";
-                file << "door \"" << building->_door->name << "\"\n";
-                file << "top_walls \"" << building->texture_top_walls->name << "\"\n";
-                file << "center_walls \"" << building->texture_center_walls->name << "\"\n";
-                file << "bottom_walls \"" << building->texture_bottom_walls->name << "\"\n";
-                file << "windows \"" << building->texture_windows->name << "\"\n";
+                file << "door \"" << ConvertWideToUtf8(building->_door->name) << "\"\n";
+                file << "top_walls \"" << ConvertWideToUtf8(building->texture_top_walls->name) << "\"\n";
+                file << "center_walls \"" << ConvertWideToUtf8(building->texture_center_walls->name) << "\"\n";
+                file << "bottom_walls \"" << ConvertWideToUtf8(building->texture_bottom_walls->name) << "\"\n";
+                file << "windows \"" << ConvertWideToUtf8(building->texture_windows->name) << "\"\n";
 
                 file << "\n";
 
@@ -690,7 +721,7 @@ public:
                         sf::Vector2i position;
                         position.x = int(wall->position.x) - int(building->position.x) + building->size.x / 2 * 16;
                         position.y = int(wall->position.y) - int(building->position.y) + building->size.y * 16;
-                        file << "Wall " << char(34) << wall->name << char(34) << " " << position.x << " " << position.y << "\n";
+                        file << "Wall " << char(34) << ConvertWideToUtf8(wall->name) << char(34) << " " << position.x << " " << position.y << "\n";
                         std::cout << "save - position of wall: " << position.x << " " << position.y << "\n";
                     }
                 }
@@ -702,7 +733,7 @@ public:
                         sf::Vector2i position;
                         position.x = int(furniture->position.x) - int(building->position.x) + building->size.x / 2 * 16;
                         position.y = int(furniture->position.y) - int(building->position.y) + building->size.y * 16;
-                        file << "Furniture " << char(34) << furniture->name << char(34) << " " << position.x << " " << position.y << "\n";
+                        file << "Furniture " << char(34) << ConvertWideToUtf8(furniture->name) << char(34) << " " << position.x << " " << position.y << "\n";
 
                     }
                 }
@@ -714,11 +745,55 @@ public:
                         sf::Vector2i position;
                         position.x = int(item->position.x) - int(building->position.x) + building->size.x / 2 * 16;
                         position.y = int(item->position.y) - int(building->position.y) + building->size.y * 16;
-                        file << "Item " << char(34) << item->name << char(34) << " " << position.x << " " << position.y << "\n";
+                        file << "Item " << char(34) << ConvertWideToUtf8(item->name) << char(34) << " " << position.x << " " << position.y << "\n";
                     }
                 }
 
                 file << "#BuildingEnd\n";
+            }
+        }
+
+        // SAVE CHARACTERS
+        for (auto& chunk : chunks) {
+            for (auto& character : chunk->_characters) {
+
+                file << "#CharacterBegin\n";
+
+                /////////////////////////////
+
+                file << "ID: " << character->id << "\n";
+                file << "Name: " << ConvertWideToUtf8(character->name) << "\n";
+                file << "Dialogue: " << (character->dialogue!=nullptr ? to_string(character->dialogue->id) : "-1" ) << "\n";
+
+                file << "Level: " << character->LEVEL << "\n";
+                file << "Experience: " << character->EXPERIENCE << "\n";
+                file << "SkillPoints: " << character->SKILL_POINTS << "\n";
+
+                file << "CurrentHP: " << character->attributes[Attribute::HP] << "\n";
+                file << "MaxHP: " << character->attributes[Attribute::HP_max] << "\n";
+                file << "CurrentMP: " << character->attributes[Attribute::MP] << "\n";
+                file << "MaxMP: " << character->attributes[Attribute::MP_max] << "\n";
+
+                file << "Strength: " << character->attributes[Attribute::STRENGTH] << "\n";
+                file << "Dexterity: " << character->attributes[Attribute::DEXTERITY] << "\n";
+                file << "Intelligence: " << character->attributes[Attribute::INTELLIGENCE] << "\n";
+
+                /////////////////////////////
+
+                file << "Body: \"" << ConvertWideToUtf8(character->body) << "\"\n";
+                file << "Head: \"" << ConvertWideToUtf8(character->head) << "\"\n";
+
+                /////////////////////////////
+
+                file << "Helmet: \"" << (character->helmet!=nullptr? ConvertWideToUtf8(character->helmet->name) : "none" ) << "\"\n";
+                file << "Armor: \"" << (character->armor !=nullptr? ConvertWideToUtf8(character->armor->name) : "none" ) << "\"\n";
+                file << "Pants: \"" << (character->pants !=nullptr? ConvertWideToUtf8(character->pants->name) : "none" ) << "\"\n";
+                file << "RightHand: \"" << (character->rightHand !=nullptr? ConvertWideToUtf8(character->rightHand->name) : "none" ) << "\"\n";
+                file << "LeftHand: \"" << (character->leftHand !=nullptr? ConvertWideToUtf8(character->leftHand->name) : "none" ) << "\"\n";
+
+                /////////////////////////////
+
+                file << "#CharacterEnd\n";
             }
         }
 
@@ -788,7 +863,7 @@ public:
         writer.write_uint32(prefabs.size());
 
         for (auto& prefab : prefabs)
-            writer.write_string(prefab->name);
+            writer.write_string(ConvertWideToUtf8(prefab->name));
 
         // save chunks and objects
         writer.write_string("#Map");
@@ -831,7 +906,7 @@ public:
 
                 }
                 else if (object->type == GameObjectType::Character) {
-                    writer.write_uint32(getPrefabID(object->name));
+                    writer.write_uint32(dynamic_cast<Character*>(object)->id);
                     writer.write_Vector2f(object->position);
 
                 }
@@ -854,13 +929,13 @@ public:
                 writer.write_string("#Building");
 
                 writer.write_short(building->id);
-                writer.write_string(building->name);
+                writer.write_string(ConvertWideToUtf8(building->name));
                 writer.write_Vector2i(building->size);
-                writer.write_string(building->_door->name);
-                writer.write_string(building->texture_top_walls->name);
-                writer.write_string(building->texture_center_walls->name);
-                writer.write_string(building->texture_bottom_walls->name);
-                writer.write_string(building->texture_windows->name);
+                writer.write_string(ConvertWideToUtf8(building->_door->name));
+                writer.write_string(ConvertWideToUtf8(building->texture_top_walls->name));
+                writer.write_string(ConvertWideToUtf8(building->texture_center_walls->name));
+                writer.write_string(ConvertWideToUtf8(building->texture_bottom_walls->name));
+                writer.write_string(ConvertWideToUtf8(building->texture_windows->name));
 
 
                 writer.write_short(building->floors->width);
@@ -902,6 +977,44 @@ public:
                 writer.write_uint32(id);
                 writer.write_uint16(count);
 
+            }
+        }
+
+        for (auto& chunk : chunks) {
+            for (auto& character : chunk->_characters) {
+                
+                writer.write_string("#Character");
+
+                writer.write_int(character->id);
+                writer.write_string(ConvertWideToUtf8(character->name));
+                (character->dialogue != nullptr) ? writer.write_int(character->dialogue->id) : writer.write_int(-1);
+
+                writer.write_int(character->LEVEL);
+                writer.write_int(character->EXPERIENCE);
+                writer.write_int(character->SKILL_POINTS);
+
+                writer.write_int(character->attributes[Attribute::HP]);
+                writer.write_int(character->attributes[Attribute::HP_max]);
+                writer.write_int(character->attributes[Attribute::MP]);
+                writer.write_int(character->attributes[Attribute::MP_max]);
+
+                writer.write_int(character->attributes[Attribute::STRENGTH]);
+                writer.write_int(character->attributes[Attribute::DEXTERITY]);
+                writer.write_int(character->attributes[Attribute::INTELLIGENCE]);
+
+                /////////////////////////////
+
+                writer.write_string(ConvertWideToUtf8(character->body));
+                writer.write_string(ConvertWideToUtf8(character->head));
+                
+                /////////////////////////////
+
+                (character->helmet != nullptr) ? writer.write_string(ConvertWideToUtf8(character->helmet->name)) : writer.write_string("none");
+                (character->armor != nullptr) ? writer.write_string(ConvertWideToUtf8(character->armor->name)) : writer.write_string("none");
+                (character->pants != nullptr) ? writer.write_string(ConvertWideToUtf8(character->pants->name)) : writer.write_string("none");
+                (character->rightHand != nullptr) ? writer.write_string(ConvertWideToUtf8(character->rightHand->name)) : writer.write_string("none");
+                (character->leftHand != nullptr) ? writer.write_string(ConvertWideToUtf8(character->leftHand->name)) : writer.write_string("none");
+                
             }
         }
 
@@ -1034,6 +1147,18 @@ public:
         return nullptr;
     }
 
+    Character* getCharacter(short id) {
+
+        for (auto& chunk : chunks) {
+            for (auto& character : chunk->_characters) {
+                if (character->id == id)
+                    return character;
+            }
+        }
+
+        return nullptr;
+    }
+
     void load(std::wstring filename = L"world\\world.wrd") {
         // clearing chunks
         /*
@@ -1098,6 +1223,15 @@ public:
             }
             else if (phrase == "#BuildingEnd") {
                 building->loadTexture();
+                load_object_type = LoadObjectType::None;
+            }
+            else if (phrase == "#CharacterBegin") {
+                character = nullptr;
+                load_object_type = LoadObjectType::Character;
+            }
+            else if (phrase == "#CharacterEnd") {
+                character->loadSprites();
+                
                 load_object_type = LoadObjectType::None;
             }
             else if (load_object_type == LoadObjectType::Map) {
@@ -1209,7 +1343,7 @@ public:
                     GameObject* new_object = nullptr;
 
                     if (phrase == "Item") {
-                        Item* item = getItem(objectName);
+                        Item* item = getItem(ConvertUtf8ToWide(objectName));
                         if (item != nullptr) {
                             new_object = new ItemOnMap(item);
                         }
@@ -1223,8 +1357,11 @@ public:
                     }else if (phrase == "Building") {
                         new_object = new Building(std::stoi(objectName));
                     }
-                    else {
-                        GameObject* prefab = getPrefab(objectName);
+                    else if (phrase == "Character") {
+                        new_object = new Character(std::stoi(objectName));
+                    }
+                    else{
+                        GameObject* prefab = getPrefab(ConvertUtf8ToWide(objectName));
                         if (prefab == nullptr)
                             std::cout << "prefab is nullptr - " << line << "\n";
                         if(prefab != nullptr)
@@ -1273,7 +1410,7 @@ public:
                     std::getline(lineStream, name, '"');
                     //std::cout << "door \"" << name << "\"\n";
 
-                    GameObject* prefab = getPrefab(name);
+                    GameObject* prefab = getPrefab(ConvertUtf8ToWide(name));
                     if (prefab != nullptr) {
                         building->_door = new Door(prefab);
                         building->_door->setPosition(building->position);
@@ -1286,7 +1423,7 @@ public:
                     std::getline(lineStream, name, '"');
                     //std::cout << "top_walls \"" << name << "\"\n";
 
-                    SingleTexture* tex = getSingleTexture(name);
+                    SingleTexture* tex = getSingleTexture(ConvertUtf8ToWide(name));
                     if (tex != nullptr)
                         building->texture_top_walls = tex;
                 }
@@ -1296,7 +1433,7 @@ public:
                     std::getline(lineStream, name, '"');
                     //std::cout << "center_walls \"" << name << "\"\n";
 
-                    SingleTexture* tex = getSingleTexture(name);
+                    SingleTexture* tex = getSingleTexture(ConvertUtf8ToWide(name));
                     if (tex != nullptr)
                         building->texture_center_walls = tex;
                 }
@@ -1306,7 +1443,7 @@ public:
                     std::getline(lineStream, name, '"');
                     //std::cout << "bottom_walls \"" << name << "\"\n";
 
-                    SingleTexture* tex = getSingleTexture(name);
+                    SingleTexture* tex = getSingleTexture(ConvertUtf8ToWide(name));
                     if (tex != nullptr)
                         building->texture_bottom_walls = tex;
                 }
@@ -1316,7 +1453,7 @@ public:
                     std::getline(lineStream, name, '"');
                     //std::cout << "windows \"" << name << "\"\n";
 
-                    SingleTexture* tex = getSingleTexture(name);
+                    SingleTexture* tex = getSingleTexture(ConvertUtf8ToWide(name));
                     if (tex != nullptr)
                         building->texture_windows = tex;
                 }
@@ -1398,7 +1535,7 @@ public:
                     std::getline(lineStream, name, '"');
                     std::getline(lineStream, name, '"');
 
-                    GameObject* prefab = getPrefab(name);
+                    GameObject* prefab = getPrefab(ConvertUtf8ToWide(name));
                     if (prefab != nullptr) {
 
                         //std::cout << prefab->name << "\n";
@@ -1420,7 +1557,7 @@ public:
                     std::getline(lineStream, name, '"');
                     std::getline(lineStream, name, '"');
 
-                    Item* item = getItem(name);
+                    Item* item = getItem(ConvertUtf8ToWide(name));
                     if (item != nullptr) {
                         GameObject* new_object = new ItemOnMap(item);
 
@@ -1435,6 +1572,102 @@ public:
                         building->addGameObject(new_object);
                     }
                 }
+            }
+            else if (load_object_type == LoadObjectType::Character) {
+
+                if (phrase == "ID:") {
+                    short id;
+                    lineStream >> id;
+                    character = getCharacter(id);
+                }
+                else if (phrase == "Name:") {
+                    std::string name;
+                    lineStream >> name;
+                    character->name = ConvertUtf8ToWide(name);
+                }
+                else if (phrase == "Dialogue:") {
+                    int id;
+                    lineStream >> id;
+                    character->dialogue = getDialogue(id);
+                }
+                else if (phrase == "Level:") {
+                    lineStream >> character->LEVEL;
+                }
+                else if (phrase == "Experience:") {
+                    lineStream >> character->EXPERIENCE;
+                }
+                else if (phrase == "SkillPoints:") {
+                    lineStream >> character->SKILL_POINTS;
+                }
+                else if (phrase == "CurrentHP:") {
+                    lineStream >> character->attributes[Attribute::HP];
+                }
+                else if (phrase == "MaxHP:") {
+                    lineStream >> character->attributes[Attribute::HP_max];
+                }
+                else if (phrase == "CurrentMP:") {
+                    lineStream >> character->attributes[Attribute::MP];
+                }
+                else if (phrase == "MaxMP:") {
+                    lineStream >> character->attributes[Attribute::MP_max];
+                }
+                else if (phrase == "Strength:") {
+                    lineStream >> character->attributes[Attribute::STRENGTH];
+                }
+                else if (phrase == "Dexterity:") {
+                    lineStream >> character->attributes[Attribute::DEXTERITY];
+                }
+                else if (phrase == "Intelligence:") {
+                    lineStream >> character->attributes[Attribute::INTELLIGENCE];
+                }
+                else if (phrase == "Body:") {
+                    std::string name;
+                    std::getline(lineStream, name, '"');
+                    std::getline(lineStream, name, '"');
+                    character->body = ConvertUtf8ToWide(name);
+                }
+                else if (phrase == "Head:") {
+                    std::string name;
+                    std::getline(lineStream, name, '"');
+                    std::getline(lineStream, name, '"');
+                    character->head = ConvertUtf8ToWide(name);
+                }
+                else if (phrase == "Helmet:") {
+                    std::string name;
+                    std::getline(lineStream, name, '"');
+                    std::getline(lineStream, name, '"');
+                    character->helmet = getItem(ConvertUtf8ToWide(name));
+                    character->loadHelmet();
+                }
+                else if (phrase == "Armor:") {
+                    std::string name;
+                    std::getline(lineStream, name, '"');
+                    std::getline(lineStream, name, '"');
+                    character->armor = getItem(ConvertUtf8ToWide(name));
+                    character->loadArmor();
+                }
+                else if (phrase == "Pants:") {
+                    std::string name;
+                    std::getline(lineStream, name, '"');
+                    std::getline(lineStream, name, '"');
+                    character->pants = getItem(ConvertUtf8ToWide(name));
+                    character->loadPants();
+                }
+                else if (phrase == "RightHand:") {
+                    std::string name;
+                    std::getline(lineStream, name, '"');
+                    std::getline(lineStream, name, '"');
+                    character->rightHand = getItem(ConvertUtf8ToWide(name));
+                    character->loadRightHand();
+                }
+                else if (phrase == "LeftHand:") {
+                    std::string name;
+                    std::getline(lineStream, name, '"');
+                    std::getline(lineStream, name, '"');
+                    character->leftHand = getItem(ConvertUtf8ToWide(name));
+                    character->loadLeftHand();
+                }
+
             }
 
 
@@ -1518,7 +1751,7 @@ public:
         std::ifstream file(pathfile, std::ios::binary);
         Reader reader(file);
 
-        std::vector < std::string > pathfiles;
+        std::vector < std::wstring > pathfiles;
 
         while (file && !file.eof()) {
             std::string phrase;
@@ -1535,7 +1768,7 @@ public:
                 uint32_t resources_count = reader.read_uint32();
 
                 for (uint32_t i = 0; i < resources_count; i++) {
-                    pathfiles.push_back(reader.read_string());
+                    pathfiles.push_back(ConvertUtf8ToWide(reader.read_string()));
                     //cout << i << " : " << pathfiles.back() << "\n";
 
                 }
@@ -1577,8 +1810,7 @@ public:
                             object = new Building(reader.read_short());                            
                         }
                         else if (objectType == static_cast<uint16_t>(GameObjectType::Character)) {
-                            GameObject* prefab = getPrefab(pathfiles[reader.read_uint32()]);
-                            object = getNewGameObject(prefab);
+                            object = new Character(reader.read_uint32());
                         }
                         else if (objectType == static_cast<uint16_t>(GameObjectType::InventoryOnMap)) {
                             Inventory* in = new Inventory(reader.read_short());
@@ -1604,16 +1836,16 @@ public:
             else if (phrase == "#Building") {
 
                 Building* building = getBuilding(reader.read_short());
-                building->name = reader.read_string();
+                building->name = ConvertUtf8ToWide(reader.read_string());
                 building->size = reader.read_Vector2i();
                 
-                building->_door = dynamic_cast<Door*>(getNewGameObject(getPrefab(reader.read_string())));
+                building->_door = dynamic_cast<Door*>(getNewGameObject(getPrefab(ConvertUtf8ToWide(reader.read_string()))));
                 building->_door->setPosition(building->position);
 
-                building->texture_top_walls = getSingleTexture(reader.read_string());
-                building->texture_center_walls = getSingleTexture(reader.read_string());
-                building->texture_bottom_walls = getSingleTexture(reader.read_string());
-                building->texture_windows = getSingleTexture(reader.read_string());
+                building->texture_top_walls = getSingleTexture(ConvertUtf8ToWide(reader.read_string()));
+                building->texture_center_walls = getSingleTexture(ConvertUtf8ToWide(reader.read_string()));
+                building->texture_bottom_walls = getSingleTexture(ConvertUtf8ToWide(reader.read_string()));
+                building->texture_windows = getSingleTexture(ConvertUtf8ToWide(reader.read_string()));
 
                 short floor_w = reader.read_short();
                 short floor_h = reader.read_short();
@@ -1665,9 +1897,53 @@ public:
 
                 std::cout << "#Inventory: " << inventory->id << "\n";
                 for (short i = 0; i < inventory->items.size(); i++) {
-                    std::cout << inventory->items[i]->name << " " << inventory->counts[i] << "\n";
+                    std::wcout << inventory->items[i]->name << L" " << inventory->counts[i] << L"\n";
                 }
             }
+            else if (phrase == "#Character") {
+
+                Character* character = getCharacter(reader.read_int());
+                character->name = ConvertUtf8ToWide(reader.read_string());
+                character->dialogue = getDialogue(reader.read_int());
+
+                character->LEVEL = reader.read_int();
+                character->EXPERIENCE = reader.read_int();
+                character->SKILL_POINTS = reader.read_int();
+
+                character->attributes[Attribute::HP] = reader.read_int();
+                character->attributes[Attribute::HP_max] = reader.read_int();
+                character->attributes[Attribute::MP] = reader.read_int();
+                character->attributes[Attribute::MP_max] = reader.read_int();
+
+                character->attributes[Attribute::STRENGTH] = reader.read_int();
+                character->attributes[Attribute::DEXTERITY] = reader.read_int();
+                character->attributes[Attribute::INTELLIGENCE] = reader.read_int();
+
+                /////////////////////////////
+
+                character->body = ConvertUtf8ToWide(reader.read_string());
+                character->head = ConvertUtf8ToWide(reader.read_string());
+
+                /////////////////////////////
+
+                character->helmet = getItem(ConvertUtf8ToWide(reader.read_string()));
+                character->armor = getItem(ConvertUtf8ToWide(reader.read_string()));
+                character->pants = getItem(ConvertUtf8ToWide(reader.read_string()));
+                character->rightHand = getItem(ConvertUtf8ToWide(reader.read_string()));
+                character->leftHand = getItem(ConvertUtf8ToWide(reader.read_string()));
+
+                /////////////////////////////
+
+                character->loadBody();
+                character->loadHead();
+                character->loadHelmet();
+                character->loadArmor();
+                character->loadPants();
+                character->loadRightHand();
+                character->loadLeftHand();
+                character->loadSprites();
+            }
+
             
         }
 

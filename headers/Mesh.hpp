@@ -31,10 +31,10 @@ class Mesh {
 public:
     const float line_weight = 1.25f;
     const sf::Color line_color = sf::Color(255, 48, 48);
-    std::string name;
+    std::wstring name;
 	std::vector <Triangle> triangles;
 
-    Mesh(std::string name) {
+    Mesh(std::wstring name) {
         this->name = name;
         triangles.clear();
     }
@@ -116,7 +116,7 @@ public:
     }
 
     void save() {
-        std::string pathfile = "assets\\" + name + ".msh";
+        std::wstring pathfile = L"assets\\" + name + L".msh";
 
         std::ofstream file(pathfile, std::ios::binary);
 
@@ -173,19 +173,19 @@ public:
 
 std::vector < Mesh* > meshes;
 
-void loadMeshes(const std::string& folderPath="assets\\") {
+void loadMeshes(const std::wstring folderPath=L"assets\\") {
 
     meshes.clear();
 
-    std::string pathfile;
-    std::string mesh_name;
+    std::wstring pathfile;
+    std::wstring mesh_name;
     Mesh* mesh;
     Triangle triangle;
 
     for (const auto& entry : std::filesystem::recursive_directory_iterator(folderPath)) {
         if (entry.is_regular_file() && entry.path().extension() == ".msh") {
 
-            pathfile = entry.path().string();
+            pathfile = entry.path().wstring();
 
             mesh_name = pathfile;
             mesh_name.erase(0, folderPath.length());
@@ -196,7 +196,7 @@ void loadMeshes(const std::string& folderPath="assets\\") {
 
             std::ifstream file(pathfile, std::ios::binary);
             if (!file) {
-                std::cerr << "Nie można otworzyć pliku " << pathfile << "\n";
+                std::wcout << L"Nie można otworzyć pliku " << pathfile << L"\n";
                 return;
             }
 
@@ -236,7 +236,7 @@ void loadMeshes(const std::string& folderPath="assets\\") {
 }
 
 
-Mesh* getMesh(std::string name) {
+Mesh* getMesh(std::wstring name) {
     for (auto& m : meshes) {
 
         if (m->name == name) {

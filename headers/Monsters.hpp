@@ -11,7 +11,11 @@ public:
 	std::vector < Point > path;
 	std::vector < sf::CircleShape > pathpoints;
 
-	Monster(string name, float width, float length, float height, short EXP) : Unit(name, name, width, length, height) {
+	sf::SoundBuffer snd_buffer;
+	sf::Sound snd;
+	sf::Time roarTime;
+
+	Monster(std::wstring name, float width, float length, float height, short EXP) : Unit(name, name, width, length, height) {
 		type = GameObjectType::Monster;
 		direction = 2;
 		isAlive = true;
@@ -27,8 +31,7 @@ public:
 
 		sprite = sf::Sprite();
 		sprite.setOrigin(texture->cx, texture->cy);
-		sprite.setTexture(*texture->texture);
-
+		sprite.setTexture(*texture->texture);	
 	}
 
 	Monster(GameObject* object) : Unit(object) {
@@ -48,6 +51,19 @@ public:
 		sprite = sf::Sprite();
 		sprite.setOrigin(texture->cx, texture->cy);
 		sprite.setTexture(*texture->texture);
+
+
+		// TO-DO - test sound "roar" 
+		snd_buffer = sf::SoundBuffer();
+		snd_buffer.loadFromFile("assets/snd/roar.ogg");
+
+		snd = sf::Sound();
+		snd.setBuffer(snd_buffer);
+
+		snd.setRelativeToListener(false);
+		snd.setMinDistance(screenHeight/2.0f); // w tej odległości dźwięk jest pełny
+		snd.setAttenuation(2.5f);
+		//
 	}
 
 	virtual ~Monster() {
@@ -58,20 +74,20 @@ public:
 
 		for (short i = 0; i < 4; i++) {
 
-			attackTextures[i] = getSingleTexture(name + "\\attackTop" + to_string(i));
-			attackTextures[4 + i] = getSingleTexture(name + "\\attackRight" + to_string(i));
-			attackTextures[8 + i] = getSingleTexture(name + "\\attackBottom" + to_string(i));
-			attackTextures[12 + i] = getSingleTexture(name + "\\attackLeft" + to_string(i));
+			attackTextures[i] = getSingleTexture(name + L"\\attackTop" + to_wstring(i));
+			attackTextures[4 + i] = getSingleTexture(name + L"\\attackRight" + to_wstring(i));
+			attackTextures[8 + i] = getSingleTexture(name + L"\\attackBottom" + to_wstring(i));
+			attackTextures[12 + i] = getSingleTexture(name + L"\\attackLeft" + to_wstring(i));
 
-			idleTextures[i] = getSingleTexture(name + "\\idleTop" + to_string(i));
-			idleTextures[4 + i] = getSingleTexture(name + "\\idleRight" + to_string(i));
-			idleTextures[8 + i] = getSingleTexture(name + "\\idleBottom" + to_string(i));
-			idleTextures[12 + i] = getSingleTexture(name + "\\idleLeft" + to_string(i));
+			idleTextures[i] = getSingleTexture(name + L"\\idleTop" + to_wstring(i));
+			idleTextures[4 + i] = getSingleTexture(name + L"\\idleRight" + to_wstring(i));
+			idleTextures[8 + i] = getSingleTexture(name + L"\\idleBottom" + to_wstring(i));
+			idleTextures[12 + i] = getSingleTexture(name + L"\\idleLeft" + to_wstring(i));
 
-			runTextures[i] = getSingleTexture(name + "\\runTop" + to_string(i));
-			runTextures[4 + i] = getSingleTexture(name + "\\runRight" + to_string(i));
-			runTextures[8 + i] = getSingleTexture(name + "\\runBottom" + to_string(i));
-			runTextures[12 + i] = getSingleTexture(name + "\\runLeft" + to_string(i));
+			runTextures[i] = getSingleTexture(name + L"\\runTop" + to_wstring(i));
+			runTextures[4 + i] = getSingleTexture(name + L"\\runRight" + to_wstring(i));
+			runTextures[8 + i] = getSingleTexture(name + L"\\runBottom" + to_wstring(i));
+			runTextures[12 + i] = getSingleTexture(name + L"\\runLeft" + to_wstring(i));
 
 		}
 
@@ -87,31 +103,31 @@ public:
 
 		Inventory* loot = new Inventory();
 		// TO-DO
-		if (name == "monsters\\wilczur") {
-			loot->addItem("items\\raw meat");
-			loot->addItem("items\\tooth", 1);
-			loot->addItem("items\\wolf skin");
+		if (name == L"monsters\\wilczur") {
+			loot->addItem(L"items\\raw meat");
+			loot->addItem(L"items\\tooth", 1);
+			loot->addItem(L"items\\wolf skin");
 		}
 		
-		if (name == "monsters\\dziobak") {
-			loot->addItem("items\\raw meat", 2);
+		if (name == L"monsters\\dziobak") {
+			loot->addItem(L"items\\raw meat", 2);
 		}
 
-		if (name == "monsters\\goblin") {
-			loot->addItem("items\\wooden club", 1);
+		if (name == L"monsters\\goblin") {
+			loot->addItem(L"items\\wooden club", 1);
 		}
 
-		if (name == "monsters\\troll") {
+		if (name == L"monsters\\troll") {
 			
 		}
 
-		if (name == "monsters\\bies") {
+		if (name == L"monsters\\bies") {
 
 		}
 
-		if (name == "monsters\\kolcorozec") {
-			loot->addItem("items\\tooth", 1);
-			loot->addItem("items\\spike", 1);
+		if (name == L"monsters\\kolcorozec") {
+			loot->addItem(L"items\\tooth", 1);
+			loot->addItem(L"items\\spike", 1);
 		}
 
 		if (loot->items.size() > 0) {
@@ -268,6 +284,14 @@ public:
 				idle();
 			}
 
+			// TO-DO
+			snd.setPosition(position.x, position.y, 0);
+			sf::Listener::setPosition(cam->position.x, cam->position.y, 0.f);
+
+			if (snd.getStatus() == sf::Sound::Stopped && (currentTime-roarTime).asSeconds() > 5.0f) {
+				snd.play();
+				roarTime = currentTime;
+			}
 
 			// colliders coloring
 			if (collisionPrediction(this, 0, 0))

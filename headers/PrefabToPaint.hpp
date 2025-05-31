@@ -363,11 +363,12 @@ public:
                     dynamic_cast<Building*>(object)->id = mapa->generateNewBuildingId();  
                 }
 
+                if (object->type == GameObjectType::Character) {
+                    dynamic_cast<Character*>(object)->id = mapa->generateNewCharacterId();
+                }
+
                 chunk->addGameObject(object);
                 addGameObjectToMainLists(object);
-
-                if (object->type == GameObjectType::Building)
-                    std::cout << "dodano budynek nr: " << dynamic_cast<Building*>(object)->id << "\n";
                 
             }
 

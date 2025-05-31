@@ -4,7 +4,7 @@
 class Object : public GameObject {
 public:
 
-	Object(string name, float width, float length, float height, bool collisioning, ColliderType ctype = ColliderType::Rectangle) : GameObject(name, width, length, height, collisioning, ctype) {
+	Object(std::wstring name, float width, float length, float height, bool collisioning, ColliderType ctype = ColliderType::Rectangle) : GameObject(name, width, length, height, collisioning, ctype) {
 		type = GameObjectType::Object;
 	}
 

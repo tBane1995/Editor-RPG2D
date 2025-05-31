@@ -130,7 +130,7 @@ GameObject* clicked_gameObject = nullptr;
 
 class GameObject {
 public:
-	std::string name;
+	std::wstring name;
 	GameObjectType type;
 	sf::Vector2f position;
 	float height;
@@ -151,7 +151,7 @@ public:
 
 	Mesh* mesh;
 
-	GameObject(std::string name, float width, float length, float height, bool collisioning, ColliderType col_type) {
+	GameObject(std::wstring name, float width, float length, float height, bool collisioning, ColliderType col_type) {
 		// CREATE PREFAB
 		this->name = name;
 
@@ -190,7 +190,7 @@ public:
 
 	}
 
-	GameObject(std::string name, float width, float length, float height, float width_left, float width_right) {
+	GameObject(std::wstring name, float width, float length, float height, float width_left, float width_right) {
 		// CREATE PREFAB: DOORS/GATES
 		this->name = name;
 
@@ -267,7 +267,7 @@ public:
 		isSelected = false;
 	}
 
-	GameObject(std::string name) {
+	GameObject(std::wstring name) {
 		// FOR TILES PALETTE (TERRAIN OR FLOOR) 
 		this->name = name;
 		position.x = 0;
@@ -296,28 +296,61 @@ public:
 		isSelected = false;
 	}
 
-	GameObject(short id, float x, float y) {
-		// FOR BUILDINGS
+	GameObject(GameObjectType object_type, short id, float x, float y) {
 
-		this->name = "new_building";
-		position.x = x;
-		position.y = y;
-		this->height = 0;
+		if (object_type == GameObjectType::Building) {
+			this->name = L"building_" + to_wstring(id);
+			position.x = x;
+			position.y = y;
+			this->height = 0;
 
-		textures.clear();
-		mesh = nullptr;
-		sprite = sf::Sprite();
+			textures.clear();
+			mesh = nullptr;
+			sprite = sf::Sprite();
 
-		collisioning = false;
-		colliders.clear();
+			collisioning = false;
+			colliders.clear();
 
-		mouseIsHover = false;
+			mouseIsHover = false;
 
-		createTextname();
+			createTextname();
 
-		isInTheMainList = false;
-		isVisible = false;
-		isSelected = false;
+			isInTheMainList = false;
+			isVisible = false;
+			isSelected = false;
+		}
+
+		if (object_type == GameObjectType::Character) {
+			this->name = L"character_" + to_wstring(id);
+
+			textures.clear();
+
+			mesh = nullptr;
+
+			position.x = x;
+			position.y = y;
+			this->height = 64;
+
+			frame = 0;
+			last_action_time = currentTime;
+
+			sprite = sf::Sprite();
+			sprite.setPosition(position);
+
+			this->collisioning = collisioning;
+			colliders.clear();
+			colliders.push_back(new Collider(36, 18, position, 0, 0, ColliderType::Elipse));
+
+			mouseIsHover = false;
+
+			createTextname();
+
+			isInTheMainList = false;
+			isVisible = false;
+			isSelected = false;
+		}
+
+		
 	}
 
 	virtual ~GameObject() {
@@ -442,7 +475,7 @@ public:
 	virtual void draw() {
 
 		if (mouseIsHover || isSelected) {
-			sf::Shader* sh = getShader("shaders\\highlighted")->shader;
+			sf::Shader* sh = getShader(L"shaders\\highlighted")->shader;
 			sh->setUniform("texture", *sprite.getTexture());
 			renderer->getTheCurrentFrame()->draw(sprite, sh);
 		}

@@ -35,7 +35,7 @@ public:
 			render_textures.push_back(r);
 		}
 
-		sh = getShader("shaders\\renderer")->shader;
+		sh = getShader(L"shaders\\renderer")->shader;
 
 		renderBorders = true;
 		renderCoords = true;

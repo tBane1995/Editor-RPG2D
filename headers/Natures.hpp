@@ -4,7 +4,7 @@
 class Nature : public GameObject {
 public:
 
-	Nature(string name, float width, float length, float height) : GameObject(name, width, length, height, true, ColliderType::Elipse) {
+	Nature(std::wstring name, float width, float length, float height) : GameObject(name, width, length, height, true, ColliderType::Elipse) {
 		type = GameObjectType::Nature;
 	}
 

@@ -75,12 +75,12 @@ public:
 	void loadDefaultMenu() {
 
 		if (selectedGameObjects.size() > 0) {
-			ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture("GUI\\context_menu\\btn_default"));
+			ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 			btn_copy->onclick_func = [this]() {
 				clipboard->copy();
 				};
 
-			ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture("GUI\\context_menu\\btn_remove"));
+			ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture(L"GUI\\context_menu\\btn_remove"));
 			btn_remove->onclick_func = [this]() {
 
 				for (auto& so : selectedGameObjects) {
@@ -110,10 +110,10 @@ public:
 			_buttons.push_back(btn_remove);
 		}
 		else {
-			ButtonWithTextAndIcon* btn_undo = new ButtonWithTextAndIcon(L"undo", getSingleTexture("GUI\\context_menu\\btn_default"));
+			ButtonWithTextAndIcon* btn_undo = new ButtonWithTextAndIcon(L"undo", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 
 
-			ButtonWithTextAndIcon* btn_paste = new ButtonWithTextAndIcon(L"paste", getSingleTexture("GUI\\context_menu\\btn_default"));
+			ButtonWithTextAndIcon* btn_paste = new ButtonWithTextAndIcon(L"paste", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 			btn_paste->onclick_func = [this]() {
 				clipboard->paste();
 				};
@@ -130,22 +130,22 @@ public:
 	void loadCharacterMenu(GameObject* object) {
 		Character* character = dynamic_cast <Character*>(object);
 
-		ButtonWithTextAndIcon* btn_edit = new ButtonWithTextAndIcon(L"edit", getSingleTexture("GUI\\context_menu\\btn_edit"));
+		ButtonWithTextAndIcon* btn_edit = new ButtonWithTextAndIcon(L"edit", getSingleTexture(L"GUI\\context_menu\\btn_edit"));
 		btn_edit->onclick_func = [this, character]() {
 			dialogs.push_back(new CharacterInfoPanel(character));
 			};
 
-		ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_copy->onclick_func = [this]() {
 			clipboard->copy();
 			};
 
-		ButtonWithTextAndIcon* btn_cut = new ButtonWithTextAndIcon(L"cut", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_cut = new ButtonWithTextAndIcon(L"cut", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_cut->onclick_func = [this]() {
 			clipboard->cut();
 			};
 
-		ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture("GUI\\context_menu\\btn_remove"));
+		ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture(L"GUI\\context_menu\\btn_remove"));
 		btn_remove->onclick_func = [this, character]() {
 			deleteGameObjectFromMainLists(character);
 			if (editor_state == EditorStates::MapEditor) {
@@ -158,7 +158,7 @@ public:
 			unselectGameObjects();
 			};
 
-		ButtonWithTextAndIcon* btn_cancel = new ButtonWithTextAndIcon(L"cancel", getSingleTexture("GUI\\context_menu\\btn_cancel"));
+		ButtonWithTextAndIcon* btn_cancel = new ButtonWithTextAndIcon(L"cancel", getSingleTexture(L"GUI\\context_menu\\btn_cancel"));
 
 		_buttons.push_back(btn_edit);
 		_buttons.push_back(btn_copy);
@@ -171,23 +171,23 @@ public:
 		Building* building = dynamic_cast <Building*>(object);
 
 		// TO-DO
-		ButtonWithTextAndIcon* btn_edit = new ButtonWithTextAndIcon(L"edit", getSingleTexture("GUI\\context_menu\\btn_edit"));
+		ButtonWithTextAndIcon* btn_edit = new ButtonWithTextAndIcon(L"edit", getSingleTexture(L"GUI\\context_menu\\btn_edit"));
 		btn_edit->onclick_func = [this, building]() {
 			editor_state = EditorStates::BuildingEditorInit;
 			building_to_edit = building;
 			};
 
-		ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_copy->onclick_func = [this]() {
 			clipboard->copy();
 			};
 
-		ButtonWithTextAndIcon* btn_cut = new ButtonWithTextAndIcon(L"cut", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_cut = new ButtonWithTextAndIcon(L"cut", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_cut->onclick_func = [this]() {
 			clipboard->cut();
 			};
 
-		ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture("GUI\\context_menu\\btn_remove"));
+		ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture(L"GUI\\context_menu\\btn_remove"));
 		btn_remove->onclick_func = [this, building]() {
 			deleteGameObjectFromMainLists(building);
 			Chunk* chunk = nullptr;
@@ -200,7 +200,7 @@ public:
 			unselectGameObjects();
 			};
 		
-		ButtonWithTextAndIcon* btn_cancel = new ButtonWithTextAndIcon(L"cancel", getSingleTexture("GUI\\context_menu\\btn_cancel"));
+		ButtonWithTextAndIcon* btn_cancel = new ButtonWithTextAndIcon(L"cancel", getSingleTexture(L"GUI\\context_menu\\btn_cancel"));
 
 		_buttons.push_back(btn_edit);
 		_buttons.push_back(btn_copy);
@@ -211,17 +211,17 @@ public:
 	}
 
 	void loadFurnitureMenu(GameObject* object) {
-		ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_copy->onclick_func = [this]() {
 			clipboard->copy();
 			};
 
-		ButtonWithTextAndIcon* btn_cut = new ButtonWithTextAndIcon(L"cut", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_cut = new ButtonWithTextAndIcon(L"cut", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_cut->onclick_func = [this]() {
 			clipboard->cut();
 			};
 
-		ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture("GUI\\context_menu\\btn_remove"));
+		ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture(L"GUI\\context_menu\\btn_remove"));
 		btn_remove->onclick_func = [this, object]() {
 			deleteGameObjectFromMainLists(object);
 			building_to_edit->deleteGameObject(object);
@@ -229,7 +229,7 @@ public:
 			unselectGameObjects();
 			};
 
-		ButtonWithTextAndIcon* btn_cancel = new ButtonWithTextAndIcon(L"cancel", getSingleTexture("GUI\\context_menu\\btn_cancel"));
+		ButtonWithTextAndIcon* btn_cancel = new ButtonWithTextAndIcon(L"cancel", getSingleTexture(L"GUI\\context_menu\\btn_cancel"));
 
 		_buttons.push_back(btn_copy);
 		_buttons.push_back(btn_cut);
@@ -244,7 +244,7 @@ public:
 
 		ButtonWithTextAndIcon* btn_open_close;
 		if (door->state == DoorState::Open || door->state == DoorState::Opening) {
-			btn_open_close = new ButtonWithTextAndIcon(L"close", getSingleTexture("GUI\\context_menu\\btn_default"));
+			btn_open_close = new ButtonWithTextAndIcon(L"close", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 
 			btn_open_close->onclick_func = [this, door]() {
 				door->close();
@@ -252,7 +252,7 @@ public:
 		}
 		else {
 
-			btn_open_close = new ButtonWithTextAndIcon(L"open", getSingleTexture("GUI\\context_menu\\btn_default"));
+			btn_open_close = new ButtonWithTextAndIcon(L"open", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 
 			btn_open_close->onclick_func = [this, door]() {
 				door->open();
@@ -261,17 +261,17 @@ public:
 			
 
 		
-		ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_copy->onclick_func = [this]() {
 			clipboard->copy();
 			};
 
-		ButtonWithTextAndIcon* btn_cut = new ButtonWithTextAndIcon(L"cut", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_cut = new ButtonWithTextAndIcon(L"cut", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_cut->onclick_func = [this]() {
 			clipboard->cut();
 			};
 
-		ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture("GUI\\context_menu\\btn_remove"));
+		ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture(L"GUI\\context_menu\\btn_remove"));
 		btn_remove->onclick_func = [this, object]() {
 
 			deleteGameObjectFromMainLists(object);
@@ -292,13 +292,13 @@ public:
 			unselectGameObjects();
 			};
 
-		ButtonWithTextAndIcon* btn_edit_mesh = new ButtonWithTextAndIcon(L"edit mesh", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_edit_mesh = new ButtonWithTextAndIcon(L"edit mesh", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_edit_mesh->onclick_func = [this, object]() {
 			mesh_to_edit_gameobject = object;
 			editor_state = EditorStates::MeshEditorInit;
 			};
 
-		ButtonWithTextAndIcon* btn_cancel = new ButtonWithTextAndIcon(L"cancel", getSingleTexture("GUI\\context_menu\\btn_cancel"));
+		ButtonWithTextAndIcon* btn_cancel = new ButtonWithTextAndIcon(L"cancel", getSingleTexture(L"GUI\\context_menu\\btn_cancel"));
 
 		_buttons.push_back(btn_open_close);
 		_buttons.push_back(btn_copy);
@@ -310,17 +310,17 @@ public:
 	}
 
 	void loadObjectMenu(GameObject* object) {
-		ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_copy = new ButtonWithTextAndIcon(L"copy", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_copy->onclick_func = [this]() {
 			clipboard->copy();
 			};
 
-		ButtonWithTextAndIcon* btn_cut = new ButtonWithTextAndIcon(L"cut", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_cut = new ButtonWithTextAndIcon(L"cut", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_cut->onclick_func = [this]() {
 			clipboard->cut();
 			};
 
-		ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture("GUI\\context_menu\\btn_remove"));
+		ButtonWithTextAndIcon* btn_remove = new ButtonWithTextAndIcon(L"remove", getSingleTexture(L"GUI\\context_menu\\btn_remove"));
 		btn_remove->onclick_func = [this, object]() {
 
 			deleteGameObjectFromMainLists(object);
@@ -341,13 +341,13 @@ public:
 			unselectGameObjects();
 			};
 
-		ButtonWithTextAndIcon* btn_edit_mesh = new ButtonWithTextAndIcon(L"edit mesh", getSingleTexture("GUI\\context_menu\\btn_default"));
+		ButtonWithTextAndIcon* btn_edit_mesh = new ButtonWithTextAndIcon(L"edit mesh", getSingleTexture(L"GUI\\context_menu\\btn_default"));
 		btn_edit_mesh->onclick_func = [this, object]() {
 			mesh_to_edit_gameobject = object;
 			editor_state = EditorStates::MeshEditorInit;
 			};
 
-		ButtonWithTextAndIcon* btn_cancel = new ButtonWithTextAndIcon(L"cancel", getSingleTexture("GUI\\context_menu\\btn_cancel"));
+		ButtonWithTextAndIcon* btn_cancel = new ButtonWithTextAndIcon(L"cancel", getSingleTexture(L"GUI\\context_menu\\btn_cancel"));
 
 		_buttons.push_back(btn_copy);
 		_buttons.push_back(btn_cut);

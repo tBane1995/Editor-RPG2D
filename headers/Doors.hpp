@@ -10,13 +10,13 @@ public:
 	sf::Sprite takeItSprite;
 	bool showHand;
 
-	Door(std::string name, float width, float length, float height, float width_left, float width_right) : GameObject(name, width, length, height, width_left, width_right) {
+	Door(std::wstring name, float width, float length, float height, float width_left, float width_right) : GameObject(name, width, length, height, width_left, width_right) {
 
 		type = GameObjectType::Door;
 
 		state = DoorState::Close;
 
-		takeItTexture = getSingleTexture("GUI\\hand");
+		takeItTexture = getSingleTexture(L"GUI\\hand");
 		takeItSprite = sf::Sprite();
 		takeItSprite.setTexture(*takeItTexture->texture);
 		takeItSprite.setOrigin(takeItTexture->cx, takeItTexture->cy);
@@ -33,7 +33,7 @@ public:
 
 		state = DoorState::Close;
 
-		takeItTexture = getSingleTexture("GUI\\hand");
+		takeItTexture = getSingleTexture(L"GUI\\hand");
 		takeItSprite = sf::Sprite();
 		takeItSprite.setTexture(*takeItTexture->texture);
 		takeItSprite.setOrigin(takeItTexture->cx, takeItTexture->cy);
@@ -141,7 +141,7 @@ public:
 	virtual void draw() {
 		
 		if (mouseIsHover || isSelected) {
-			sf::Shader* sh = getShader("shaders\\highlighted")->shader;
+			sf::Shader* sh = getShader(L"shaders\\highlighted")->shader;
 			sh->setUniform("texture", *sprite.getTexture());
 			renderer->getTheCurrentFrame()->draw(sprite, sh);
 		}

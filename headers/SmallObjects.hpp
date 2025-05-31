@@ -4,7 +4,7 @@
 class SmallObject : public GameObject {
 public:
 
-	SmallObject(string name, float width, float length, float height) : GameObject(name, width, length, height, false, ColliderType::Elipse) {
+	SmallObject(std::wstring name, float width, float length, float height) : GameObject(name, width, length, height, false, ColliderType::Elipse) {
 		type = GameObjectType::SmallObject;
 	}
 

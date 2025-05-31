@@ -27,17 +27,18 @@ public:
 		textarea = new TextArea(text, textpos, width - 2 * dialog_border_width - 2 * margin);
 
 		textarea->setTextColor(textColor);
-		textarea->setBackgroundColor(sf::Color::Transparent);
 		textarea->setRectColor(panelColor_normal);
 
-		btn_yes = new ButtonWithText("tak");
-		btn_no = new ButtonWithText("nie");
-		float x1 = 128 - btn_yes->rect.getSize().x;
-		float x2 = 128 - btn_no->rect.getSize().x;
-		float margin_bottom = 16;
+		sf::Vector2f btn_size = sf::Vector2f(64, -1);
+		btn_yes = new ButtonWithText("tak", 17, TextAlignment::Center, btn_size);
+		btn_no = new ButtonWithText("nie", 17, TextAlignment::Center, btn_size);
 
-		btn_yes->setPosition(sf::Vector2f(position.x - x1, position.y + rect.getSize().y - dialog_border_width - 8 - margin_bottom));
-		btn_no->setPosition(sf::Vector2f(position.x + x2, position.y + rect.getSize().y - dialog_border_width - 8 - margin_bottom));
+		float x1 = -64 - btn_yes->rect.getSize().x / 2;
+		float x2 = 64 - btn_no->rect.getSize().x / 2;;
+		float margin_bottom = 48;
+
+		btn_yes->setPosition(sf::Vector2f(position.x + x1, position.y + rect.getSize().y/2 - dialog_border_width - margin_bottom));
+		btn_no->setPosition(sf::Vector2f(position.x + x2, position.y + rect.getSize().y/2 - dialog_border_width - margin_bottom));
 
 		value = ConfirmValue::Undefinded;
 	}

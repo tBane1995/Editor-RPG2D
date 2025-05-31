@@ -9,6 +9,8 @@ void BuildingEditorEventRightClick(sf::Event& event);
 sf::Text fps_counter;
 sf::Text coordinates;
 
+ButtonWithImage* reset_camera;
+
 void Editor() {
 
     window->setTitle("Map Editor");
@@ -731,8 +733,57 @@ void Editor() {
             std::cout << "edit building nr " << building_to_edit->id << "\n";
             editor_state = EditorStates::BuildingEditor;
 
+            // TO-DO
+            reset_camera = new ButtonWithImage(getSingleTexture(L"GUI\\building_editor_side_menu\\reset_camera"));
+            reset_camera->setPosition(sf::Vector2f(-screenWidth/2.0f + 48, -screenHeight/2.0f + 48 + menu_bar->getSize().y));
+            reset_camera->onclick_func = []() {
+                cam->setPosition(building_to_edit->size.x * 16 / 2 + 160, building_to_edit->size.y * 16 / 2);
+                };
+            reset_camera->hover_func = []() {
+                if (tip == nullptr || tip->btn != reset_camera) {
+                    if (tip != nullptr)
+                        delete tip;
+
+                    tip = new Tip(L"reset camera", reset_camera);
+                }
+                };
+
         }
         else if (editor_state == EditorStates::BuildingEditor) {
+
+            if (dialogs.empty()) {
+                float moveSpeed = 300.0f * dt;
+                bool cam_moved = false;
+
+                // moving the view
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                    cam->move(0.0f, -moveSpeed);
+                    cam_moved = true;
+                }
+
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+                    cam->move(0.0f, moveSpeed);
+                    cam_moved = true;
+                }
+
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                    cam->move(-moveSpeed, 0.0f);
+                    cam_moved = true;
+                }
+
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                    cam->move(moveSpeed, 0.0f);
+                    cam_moved = true;
+                }
+
+                if (cam_moved) {
+
+                    if (context_menu != nullptr) {
+                        delete context_menu;
+                        context_menu = nullptr;
+                    }
+                }
+            }
 
             GUIwasHover = false;
             GUIwasClicked = false;
@@ -751,6 +802,7 @@ void Editor() {
 
             palette->cursorHover();
             menu_bar->cursorHover();
+            reset_camera->cursorHover();
 
             if (context_menu != nullptr) {
                 context_menu->cursorHover();
@@ -759,6 +811,7 @@ void Editor() {
             palette->update();
             menu_bar->update();
             clipboard->update();
+            reset_camera->update();
 
             if (context_menu != nullptr) {
                 context_menu->update();
@@ -871,6 +924,7 @@ void Editor() {
                     else {
                         palette->handleEvent(event);
                         menu_bar->handleEvent(event);
+                        reset_camera->handleEvent(event);
 
                         if (clicked_gameObject != nullptr) {
                             if (clicked_gameObject->isSelected == false) {
@@ -917,6 +971,7 @@ void Editor() {
 
                     palette->handleEvent(event);
                     menu_bar->handleEvent(event);
+                    reset_camera->handleEvent(event);
 
                     if (context_menu != nullptr)
                         context_menu->handleEvent(event);
@@ -1082,6 +1137,7 @@ void Editor() {
             painter->draw();
             palette->draw();
             menu_bar->draw();
+            reset_camera->draw();
 
             for (auto& dial : dialogs)
                 dial->draw();

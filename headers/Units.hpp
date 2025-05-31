@@ -395,12 +395,12 @@ enum class State { Idle, Run, Attack };
 class Unit : public GameObject {
 public:
 
-	std::map < Attribute, short > attributes;
-	std::string body;
+	std::map < Attribute, int > attributes;
+	std::wstring body;
 
-	SingleTexture* idleTextures[16];		// idle textures	
-	SingleTexture* runTextures[16];			// run textures
-	SingleTexture* attackTextures[16];		// attack textures
+	std::vector < SingleTexture* > idleTextures;		// idle textures	
+	std::vector < SingleTexture* > runTextures;			// run textures
+	std::vector < SingleTexture* > attackTextures;		// attack textures
 
 	char direction = 2;				// 0 to top, 1 to right, 2 to bottom, 3 to left
 	State state = State::Idle;
@@ -413,7 +413,7 @@ public:
 
 	sf::Vector2f target; 
 
-	Unit(string name, string body, float width, float length, float height) : GameObject(name, width, length, height, true, ColliderType::Elipse) {
+	Unit(std::wstring name, std::wstring body, float width, float length, float height) : GameObject(name, width, length, height, true, ColliderType::Elipse) {
 
 		this->body = body;
 
@@ -432,9 +432,10 @@ public:
 		direction = 2;
 		state = State::Idle;
 
+		resizeTheListsOfTextures();
 		loadBody();
 
-		texture = idleTextures[0];
+		texture = idleTextures[direction * 4 + frame];
 
 		sprite = sf::Sprite();
 		sprite.setTexture(*texture->texture);
@@ -468,9 +469,10 @@ public:
 		direction = 2;
 		state = State::Idle;
 
+		resizeTheListsOfTextures();
 		loadBody();
 
-		texture = idleTextures[0];
+		texture = idleTextures[direction * 4 + frame];
 
 		sprite = sf::Sprite();
 		sprite.setTexture(*texture->texture);
@@ -486,23 +488,71 @@ public:
 
 	}
 
+	Unit(short id, float x, float y) : GameObject(GameObjectType::Character, id, x, y) {
+
+		this->body = L"sets\\body\\man";
+
+		attributes[Attribute::HP] = 40;
+		attributes[Attribute::HP_max] = 40;
+
+		attributes[Attribute::MP] = 10;
+		attributes[Attribute::MP_max] = 10;
+
+		attributes[Attribute::STRENGTH] = 5;
+		attributes[Attribute::DEXTERITY] = 5;
+		attributes[Attribute::INTELLIGENCE] = 5;
+
+		//////////////////////////////////
+
+		direction = 2;
+		state = State::Idle;
+
+		
+		resizeTheListsOfTextures();
+		loadBody();
+
+		texture = idleTextures[direction * 4 + frame];
+
+		sprite = sf::Sprite();
+		sprite.setTexture(*texture->texture);
+		sprite.setOrigin(texture->cx, texture->cy);
+
+		/////////////////////////////
+
+		action_range = 16;
+		view_range = 64;
+
+		createActionRangeArea();
+		createViewRangeArea();
+
+	}
+
+	void resizeTheListsOfTextures() {
+		idleTextures.resize(16);
+		runTextures.resize(16);
+		attackTextures.resize(16);
+	}
+
 	void loadBody() {
+
+		
+
 		for (short i = 0; i < 4; i++) {
 
-			idleTextures[i] = getSingleTexture(body + "\\idleTop" + to_string(i));
-			idleTextures[4 + i] = getSingleTexture(body + "\\idleRight" + to_string(i));
-			idleTextures[8 + i] = getSingleTexture(body + "\\idleBottom" + to_string(i));
-			idleTextures[12 + i] = getSingleTexture(body + "\\idleLeft" + to_string(i));
+			idleTextures[i] = getSingleTexture(body + L"\\idleTop" + to_wstring(i));
+			idleTextures[4 + i] = getSingleTexture(body + L"\\idleRight" + to_wstring(i));
+			idleTextures[8 + i] = getSingleTexture(body + L"\\idleBottom" + to_wstring(i));
+			idleTextures[12 + i] = getSingleTexture(body + L"\\idleLeft" + to_wstring(i));
 
-			runTextures[i] = getSingleTexture(body + "\\runTop" + to_string(i));
-			runTextures[4 + i] = getSingleTexture(body + "\\runRight" + to_string(i));
-			runTextures[8 + i] = getSingleTexture(body + "\\runBottom" + to_string(i));
-			runTextures[12 + i] = getSingleTexture(body + "\\runLeft" + to_string(i));
+			runTextures[i] = getSingleTexture(body + L"\\runTop" + to_wstring(i));
+			runTextures[4 + i] = getSingleTexture(body + L"\\runRight" + to_wstring(i));
+			runTextures[8 + i] = getSingleTexture(body + L"\\runBottom" + to_wstring(i));
+			runTextures[12 + i] = getSingleTexture(body + L"\\runLeft" + to_wstring(i));
 
-			attackTextures[i] = getSingleTexture(body + "\\attackTop" + to_string(i));
-			attackTextures[4 + i] = getSingleTexture(body + "\\attackRight" + to_string(i));
-			attackTextures[8 + i] = getSingleTexture(body + "\\attackBottom" + to_string(i));
-			attackTextures[12 + i] = getSingleTexture(body + "\\attackLeft" + to_string(i));
+			attackTextures[i] = getSingleTexture(body + L"\\attackTop" + to_wstring(i));
+			attackTextures[4 + i] = getSingleTexture(body + L"\\attackRight" + to_wstring(i));
+			attackTextures[8 + i] = getSingleTexture(body + L"\\attackBottom" + to_wstring(i));
+			attackTextures[12 + i] = getSingleTexture(body + L"\\attackLeft" + to_wstring(i));
 		}
 	}
 

@@ -35,12 +35,12 @@ public:
 			float y = cam->position.y + position.y - (itemsInCol / 2 - i / itemsInRow) * slotSide + slotSide / 2;
 			slotsSprites[i].setOrigin(slotSide / 2, slotSide / 2);
 			slotsSprites[i].setPosition(x, y);
-			slotsSprites[i].setTexture(*getSingleTexture("GUI\\slot1")->texture);
+			slotsSprites[i].setTexture(*getSingleTexture(L"GUI\\slot1")->texture);
 		}
 
 		// SELECTOR
 		selector = sf::Sprite();
-		selector.setTexture(*getSingleTexture("GUI\\selector")->texture);
+		selector.setTexture(*getSingleTexture(L"GUI\\selector")->texture);
 		selector.setOrigin(slotSide / 2, slotSide / 2);
 
 		drawSelector = false;
@@ -180,7 +180,7 @@ void updateInventoryPanel() {
 	drawItemStats = false;
 	
 	background = sf::Sprite();
-	background.setTexture(*getSingleTexture("GUI\\infoPanel")->texture);
+	background.setTexture(*getSingleTexture(L"GUI\\infoPanel")->texture);
 	background.setPosition(cam->position.x, cam->position.y + 275);
 	background.setOrigin(300,75);
 

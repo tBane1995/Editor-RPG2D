@@ -25,6 +25,7 @@
 #include "headers/Camera.hpp"
 #include "headers/Mouse.hpp"
 #include "headers/Theme.hpp"
+#include "headers/Translate.hpp"
 
 #include "headers/Fonts.hpp"
 #include "headers/Textures.hpp"
@@ -84,18 +85,22 @@
 
 #include "headers/PrefabToPaint.hpp"
 
-
-
 #include "headers/Tips.hpp"
 #include "headers/Palette.hpp"
 #include "headers/MenuBar.hpp"
+
+#include "headers/DialogueEditor.hpp"
 #include "headers/CharacterInfoPanel.hpp"
+//#include "headers/InstructionsWorldEditor.hpp"    // TO-DO
+//#include "headers/InstructionsBuildingEditor.hpp" // TO-DO
+//#include "headers/InstructionsMeshEditor.hpp"     // TO-DOS
+
 #include "headers/Clipboard.hpp"
 #include "headers/History.hpp"
 #include "headers/ContextMenu.hpp"
 
 #include "headers/Config.hpp"
-
+    
 #include "headers/ControlsPanel.hpp"
 #include "headers/InventoryPanel.hpp"
 #include "headers/TradePanel.hpp"

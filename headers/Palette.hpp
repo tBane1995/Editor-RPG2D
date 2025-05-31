@@ -135,7 +135,7 @@ public:
     GameObjectAndTextureInfo* object_and_texture_info;
     sf::Sprite sprite;
 
-    PaletteButton(sf::Vector2f position) : ButtonWithImage(getSingleTexture("GUI\\slot2"), position) {
+    PaletteButton(sf::Vector2f position) : ButtonWithImage(getSingleTexture(L"GUI\\slot2"), position) {
         object_and_texture_info = nullptr;
     }
 
@@ -157,7 +157,7 @@ public:
                     pos.y = this->position.y + sprite.getTexture()->getSize().y / 4.0f;
                     if (tip != nullptr)
                         delete tip;
-                    tip = new Tip(ConvertUtf8ToWide(getShortName(this->object_and_texture_info->object->name)), pos, this);       // TO-DO delete convert and use std::wstring
+                    tip = new Tip(getShortName(this->object_and_texture_info->object->name), pos, this);       // TO-DO delete convert and use std::wstring
                 }
 
                 };
@@ -646,83 +646,41 @@ public:
     void setWallsObjectsToPalette() {
         gameObjectsAndTexturesInfo.clear();
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_0")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_2")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_0")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_2")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_3")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_4")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_4")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_3")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\mud_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\mud_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_3")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_5")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_6")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_7")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mud_wall_8")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_5")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_6")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_7")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mud_wall_8")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\mud_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\mud_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\mud_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\mud_wall_overgrown")));
-
-        gameObjectsAndTexturesInfo.push_back(nullptr);
-        gameObjectsAndTexturesInfo.push_back(nullptr);
-        gameObjectsAndTexturesInfo.push_back(nullptr);
-        gameObjectsAndTexturesInfo.push_back(nullptr);
-        gameObjectsAndTexturesInfo.push_back(nullptr);
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_0")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_2")));
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_3")));
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_4")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_3")));
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\stone_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_3")));
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_5")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_6")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_7")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_stone_wall_8")));
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\stone_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\stone_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\stone_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\stone_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\mud_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\mud_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\mud_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\mud_wall_overgrown")));
 
         gameObjectsAndTexturesInfo.push_back(nullptr);
         gameObjectsAndTexturesInfo.push_back(nullptr);
@@ -730,83 +688,41 @@ public:
         gameObjectsAndTexturesInfo.push_back(nullptr);
         gameObjectsAndTexturesInfo.push_back(nullptr);
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_0")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_2")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_0")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_2")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_3")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_4")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_4")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_3")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\wooden_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\stone_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_3")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_5")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_6")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_7")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_wooden_wall_8")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_5")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_6")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_7")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_stone_wall_8")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\wooden_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\wooden_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\wooden_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\wooden_wall_overgrown")));
-
-        gameObjectsAndTexturesInfo.push_back(nullptr);
-        gameObjectsAndTexturesInfo.push_back(nullptr);
-        gameObjectsAndTexturesInfo.push_back(nullptr);
-        gameObjectsAndTexturesInfo.push_back(nullptr);
-        gameObjectsAndTexturesInfo.push_back(nullptr);
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_0")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_2")));
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_3")));
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_4")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_3")));
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\brick_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_3")));
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_5")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_6")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_7")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_brick_wall_8")));
-
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\brick_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\brick_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\brick_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\brick_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\stone_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\stone_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\stone_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\stone_wall_overgrown")));
 
         gameObjectsAndTexturesInfo.push_back(nullptr);
         gameObjectsAndTexturesInfo.push_back(nullptr);
@@ -814,41 +730,125 @@ public:
         gameObjectsAndTexturesInfo.push_back(nullptr);
         gameObjectsAndTexturesInfo.push_back(nullptr);
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_0")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_2")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_0")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_2")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_3")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_4")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_4")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_3")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\mulch_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\wooden_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_3")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_5")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_6")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_7")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\set_mulch_wall_8")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_5")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_6")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_7")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_wooden_wall_8")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\mulch_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\mulch_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\empty_wall")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\mulch_wall_overgrown")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("walls\\mulch_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\wooden_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\wooden_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\wooden_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\wooden_wall_overgrown")));
+
+        gameObjectsAndTexturesInfo.push_back(nullptr);
+        gameObjectsAndTexturesInfo.push_back(nullptr);
+        gameObjectsAndTexturesInfo.push_back(nullptr);
+        gameObjectsAndTexturesInfo.push_back(nullptr);
+        gameObjectsAndTexturesInfo.push_back(nullptr);
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_0")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_2")));
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_3")));
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_4")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_3")));
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\brick_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_3")));
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_5")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_6")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_7")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_brick_wall_8")));
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\brick_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\brick_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\brick_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\brick_wall_overgrown")));
+
+        gameObjectsAndTexturesInfo.push_back(nullptr);
+        gameObjectsAndTexturesInfo.push_back(nullptr);
+        gameObjectsAndTexturesInfo.push_back(nullptr);
+        gameObjectsAndTexturesInfo.push_back(nullptr);
+        gameObjectsAndTexturesInfo.push_back(nullptr);
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_0")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_2")));
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_3")));
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_4")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_3")));
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\mulch_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_3")));
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_5")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_6")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_7")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\set_mulch_wall_8")));
+
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\mulch_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\mulch_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\empty_wall")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\mulch_wall_overgrown")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"walls\\mulch_wall_overgrown")));
     }
 
     void setMonstersObjectsToPalette() {
@@ -864,24 +864,24 @@ public:
     void setFlatObjectsToPalette() {
         gameObjectsAndTexturesInfo.clear();
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\path_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\path_2")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\stonepath_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\stonepath_2")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\sandspath_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\sandspath_2")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\path_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\path_2")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\stonepath_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\stonepath_2")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\sandspath_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\sandspath_2")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\herb_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\herb_2")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\herb_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\herb_2")));
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\small_rock_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\small_rock_2")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\small_rock_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\small_rock_4")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\small_sands_rock_1")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\small_sands_rock_2")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\small_sands_rock_3")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("flatObjects\\small_sands_rock_4")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\small_rock_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\small_rock_2")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\small_rock_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\small_rock_4")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\small_sands_rock_1")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\small_sands_rock_2")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\small_sands_rock_3")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"flatObjects\\small_sands_rock_4")));
 
         
     }
@@ -915,8 +915,8 @@ public:
             }
         }
 
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("doors\\wooden_gate")));
-        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab("doors\\great_stone_gate")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"doors\\wooden_gate")));
+        gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(getPrefab(L"doors\\great_stone_gate")));
     }
 
     void setSmallObjectsToPalette() {
@@ -934,11 +934,11 @@ public:
         gameObjectsAndTexturesInfo.clear();
 
         std::vector < Building* > buildings;
-        buildings.push_back(new Building("assets\\buildings\\mud_house.bld"));
-        buildings.push_back(new Building("assets\\buildings\\stone_house.bld"));
-        buildings.push_back(new Building("assets\\buildings\\wooden_house.bld"));
-        buildings.push_back(new Building("assets\\buildings\\brick_house.bld"));
-        buildings.push_back(new Building("assets\\buildings\\mulch_house.bld"));
+        buildings.push_back(new Building(L"assets\\buildings\\mud_house.bld"));
+        buildings.push_back(new Building(L"assets\\buildings\\stone_house.bld"));
+        buildings.push_back(new Building(L"assets\\buildings\\wooden_house.bld"));
+        buildings.push_back(new Building(L"assets\\buildings\\brick_house.bld"));
+        buildings.push_back(new Building(L"assets\\buildings\\mulch_house.bld"));
 
         float part_size = 64;
 
@@ -986,7 +986,7 @@ public:
                         pos.y = button->position.y + button->sprite.getGlobalBounds().height / 4.0f;
                         if (tip != nullptr)
                             delete tip;
-                        tip = new Tip(ConvertUtf8ToWide(getShortName(button->object_and_texture_info->object->name)), pos, button);       // TO-DO delete convert and use std::wstring
+                        tip = new Tip(getShortName(button->object_and_texture_info->object->name), pos, button);       // TO-DO delete convert and use std::wstring
                     }
                     };
 
@@ -1032,12 +1032,11 @@ public:
         // delete old Tools Buttons
         deleteToolsButtons();
 
-        cout << "create Tools Buttons\n";
         btnToolsEmpty = new ButtonWithImage();
-        btnToolsEmpty->setTexture(getSingleTexture("GUI\\toolButtons\\toolbutton"));
+        btnToolsEmpty->setTexture(getSingleTexture(L"GUI\\toolButtons\\toolbutton"));
 
         btnToolsCursor = new ButtonWithImage();
-        btnToolsCursor->setTexture(getSingleTexture("GUI\\toolButtons\\toolbutton-cursor"));
+        btnToolsCursor->setTexture(getSingleTexture(L"GUI\\toolButtons\\toolbutton-cursor"));
         btnToolsCursor->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnToolsCursor) {
                 if (tip != nullptr)
@@ -1058,7 +1057,7 @@ public:
 
 
         btnToolsBrush = new ButtonWithImage();
-        btnToolsBrush->setTexture(getSingleTexture("GUI\\toolButtons\\toolbutton-brush"));
+        btnToolsBrush->setTexture(getSingleTexture(L"GUI\\toolButtons\\toolbutton-brush"));
         btnToolsBrush->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnToolsBrush) {
                 if (tip != nullptr)
@@ -1081,7 +1080,7 @@ public:
 
 
         btnToolsRectBrush = new ButtonWithImage();
-        btnToolsRectBrush->setTexture(getSingleTexture("GUI\\toolButtons\\toolbutton-rect_brush"));
+        btnToolsRectBrush->setTexture(getSingleTexture(L"GUI\\toolButtons\\toolbutton-rect_brush"));
         btnToolsRectBrush->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnToolsRectBrush) {
                 if (tip != nullptr)
@@ -1103,7 +1102,7 @@ public:
 
 
         btnToolsIncrease = new ButtonWithImage();
-        btnToolsIncrease->setTexture(getSingleTexture("GUI\\toolButtons\\toolbutton-increase"));
+        btnToolsIncrease->setTexture(getSingleTexture(L"GUI\\toolButtons\\toolbutton-increase"));
         btnToolsIncrease->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnToolsIncrease) {
                 if (tip != nullptr)
@@ -1123,7 +1122,7 @@ public:
 
 
         btnToolsDecrease = new ButtonWithImage();
-        btnToolsDecrease->setTexture(getSingleTexture("GUI\\toolButtons\\toolbutton-decrease"));
+        btnToolsDecrease->setTexture(getSingleTexture(L"GUI\\toolButtons\\toolbutton-decrease"));
         btnToolsDecrease->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnToolsDecrease) {
                 if (tip != nullptr)
@@ -1142,7 +1141,7 @@ public:
 
 
         btnToolsRectangle = new ButtonWithImage();
-        btnToolsRectangle->setTexture(getSingleTexture("GUI\\toolButtons\\toolbutton-rectangle"));
+        btnToolsRectangle->setTexture(getSingleTexture(L"GUI\\toolButtons\\toolbutton-rectangle"));
         btnToolsRectangle->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnToolsRectangle) {
                 if (tip != nullptr)
@@ -1164,7 +1163,7 @@ public:
 
 
         btnToolsElipse = new ButtonWithImage();
-        btnToolsElipse->setTexture(getSingleTexture("GUI\\toolButtons\\toolbutton-elipse"));
+        btnToolsElipse->setTexture(getSingleTexture(L"GUI\\toolButtons\\toolbutton-elipse"));
         btnToolsElipse->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnToolsElipse) {
                 if (tip != nullptr)
@@ -1186,7 +1185,7 @@ public:
 
 
         btnToolsFill = new ButtonWithImage();
-        btnToolsFill->setTexture(getSingleTexture("GUI\\toolButtons\\toolbutton-fill"));
+        btnToolsFill->setTexture(getSingleTexture(L"GUI\\toolButtons\\toolbutton-fill"));
         btnToolsFill->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnToolsElipse) {
                 if (tip != nullptr)
@@ -1204,7 +1203,7 @@ public:
 
 
         btnToolsEraser = new ButtonWithImage();
-        btnToolsEraser->setTexture(getSingleTexture("GUI\\toolButtons\\toolbutton-eraser"));
+        btnToolsEraser->setTexture(getSingleTexture(L"GUI\\toolButtons\\toolbutton-eraser"));
         btnToolsEraser->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnToolsEraser) {
                 if (tip != nullptr)
@@ -1273,14 +1272,14 @@ public:
         deleteGroupButtons();
 
         btnNavLeft = new ButtonWithImage();
-        btnNavLeft->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton_to_left"));
+        btnNavLeft->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton_to_left"));
         btnNavLeft->onclick_func = [this]() {
             moveVisibleGroupsToLeft();
             setTheVisibleGroupsButtons();
             };
 
         btnNavRight = new ButtonWithImage();
-        btnNavRight->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton_to_right"));
+        btnNavRight->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton_to_right"));
         btnNavRight->onclick_func = [this]() {
             moveVisibleGroupsToRight();
             setTheVisibleGroupsButtons();
@@ -1288,10 +1287,10 @@ public:
 
         // create Group Buttons
         btnGroupEmpty = new ButtonWithImage();
-        btnGroupEmpty->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton"));
+        btnGroupEmpty->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton"));
 
         btnGroupTerrain = new ButtonWithImage();
-        btnGroupTerrain->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-terrain"));
+        btnGroupTerrain->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-terrain"));
         btnGroupTerrain->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupTerrain) {
                 if (tip != nullptr)
@@ -1316,7 +1315,7 @@ public:
             };
 
         btnGroupHighlands = new ButtonWithImage();
-        btnGroupHighlands->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-highlands"));
+        btnGroupHighlands->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-highlands"));
         btnGroupHighlands->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupHighlands) {
                 if (tip != nullptr)
@@ -1341,7 +1340,7 @@ public:
             };
 
         btnGroupFloors = new ButtonWithImage();
-        btnGroupFloors->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-floors"));
+        btnGroupFloors->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-floors"));
         btnGroupFloors->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupFloors) {
                 if (tip != nullptr)
@@ -1363,7 +1362,7 @@ public:
             };
 
         btnGroupWater = new ButtonWithImage();
-        btnGroupWater->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-water"));
+        btnGroupWater->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-water"));
         btnGroupWater->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupWater) {
                 if (tip != nullptr)
@@ -1385,7 +1384,7 @@ public:
             };
 
         btnGroupFurnitures = new ButtonWithImage();
-        btnGroupFurnitures->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-furnitures"));
+        btnGroupFurnitures->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-furnitures"));
         btnGroupFurnitures->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupFurnitures) {
                 if (tip != nullptr)
@@ -1408,7 +1407,7 @@ public:
             };
 
         btnGroupWalls = new ButtonWithImage();
-        btnGroupWalls->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-walls"));
+        btnGroupWalls->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-walls"));
         btnGroupWalls->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupWalls) {
                 if (tip != nullptr)
@@ -1431,7 +1430,7 @@ public:
             };
 
         btnGroupMonsters = new ButtonWithImage();
-        btnGroupMonsters->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-monsters"));
+        btnGroupMonsters->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-monsters"));
         btnGroupMonsters->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupMonsters) {
                 if (tip != nullptr)
@@ -1454,7 +1453,7 @@ public:
             };
 
         btnGroupFlatObjects = new ButtonWithImage();
-        btnGroupFlatObjects->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-flat_objects"));
+        btnGroupFlatObjects->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-flat_objects"));
         btnGroupFlatObjects->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupFlatObjects) {
                 if (tip != nullptr)
@@ -1477,7 +1476,7 @@ public:
             };
 
         btnGroupItems = new ButtonWithImage();
-        btnGroupItems->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-items"));
+        btnGroupItems->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-items"));
         btnGroupItems->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupItems) {
                 if (tip != nullptr)
@@ -1500,7 +1499,7 @@ public:
             };
 
         btnGroupNatures = new ButtonWithImage();
-        btnGroupNatures->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-natures"));
+        btnGroupNatures->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-natures"));
         btnGroupNatures->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupNatures) {
                 if (tip != nullptr)
@@ -1523,7 +1522,7 @@ public:
             };
 
         btnGroupObjects = new ButtonWithImage();
-        btnGroupObjects->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-objects"));
+        btnGroupObjects->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-objects"));
         btnGroupObjects->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupObjects) {
                 if (tip != nullptr)
@@ -1546,7 +1545,7 @@ public:
             };
 
         btnGroupSmallObjects = new ButtonWithImage();
-        btnGroupSmallObjects->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-smallObjects"));
+        btnGroupSmallObjects->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-smallObjects"));
         btnGroupSmallObjects->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupSmallObjects) {
                 if (tip != nullptr)
@@ -1569,7 +1568,7 @@ public:
             };
 
         btnGroupBuildings = new ButtonWithImage();
-        btnGroupBuildings->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-buildings"));
+        btnGroupBuildings->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-buildings"));
         btnGroupBuildings->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupBuildings) {
                 if (tip != nullptr)
@@ -1592,7 +1591,7 @@ public:
             };
 
         btnGroupDirections = new ButtonWithImage();
-        btnGroupDirections->setTexture(getSingleTexture("GUI\\groupButtons\\groupButton-directions"));
+        btnGroupDirections->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-directions"));
         btnGroupDirections->hover_func = [this]() {
             if (tip == nullptr || tip->btn != btnGroupDirections) {
                 if (tip != nullptr)

@@ -9,15 +9,11 @@ sf::Font dialogueFont;
 void loadFonts() {
 	basicFont = sf::Font();
 	//basicFont.loadFromFile("assets\\fonts\\arial.ttf");
-	basicFont.loadFromFile("assets\\fonts\\Pixelify_Sans\\PixelifySans-VariableFont_wght.ttf");
+	basicFont.loadFromFile("assets\\fonts\\Tiny5-Regular.ttf");
 
 	dialogueFont = sf::Font();
 	dialogueFont.loadFromFile("assets\\fonts\\Pixelify_Sans\\PixelifySans-VariableFont_wght.ttf");
 
-}
-
-float getLineHeight(short characterSize) {
-    return float(characterSize) * 1.3f;
 }
 
 std::wstring ConvertUtf8ToWide(const std::string& utf8Str) {
@@ -40,6 +36,9 @@ void replaceAll(std::string& str, const std::string& from, const std::string& to
     }
 }
 
+std::string ConvertWideToUtf8(std::wstring wide) {
+    return std::string(wide.begin(), wide.end());
+}
 
 std::vector < std::wstring > wrapText(const std::wstring& text, const sf::Font& font, short characterSize, short maxWidth)
 {

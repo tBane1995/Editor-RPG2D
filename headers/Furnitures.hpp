@@ -10,7 +10,7 @@ public:
 	sf::Sprite takeItSprite;
 	bool showHand;
 
-	Furniture(string name, float width, float length, float height) : GameObject(name, width, length, height, true, ColliderType::Rectangle) {
+	Furniture(std::wstring name, float width, float length, float height) : GameObject(name, width, length, height, true, ColliderType::Rectangle) {
 		type = GameObjectType::Furniture;
 		
 		texture = getSingleTexture(name);
@@ -19,7 +19,7 @@ public:
 		sprite.setOrigin(texture->cx, texture->cy);
 
 		inventory = nullptr;
-		takeItTexture = getSingleTexture("GUI\\hand");
+		takeItTexture = getSingleTexture(L"GUI\\hand");
 		takeItSprite = sf::Sprite();
 		takeItSprite.setTexture(*takeItTexture->texture);
 		takeItSprite.setOrigin(takeItTexture->cx, takeItTexture->cy);
@@ -38,7 +38,7 @@ public:
 
 		inventory = nullptr;
 		
-		takeItTexture = getSingleTexture("GUI\\hand");
+		takeItTexture = getSingleTexture(L"GUI\\hand");
 		takeItSprite = sf::Sprite();
 		takeItSprite.setTexture(*takeItTexture->texture);
 		takeItSprite.setOrigin(takeItTexture->cx, takeItTexture->cy);
@@ -85,9 +85,9 @@ public:
 					showHand = true;
 
 					if (inventory->items.size() > 0)
-						takeItSprite.setTexture(*getSingleTexture("GUI\\hand")->texture);
+						takeItSprite.setTexture(*getSingleTexture(L"GUI\\hand")->texture);
 					else
-						takeItSprite.setTexture(*getSingleTexture("GUI\\grey_hand")->texture);
+						takeItSprite.setTexture(*getSingleTexture(L"GUI\\grey_hand")->texture);
 				}
 
 			}

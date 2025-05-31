@@ -4,7 +4,7 @@
 class Wall : public GameObject {
 public:
 
-	Wall(string name, float width, float length, float height) : GameObject(name, width, length, height, true, ColliderType::Rectangle) {
+	Wall(std::wstring name, float width, float length, float height) : GameObject(name, width, length, height, true, ColliderType::Rectangle) {
 		type = GameObjectType::Wall;
 	}
 

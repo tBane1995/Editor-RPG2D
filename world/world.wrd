@@ -1168,7 +1168,7 @@ Chunk y=1 x=16
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-Character "characters\jack" y=480 x=4192
+Character "0" y=480 x=4192
 
 Chunk y=1 x=17
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -2041,7 +2041,7 @@ FlatObject "flatObjects\herb_2" y=608 x=4400
 SmallObject "smallObjects\grass_2" y=592 x=4448
 SmallObject "smallObjects\grass_2" y=624 x=4352
 SmallObject "smallObjects\grass_2" y=640 x=4448
-Character "characters\jack" y=704 x=4432
+Character "1" y=704 x=4432
 
 Chunk y=2 x=18
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -2301,7 +2301,7 @@ Object "objects\great_stone_wall" y=528 x=7408
 Object "objects\great_stone_wall" y=528 x=7248
 Object "objects\great_stone_wall" y=528 x=7184
 Object "objects\great_stone_wall" y=528 x=7216
-Character "characters\jack" y=736 x=7408
+Character "2" y=736 x=7408
 
 Chunk y=2 x=29
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -2354,7 +2354,7 @@ Object "objects\great_stone_wall" y=528 x=7824
 Object "objects\great_stone_wall" y=528 x=7856
 Object "objects\great_stone_wall" y=528 x=7888
 Object "objects\great_stone_wall" y=528 x=7920
-Character "characters\jack" y=656 x=7872
+Character "3" y=656 x=7872
 
 Chunk y=2 x=31
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -2381,8 +2381,8 @@ Object "objects\great_stone_wall" y=528 x=8080
 Object "objects\great_stone_wall" y=528 x=8112
 Object "objects\great_stone_wall" y=528 x=8144
 Object "objects\great_stone_wall" y=528 x=8176
-Character "characters\jack" y=656 x=7936
-Character "characters\jack" y=656 x=8000
+Character "4" y=656 x=7936
+Character "5" y=656 x=8000
 
 Chunk y=2 x=32
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -2409,7 +2409,7 @@ Object "objects\great_stone_wall" y=528 x=8336
 Object "objects\great_stone_wall" y=528 x=8368
 Object "objects\great_stone_wall" y=528 x=8400
 Object "objects\great_stone_wall" y=528 x=8432
-Character "characters\jack" y=656 x=8352
+Character "6" y=656 x=8352
 
 Chunk y=2 x=33
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -2436,7 +2436,7 @@ Object "objects\great_stone_wall" y=528 x=8592
 Object "objects\great_stone_wall" y=528 x=8624
 Object "objects\great_stone_wall" y=528 x=8656
 Object "objects\great_stone_wall" y=528 x=8688
-Character "characters\jack" y=720 x=8480
+Character "7" y=720 x=8480
 
 Chunk y=2 x=34
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -2919,7 +2919,7 @@ FlatObject "flatObjects\stonepath_1" y=928 x=3632
 FlatObject "flatObjects\stonepath_1" y=944 x=3696
 FlatObject "flatObjects\stonepath_1" y=960 x=3744
 FlatObject "flatObjects\stonepath_1" y=960 x=3792
-Character "characters\jack" y=816 x=3760
+Character "8" y=816 x=3760
 
 Chunk y=3 x=15
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -3839,7 +3839,7 @@ Chunk y=4 x=16
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 FlatObject "flatObjects\stonepath_2" y=1264 x=4336
 FlatObject "flatObjects\stonepath_2" y=1248 x=4256
-Character "characters\jack" y=1024 x=4256
+Character "9" y=1024 x=4256
 Building "12" y=1200 x=4256
 
 Chunk y=4 x=17
@@ -4764,7 +4764,7 @@ FlatObject "flatObjects\stonepath_2" y=1376 x=3888
 FlatObject "flatObjects\stonepath_2" y=1376 x=3920
 FlatObject "flatObjects\stonepath_2" y=1440 x=4080
 FlatObject "flatObjects\stonepath_2" y=1472 x=4080
-Character "characters\jack" y=1280 x=3840
+Character "10" y=1280 x=3840
 
 Chunk y=5 x=16
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -5521,7 +5521,7 @@ Chunk y=6 x=5
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 Nature "natures\rock_1" y=1776 x=1280
 FlatObject "flatObjects\small_rock_3" y=1760 x=1312
-Character "characters\jack" y=1776 x=1472
+Character "11" y=1776 x=1472
 
 Chunk y=6 x=6
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -5663,7 +5663,7 @@ FlatObject "flatObjects\path_1" y=1712 x=2720
 FlatObject "flatObjects\path_1" y=1680 x=2720
 FlatObject "flatObjects\path_1" y=1648 x=2704
 SmallObject "smallObjects\grass_2" y=1744 x=2576
-Character "characters\jack" y=1616 x=2672
+Character "12" y=1616 x=2672
 
 Chunk y=6 x=11
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -5798,7 +5798,7 @@ FlatObject "flatObjects\stonepath_1" y=1680 x=4080
 FlatObject "flatObjects\stonepath_1" y=1648 x=4080
 FlatObject "flatObjects\path_2" y=1776 x=3984
 FlatObject "flatObjects\path_2" y=1760 x=4016
-Character "characters\jack" y=1568 x=4016
+Character "13" y=1568 x=4016
 
 Chunk y=6 x=16
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -5825,7 +5825,7 @@ FlatObject "flatObjects\stonepath_1" y=1760 x=4144
 FlatObject "flatObjects\stonepath_1" y=1776 x=4192
 FlatObject "flatObjects\stonepath_1" y=1744 x=4096
 Door "doors\wooden_gate" y=1536 x=4096
-Character "characters\jack" y=1568 x=4176
+Character "14" y=1568 x=4176
 
 Chunk y=6 x=17
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -6158,7 +6158,7 @@ FlatObject "flatObjects\stonepath_1" y=1648 x=7744
 FlatObject "flatObjects\stonepath_1" y=1648 x=7792
 FlatObject "flatObjects\stonepath_1" y=1664 x=7840
 FlatObject "flatObjects\stonepath_1" y=1680 x=7888
-Character "characters\jack" y=1568 x=7856
+Character "15" y=1568 x=7856
 
 Chunk y=6 x=31
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -6183,7 +6183,7 @@ FlatObject "flatObjects\stonepath_2" y=1600 x=7968
 FlatObject "flatObjects\stonepath_2" y=1632 x=7968
 FlatObject "flatObjects\stonepath_1" y=1664 x=7936
 Door "doors\great_stone_gate" y=1536 x=7936
-Character "characters\jack" y=1568 x=8016
+Character "16" y=1568 x=8016
 
 Chunk y=6 x=32
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -7061,7 +7061,7 @@ Nature "natures\bush_1" y=2016 x=7456
 Nature "natures\bush_1" y=2032 x=7424
 Nature "natures\boulder_2" y=1792 x=7424
 Item "items\mushroom" y=1856 x=7536
-Character "characters\jack" y=2016 x=7632
+Character "17" y=2016 x=7632
 
 Chunk y=7 x=30
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -31960,6 +31960,14 @@ Wall "walls\mud_wall" 112 48
 Wall "walls\mud_wall" 144 48
 Wall "walls\mud_wall" 176 48
 Wall "walls\mud_wall" 208 48
+//FURNITURES
+Furniture "furnitures\furnace" 128 80
+Furniture "furnitures\bed" 64 176
+Furniture "furnitures\chest" 192 80
+Furniture "furnitures\table" 192 176
+Furniture "furnitures\chair" 176 144
+Furniture "furnitures\chair" 208 144
+Furniture "furnitures\wardrobe" 64 80
 #BuildingEnd
 #BuildingBegin
 id 2
@@ -31972,22 +31980,22 @@ bottom_walls "walls\stone_wall_overgrown"
 windows "buildings\parts\window_2"
 
 //FLOORS
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
 //WALLS
 Wall "walls\stone_wall" 48 48
@@ -32124,6 +32132,17 @@ Wall "walls\wooden_wall" 144 48
 Wall "walls\wooden_wall" 112 48
 Wall "walls\wooden_wall" 80 48
 Wall "walls\wooden_wall" 48 48
+//FURNITURES
+Furniture "furnitures\bed" 64 96
+Furniture "furnitures\furnace" 128 80
+Furniture "furnitures\table" 64 176
+Furniture "furnitures\chair" 48 144
+Furniture "furnitures\chair" 80 144
+Furniture "furnitures\wardrobe" 192 80
+Furniture "furnitures\barrel" 208 176
+Furniture "furnitures\barrel" 192 176
+Furniture "furnitures\barrel" 192 160
+Furniture "furnitures\barrel" 208 160
 #BuildingEnd
 #BuildingBegin
 id 11
@@ -32309,7 +32328,6 @@ bottom_walls "walls\stone_wall_overgrown"
 windows "buildings\parts\window_2"
 
 //FLOORS
-2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
@@ -32329,10 +32347,11 @@ windows "buildings\parts\window_2"
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2
-2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
 //WALLS
 Wall "walls\set_stone_wall_0" 16 16
@@ -32519,22 +32538,22 @@ bottom_walls "walls\mud_wall"
 windows "buildings\parts\window"
 
 //FLOORS
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0
-0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0
-0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0
-0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
 //WALLS
 Wall "walls\mud_wall" 80 240
@@ -32703,22 +32722,22 @@ bottom_walls "walls\mud_wall"
 windows "buildings\parts\window"
 
 //FLOORS
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0
-0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0
-0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0
-0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0
-0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
 //WALLS
 Wall "walls\mud_wall" 80 240
@@ -32779,7 +32798,6 @@ bottom_walls "walls\stone_wall_overgrown"
 windows "buildings\parts\window_2"
 
 //FLOORS
-0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
@@ -32794,7 +32812,8 @@ windows "buildings\parts\window_2"
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
 //WALLS
 Wall "walls\stone_wall_overgrown" 176 240
@@ -32921,22 +32940,22 @@ bottom_walls "walls\stone_wall_overgrown"
 windows "buildings\parts\window_2"
 
 //FLOORS
-0 0 0 0 0 0 0 0 0 0 0 0 3 3 3 0
-0 0 2 2 2 2 2 2 0 3 3 3 3 3 3 3
-3 3 3 3 3 1 1 1 1 1 1 1 1 1 1 1
-3 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3
-3 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
 //WALLS
 Wall "walls\stone_wall_overgrown" 176 240
@@ -32992,22 +33011,22 @@ bottom_walls "walls\stone_wall_overgrown"
 windows "buildings\parts\window_2"
 
 //FLOORS
-0 0 0 0 0 0 0 0 0 0 0 0 3 3 3 0
-0 0 2 2 2 2 2 2 0 3 3 3 3 3 3 3
-3 3 3 3 3 1 1 1 1 1 1 1 1 1 1 1
-3 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 3
-3 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
 //WALLS
 Wall "walls\stone_wall_overgrown" 176 240
@@ -33428,3 +33447,399 @@ Wall "walls\set_wooden_wall_3" 16 112
 Wall "walls\set_wooden_wall_3" 16 144
 Wall "walls\set_wooden_wall_3" 16 176
 #BuildingEnd
+#CharacterBegin
+ID: 0
+Name: character_0
+Dialogue: 3
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\body\man"
+Head: "sets\head\man-gray-haired"
+Helmet: "none"
+Armor: "items\wool shirt"
+Pants: "items\wool pants"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 1
+Name: character_1
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\body\man"
+Head: "sets\head\man-brown-haired"
+Helmet: "none"
+Armor: "items\wool shirt"
+Pants: "items\wool pants"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 2
+Name: character_2
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "none"
+Pants: "none"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 3
+Name: character_3
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "none"
+Pants: "none"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 4
+Name: character_4
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "none"
+Pants: "none"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 5
+Name: character_5
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "none"
+Pants: "none"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 6
+Name: character_6
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "none"
+Pants: "none"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 7
+Name: character_7
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "none"
+Pants: "none"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 8
+Name: character_8
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "items\wool shirt"
+Pants: "items\wool pants"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 9
+Name: character_9
+Dialogue: 2
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "items\skin jacket"
+Pants: "items\skin pants"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 10
+Name: character_10
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\body\man"
+Head: "sets\head\boy-brown-haired"
+Helmet: "none"
+Armor: "items\wool shirt"
+Pants: "items\wool pants"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 11
+Name: character_11
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "items\torn shirt"
+Pants: "items\skin pants"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 12
+Name: character_12
+Dialogue: 3
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "items\skin jacket"
+Pants: "items\skin pants"
+RightHand: "items\bow"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 13
+Name: character_13
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\body\man"
+Head: "sets\head\man-brown-haired"
+Helmet: "none"
+Armor: "items\skin jacket"
+Pants: "items\skin pants"
+RightHand: "items\sword"
+LeftHand: "items\shield"
+#CharacterEnd
+#CharacterBegin
+ID: 14
+Name: character_14
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "items\skin jacket"
+Pants: "items\skin pants"
+RightHand: "items\sword"
+LeftHand: "items\shield"
+#CharacterEnd
+#CharacterBegin
+ID: 15
+Name: character_15
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "none"
+Pants: "none"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 16
+Name: character_16
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "none"
+Pants: "none"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd
+#CharacterBegin
+ID: 17
+Name: character_17
+Dialogue: -1
+Level: 0
+Experience: 0
+SkillPoints: 0
+CurrentHP: 40
+MaxHP: 40
+CurrentMP: 10
+MaxMP: 10
+Strength: 5
+Dexterity: 5
+Intelligence: 5
+Body: "sets\head\man-black-haired"
+Head: "sets\head\man-black-haired"
+Helmet: "none"
+Armor: "none"
+Pants: "none"
+RightHand: "none"
+LeftHand: "none"
+#CharacterEnd

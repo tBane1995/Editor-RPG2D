@@ -7,7 +7,7 @@ public:
 	TerrainPrefab* terrain;
 	Shader* shader;
 
-	WaterPrefab(std::string name, short id, TerrainPrefab* terrain) : GameObject(name) {
+	WaterPrefab(std::wstring name, short id, TerrainPrefab* terrain) : GameObject(name) {
 		type = GameObjectType::Water;
 
 		this->terrain = terrain;
@@ -16,7 +16,7 @@ public:
 		if (terrain != nullptr)
 			texture = terrain->texture;
 
-		shader = getShader("shaders\\" + name);
+		shader = getShader(L"shaders\\" + name);
 
 		colliders[0]->shape->setPosition(position);
 	}
@@ -123,8 +123,8 @@ private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		states.transform *= getTransform();
-		states.texture = &(*getSingleTexture("tiles\\0_tileset")->texture);
-		states.shader = &(*getShader("shaders\\lake")->shader);
+		states.texture = &(*getSingleTexture(L"tiles\\0_tileset")->texture);
+		states.shader = &(*getShader(L"shaders\\lake")->shader);
 		target.draw(vertexes, states);
 	}
 };
@@ -136,14 +136,14 @@ void createWaterPrefabs() {
 
 	waterGameObjects.clear();
 
-	waterGameObjects.push_back(new WaterPrefab("empty", 0, nullptr));
-	waterGameObjects.push_back(new WaterPrefab("palette_lake", 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[0])));
+	waterGameObjects.push_back(new WaterPrefab(L"empty", 0, nullptr));
+	waterGameObjects.push_back(new WaterPrefab(L"palette_lake", 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[0])));
 	countOfBasicWater = 2;
 
 	/////////////////////////////////////////////////////
 	for (int i = 0; i < countOfBasicWater; i++) {
 
-		std::string shader_name = waterGameObjects[i + 1]->name;
+		std::wstring shader_name = waterGameObjects[i + 1]->name;
 
 		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 0])));
 		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 1])));

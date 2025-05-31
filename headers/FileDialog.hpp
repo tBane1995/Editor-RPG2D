@@ -51,20 +51,20 @@ public:
         sf::RectangleShape rectangle;
         sf::Sprite icon;
         std::filesystem::path path;
+        
 
-        Entry(sf::Vector2f size) : TextArea(L"..", sf::Vector2f(0,0), size.x, size) {
+        Entry(sf::Vector2f size) : TextArea(L"..", sf::Vector2f(0,0), size.x, size, TextAlignment::Left, VerticalAlignment::Center) {
 
             rectangle = sf::RectangleShape(size+sf::Vector2f(30,0));
             rectangle.setFillColor(panelColor_normal);
 
-            this->setBackgroundColor(sf::Color::Transparent);
             this->setRectColor(sf::Color::Transparent);
 
             state = ButtonState::Idle;
             clickTime = currentTime;
 
             this->path = std::filesystem::path();   // empty path
-            icon.setTexture(*getSingleTexture("GUI\\icons\\empty")->texture);
+            icon.setTexture(*getSingleTexture(L"GUI\\icons\\empty")->texture);
         }
 
         ~Entry() {
@@ -74,7 +74,7 @@ public:
         void setPosition(sf::Vector2f position) {
             rectangle.setPosition(position + cam->position);
             icon.setPosition(position + cam->position);
-            TextArea::setPosition(sf::Vector2f(position.x + 30, position.y + this->rect.getSize().y/8.0f));
+            TextArea::setPosition(sf::Vector2f(position.x + 30, position.y));
         }
 
         void setPathfile(std::filesystem::path pathfile, std::wstring pathname = L"") {
@@ -84,21 +84,20 @@ public:
 
             if (path != std::filesystem::path()) {
                 if (std::filesystem::is_directory(path)) {
-                    icon.setTexture(*getSingleTexture("GUI\\icons\\dictionary")->texture);
+                    icon.setTexture(*getSingleTexture(L"GUI\\icons\\dictionary")->texture);
                 }
                 else {
-                    icon.setTexture(*getSingleTexture("GUI\\icons\\file")->texture);
+                    icon.setTexture(*getSingleTexture(L"GUI\\icons\\file")->texture);
                 }
             }
             else {
-                icon.setTexture(*getSingleTexture("GUI\\icons\\empty")->texture);
+                icon.setTexture(*getSingleTexture(L"GUI\\icons\\empty")->texture);
             }
         }
 
         void unclick() {
             state = ButtonState::Idle;
             rectangle.setFillColor(panelColor_normal);
-            setBackgroundColor(sf::Color::Transparent);
             setRectColor(sf::Color::Transparent);
         }
 
@@ -106,7 +105,6 @@ public:
 
             state = ButtonState::Hover;
             rectangle.setFillColor(panelColor_medium);
-            setBackgroundColor(sf::Color::Transparent);
             setRectColor(sf::Color::Transparent);
             GUIwasHover = true;
         }
@@ -115,7 +113,6 @@ public:
 
             state = ButtonState::Pressed;
             rectangle.setFillColor(panelColor_medium);
-            setBackgroundColor(sf::Color::Transparent);
             setRectColor(sf::Color::Transparent);
             GUIwasClicked = true;
             clickTime = currentTime;
@@ -234,7 +231,6 @@ public:
         titleText = new TextArea(title);
         titleText->setCharacterSize(17);
         titleText->setTextColor(textColor);
-        titleText->setBackgroundColor(sf::Color::Transparent);
         titleText->setRectColor(sf::Color::Transparent);
         titleText->setRectSize(titlebar.getSize());
 
@@ -258,18 +254,16 @@ public:
         filenameInfo = new TextArea(L"File name: ");
         filenameInfo->setCharacterSize(17);
         filenameInfo->setTextColor(textColor);
-        filenameInfo->setBackgroundColor(sf::Color::Transparent);
         filenameInfo->setRectColor(sf::Color::Transparent);
-        filenameInfo->generateRect();
+        filenameInfo->setRectSize(sf::Vector2f(0, 0));
 
         selectedFilename = new EditableTextArea(L"");
         selectedFilename->setCharacterSize(17);
         sf::Vector2f size;
         size.x = rect_width - filenameInfo->getSize().x - 3 * margin_vert;
-        size.y = getLineHeight(17);
+        size.y = selectedFilename->font.getLineSpacing(selectedFilename->characterSize) * 1.3f;
         selectedFilename->setRectSize(size);
         selectedFilename->setTextColor(textColor);
-        selectedFilename->setBackgroundColor(sf::Color::Transparent);
         selectedFilename->setRectColor(panelColor_dark);
 
         sf::Vector2f btn_size = sf::Vector2f(64, -1);
@@ -308,7 +302,7 @@ public:
         pos.y = cam->position.y + position.y - rect_height / 2.0f + titlebar.getSize().y;
         entriesRect.setPosition(pos);
 
-        pos.x = position.x - rect_width / 2.0f + (titleText->texts[0].getPosition().x - titleText->background.getPosition().x);
+        pos.x = position.x - rect_width / 2.0f + (titleText->texts[0].getPosition().x - titleText->rect.getPosition().x);
         for (short i = 0; i < 7; i++) {
 
             pos.y = position.y - rect_height / 2.0f + titlebar.getSize().y + i * line_height;

@@ -99,66 +99,66 @@ public:
         if (part_size == ScrollbarPartSize::_16) {
             // BAR SPRITES
             spr_bar_top = sf::Sprite();
-            spr_bar_top.setTexture(*getSingleTexture("GUI\\scrollbar_16\\bar_top")->texture);
+            spr_bar_top.setTexture(*getSingleTexture(L"GUI\\scrollbar_16\\bar_top")->texture);
             spr_bar_top.setScale(size.x / 16.0f, size.x / 16.0f);
             spr_bar_top.setPosition(p);
 
             spr_bar_center = sf::Sprite();
-            spr_bar_center.setTexture(*getSingleTexture("GUI\\scrollbar_16\\bar_center")->texture);
+            spr_bar_center.setTexture(*getSingleTexture(L"GUI\\scrollbar_16\\bar_center")->texture);
             spr_bar_center.setScale(size.x / 16.0f, (size.y - 2.0f * size.x) / 16.0f);
             spr_bar_center.setPosition(p.x, p.y + size.x);
 
             spr_bar_bottom = sf::Sprite();
-            spr_bar_bottom.setTexture(*getSingleTexture("GUI\\scrollbar_16\\bar_bottom")->texture);
+            spr_bar_bottom.setTexture(*getSingleTexture(L"GUI\\scrollbar_16\\bar_bottom")->texture);
             spr_bar_bottom.setScale(size.x / 16.0f, size.x / 16.0f);
             spr_bar_bottom.setPosition(p.x, p.y + size.y - size.x);
 
             // SCROLL SPRITES
             spr_scroll_top = sf::Sprite();
-            spr_scroll_top.setTexture(*getSingleTexture("GUI\\scrollbar_16\\scroll_top")->texture);
+            spr_scroll_top.setTexture(*getSingleTexture(L"GUI\\scrollbar_16\\scroll_top")->texture);
             spr_scroll_top.setScale(size.x / 16.0f, size.x / 16.0f);
             spr_scroll_top.setPosition(p.x, p.y + size.x);
 
             spr_scroll_center = sf::Sprite();
-            spr_scroll_center.setTexture(*getSingleTexture("GUI\\scrollbar_16\\scroll_center")->texture);
+            spr_scroll_center.setTexture(*getSingleTexture(L"GUI\\scrollbar_16\\scroll_center")->texture);
             spr_scroll_center.setScale(size.x / 16.0f, (getScrollSizeY() - 2.0f * size.x) / 16.0f);
             spr_scroll_center.setPosition(p.x, p.y + size.x + size.x);
 
             spr_scroll_bottom = sf::Sprite();
-            spr_scroll_bottom.setTexture(*getSingleTexture("GUI\\scrollbar_16\\scroll_bottom")->texture);
+            spr_scroll_bottom.setTexture(*getSingleTexture(L"GUI\\scrollbar_16\\scroll_bottom")->texture);
             spr_scroll_bottom.setScale(size.x / 16.0f, size.x / 16.0f);
             spr_scroll_bottom.setPosition(p.x, p.y + size.x + size.x + getScrollSizeY() - 2.0f * size.x);
         }
         else if (part_size == ScrollbarPartSize::_20) {
             // BAR SPRITES
             spr_bar_top = sf::Sprite();
-            spr_bar_top.setTexture(*getSingleTexture("GUI\\scrollbar_20\\bar_top")->texture);
+            spr_bar_top.setTexture(*getSingleTexture(L"GUI\\scrollbar_20\\bar_top")->texture);
             spr_bar_top.setScale(size.x / 20.0f, size.x / 20.0f);
             spr_bar_top.setPosition(p);
 
             spr_bar_center = sf::Sprite();
-            spr_bar_center.setTexture(*getSingleTexture("GUI\\scrollbar_20\\bar_center")->texture);
+            spr_bar_center.setTexture(*getSingleTexture(L"GUI\\scrollbar_20\\bar_center")->texture);
             spr_bar_center.setScale(size.x / 20.0f, (size.y - 2.0f * size.x) / 20.0f);
             spr_bar_center.setPosition(p.x, p.y + size.x);
 
             spr_bar_bottom = sf::Sprite();
-            spr_bar_bottom.setTexture(*getSingleTexture("GUI\\scrollbar_20\\bar_bottom")->texture);
+            spr_bar_bottom.setTexture(*getSingleTexture(L"GUI\\scrollbar_20\\bar_bottom")->texture);
             spr_bar_bottom.setScale(size.x / 20.0f, size.x / 20.0f);
             spr_bar_bottom.setPosition(p.x, p.y + size.y - size.x);
 
             // SCROLL SPRITES
             spr_scroll_top = sf::Sprite();
-            spr_scroll_top.setTexture(*getSingleTexture("GUI\\scrollbar_20\\scroll_top")->texture);
+            spr_scroll_top.setTexture(*getSingleTexture(L"GUI\\scrollbar_20\\scroll_top")->texture);
             spr_scroll_top.setScale(size.x / 20.0f, size.x / 20.0f);
             spr_scroll_top.setPosition(p.x, p.y + size.x);
 
             spr_scroll_center = sf::Sprite();
-            spr_scroll_center.setTexture(*getSingleTexture("GUI\\scrollbar_20\\scroll_center")->texture);
+            spr_scroll_center.setTexture(*getSingleTexture(L"GUI\\scrollbar_20\\scroll_center")->texture);
             spr_scroll_center.setScale(size.x / 20.0f, (getScrollSizeY() - 2 * size.x) / 20.0f);
             spr_scroll_center.setPosition(p.x, p.y + size.x + size.x);
 
             spr_scroll_bottom = sf::Sprite();
-            spr_scroll_bottom.setTexture(*getSingleTexture("GUI\\scrollbar_20\\scroll_bottom")->texture);
+            spr_scroll_bottom.setTexture(*getSingleTexture(L"GUI\\scrollbar_20\\scroll_bottom")->texture);
             spr_scroll_bottom.setScale(size.x / 20.0f, size.x / 20.0f);
             spr_scroll_bottom.setPosition(p.x, p.y + size.x + size.x + getScrollSizeY() - 2 * size.x);
         }

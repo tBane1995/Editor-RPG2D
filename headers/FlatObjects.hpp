@@ -4,7 +4,7 @@
 class FlatObject : public GameObject {
 public:
 	
-	FlatObject(string name, float width, float length, float height ) : GameObject(name, width, length, height, false, ColliderType::Elipse) {
+	FlatObject(std::wstring name, float width, float length, float height ) : GameObject(name, width, length, height, false, ColliderType::Elipse) {
 		type = GameObjectType::FlatObject;
 	}
 

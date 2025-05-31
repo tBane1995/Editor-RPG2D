@@ -23,7 +23,7 @@ public:
 		rect.setPosition(cam->position.x + position.x, cam->position.y + position.y);
 
 		checkSprite = sf::Sprite();
-		checkSprite.setTexture(*getSingleTexture("GUI\\checkbox\\check")->texture);
+		checkSprite.setTexture(*getSingleTexture(L"GUI\\checkbox\\check")->texture);
 		sf::Vector2f texsize = sf::Vector2f( checkSprite.getTexture()->getSize().x, checkSprite.getTexture()->getSize().y);
 		checkSprite.setOrigin(texsize.x / 2.0f, texsize.y / 2.0f);
 		checkSprite.setScale(size.x/texsize.x, size.y/texsize.y);
@@ -42,7 +42,7 @@ public:
 		rect.setPosition(cam->position.x + position.x, cam->position.y + position.y);
 
 		checkSprite = sf::Sprite();
-		checkSprite.setTexture(*getSingleTexture("GUI\\checkbox\\check")->texture);
+		checkSprite.setTexture(*getSingleTexture(L"GUI\\checkbox\\check")->texture);
 		sf::Vector2f texsize = sf::Vector2f(checkSprite.getTexture()->getSize().x, checkSprite.getTexture()->getSize().y);
 		checkSprite.setOrigin(texsize.x / 2.0f, texsize.y / 2.0f);
 		checkSprite.setScale(size.x / texsize.x, size.y / texsize.y);

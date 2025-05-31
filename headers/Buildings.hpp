@@ -21,7 +21,7 @@ public:
 
     short x1, x2, y1, y2; // corners of building
 
-    Building(string location) : GameObject(-1, 0, 0) {
+    Building(std::wstring location) : GameObject(GameObjectType::Building, -1, 0, 0) {
         this->id = -1;
 
         size = sf::Vector2i(16, 16);
@@ -29,14 +29,14 @@ public:
         colliders[0]->setPosition(position);
 
         floors = new Floors(position.x / 16 - size.x / 2, position.y / 16 - size.y, size.x, size.y);
-        _door = new Door(getPrefab("doors\\wooden_door"));
+        _door = new Door(getPrefab(L"doors\\wooden_door"));
         _door->setPosition(position);
-        texture_top_walls = getSingleTexture("walls\\wooden_wall");
-        texture_center_walls = getSingleTexture("walls\\stone_wall");
-        texture_bottom_walls = getSingleTexture("walls\\stone_wall");
+        texture_top_walls = getSingleTexture(L"walls\\wooden_wall");
+        texture_center_walls = getSingleTexture(L"walls\\stone_wall");
+        texture_bottom_walls = getSingleTexture(L"walls\\stone_wall");
         texture_windows = nullptr;
 
-        if(name != "") {
+        if(name != L"") {
             this->name = getShortName(location);
             size_t pos = name.find_last_of('.');
             if (pos != std::string::npos)
@@ -49,7 +49,7 @@ public:
         }
     }
 
-    Building(GameObject* object) : GameObject(-1,0,0) {
+    Building(GameObject* object) : GameObject(GameObjectType::Building, -1, 0, 0) {
         
         this->id = -1;
         type = GameObjectType::Building;
@@ -59,11 +59,11 @@ public:
         colliders[0]->setPosition(position);
 
         floors = new Floors(position.x / 16 - size.x / 2, position.y / 16 - size.y, size.x, size.y);
-        _door = new Door(getPrefab("doors\\wooden_door"));
+        _door = new Door(getPrefab(L"doors\\wooden_door"));
         _door->setPosition(position);
-        texture_top_walls = getSingleTexture("walls\\wooden_wall");
-        texture_center_walls = getSingleTexture("walls\\stone_wall");
-        texture_bottom_walls = getSingleTexture("walls\\stone_wall");
+        texture_top_walls = getSingleTexture(L"walls\\wooden_wall");
+        texture_center_walls = getSingleTexture(L"walls\\stone_wall");
+        texture_bottom_walls = getSingleTexture(L"walls\\stone_wall");
         texture_windows = nullptr;
 
         Building* ob = dynamic_cast<Building*>(object);
@@ -106,7 +106,7 @@ public:
         }
     }
 
-    Building(short id) : GameObject(id, 0, 0 )
+    Building(short id) : GameObject(GameObjectType::Building, id, 0, 0 )
     {
         this->id = id;
         type = GameObjectType::Building;
@@ -118,11 +118,11 @@ public:
         colliders[0]->setPosition(position);
 
         floors = new Floors(position.x / 16 - size.x / 2, position.y / 16 - size.y, size.x, size.y);
-        _door = new Door(getPrefab("doors\\wooden_door"));
+        _door = new Door(getPrefab(L"doors\\wooden_door"));
         _door->setPosition(position);
-        texture_top_walls = getSingleTexture("walls\\wooden_wall");
-        texture_center_walls = getSingleTexture("walls\\stone_wall");
-        texture_bottom_walls = getSingleTexture("walls\\stone_wall");
+        texture_top_walls = getSingleTexture(L"walls\\wooden_wall");
+        texture_center_walls = getSingleTexture(L"walls\\stone_wall");
+        texture_bottom_walls = getSingleTexture(L"walls\\stone_wall");
         texture_windows = nullptr;
 
         loadTexture();
@@ -375,19 +375,19 @@ public:
         }
 
         // LOAD TEXTURES OF ROOF
-        sf::Texture tile_left_texture = *getSingleTexture("buildings\\parts\\tile_left")->texture;
-        sf::Texture tile_left_top_texture = *getSingleTexture("buildings\\parts\\tile_left_top")->texture;
-        sf::Texture tile_left_bottom_texture = *getSingleTexture("buildings\\parts\\tile_left_bottom")->texture;
+        sf::Texture tile_left_texture = *getSingleTexture(L"buildings\\parts\\tile_left")->texture;
+        sf::Texture tile_left_top_texture = *getSingleTexture(L"buildings\\parts\\tile_left_top")->texture;
+        sf::Texture tile_left_bottom_texture = *getSingleTexture(L"buildings\\parts\\tile_left_bottom")->texture;
 
-        sf::Texture tile_right_texture = *getSingleTexture("buildings\\parts\\tile_right")->texture;
-        sf::Texture tile_right_top_texture = *getSingleTexture("buildings\\parts\\tile_right_top")->texture;
-        sf::Texture tile_right_bottom_texture = *getSingleTexture("buildings\\parts\\tile_right_bottom")->texture;
+        sf::Texture tile_right_texture = *getSingleTexture(L"buildings\\parts\\tile_right")->texture;
+        sf::Texture tile_right_top_texture = *getSingleTexture(L"buildings\\parts\\tile_right_top")->texture;
+        sf::Texture tile_right_bottom_texture = *getSingleTexture(L"buildings\\parts\\tile_right_bottom")->texture;
 
-        sf::Texture tile_center_texture = *getSingleTexture("buildings\\parts\\tile_center")->texture;
-        sf::Texture tile_center_top_texture = *getSingleTexture("buildings\\parts\\tile_center_top")->texture;
-        sf::Texture tile_center_bottom_texture = *getSingleTexture("buildings\\parts\\tile_center_bottom")->texture;
+        sf::Texture tile_center_texture = *getSingleTexture(L"buildings\\parts\\tile_center")->texture;
+        sf::Texture tile_center_top_texture = *getSingleTexture(L"buildings\\parts\\tile_center_top")->texture;
+        sf::Texture tile_center_bottom_texture = *getSingleTexture(L"buildings\\parts\\tile_center_bottom")->texture;
 
-        sf::Texture bar_of_roof_texture = *getSingleTexture("buildings\\parts\\bar")->texture;
+        sf::Texture bar_of_roof_texture = *getSingleTexture(L"buildings\\parts\\bar")->texture;
 
         // TILE DEFINITION
         sf::Vector2f tile_size(16, 16);
@@ -655,7 +655,7 @@ public:
         return house_with_door_texture;
     }
 
-    void load(std::string location) {
+    void load(std::wstring location) {
 
         // DELETE OLD GAMEOBJECTS
 
@@ -694,7 +694,7 @@ public:
         std::ifstream file(location);
 
         if (!file.is_open()) {
-            std::cout << "cant open building script: " << location << "\n";
+            std::wcout << L"cant open building script: " << location << L"\n";
             return;
         }
 
@@ -742,7 +742,7 @@ public:
                 getline(lineStream, objectName, '"');
                 //std::cout << "door \"" << objectName << "\"\n";
 
-                GameObject* prefab = getPrefab(objectName);
+                GameObject* prefab = getPrefab(ConvertUtf8ToWide(objectName));
                 if (prefab != nullptr) {
                     _door = new Door(prefab);
                     _door->setPosition(position);
@@ -757,7 +757,7 @@ public:
                 getline(lineStream, objectName, '"');
                 //std::cout << "top_walls \"" << objectName << "\"\n";
 
-                SingleTexture* tex = getSingleTexture(objectName);
+                SingleTexture* tex = getSingleTexture(ConvertUtf8ToWide(objectName));
                 if (tex != nullptr)
                     texture_top_walls = tex;
             }
@@ -768,7 +768,7 @@ public:
                 getline(lineStream, objectName, '"');
                 //std::cout << "walls \"" << objectName << "\"\n";
 
-                SingleTexture* tex = getSingleTexture(objectName);
+                SingleTexture* tex = getSingleTexture(ConvertUtf8ToWide(objectName));
                 if (tex != nullptr)
                     texture_center_walls = tex;
             }
@@ -779,7 +779,7 @@ public:
                 getline(lineStream, objectName, '"');
                 //std::cout << "bottom_walls \"" << objectName << "\"\n";
 
-                SingleTexture* tex = getSingleTexture(objectName);
+                SingleTexture* tex = getSingleTexture(ConvertUtf8ToWide(objectName));
                 if (tex != nullptr)
                     texture_bottom_walls = tex;
             }
@@ -789,7 +789,7 @@ public:
                 getline(lineStream, objectName, '"');
                 //std::cout << "windows \"" << objectName << "\"\n";
 
-                SingleTexture* tex = getSingleTexture(objectName);
+                SingleTexture* tex = getSingleTexture(ConvertUtf8ToWide(objectName));
                 if (tex != nullptr)
                     texture_windows = tex;
 
@@ -827,7 +827,7 @@ public:
                 x = x - (size.x * 16 / 2) + position.x;
                 y = y - (size.y * 16) + position.y;
 
-                Item* item = getItem(objectName);
+                Item* item = getItem(ConvertUtf8ToWide(objectName));
                 if (item != nullptr) {
                     ItemOnMap* itemOnMap = new ItemOnMap(item);
                     itemOnMap->setPosition(sf::Vector2f(x, y));
@@ -849,7 +849,7 @@ public:
                 x += (position.x - size.x / 2 * 16);
                 y += (position.y - size.y * 16);
 
-                GameObject* prefab = getPrefab(objectName);
+                GameObject* prefab = getPrefab(ConvertUtf8ToWide(objectName));
                 if (prefab != nullptr) {
                     Furniture* furniture = new Furniture(prefab);
                     
@@ -872,7 +872,7 @@ public:
                 x = x + position.x - size.x / 2 * 16;
                 y = y + position.y - size.y * 16;
                 
-                GameObject* prefab = getPrefab(objectName);
+                GameObject* prefab = getPrefab(ConvertUtf8ToWide(objectName));
                 if (prefab != nullptr) {
                     Wall* wall = new Wall(prefab);
                     wall->setPosition(sf::Vector2f(x, y));
@@ -896,11 +896,11 @@ public:
 
         file << "name \"testBuilding\"\n";
         file << "size " << std::to_string(floors->width) << " " << std::to_string(floors->height) << "\n";
-        file << "door \"" << _door->name << "\"\n";
-        file << "top_walls \"" << texture_top_walls->name << "\"\n";
-        file << "center_walls \"" << texture_center_walls->name << "\"\n";
-        file << "bottom_walls \"" << texture_bottom_walls->name << "\"\n";
-        file << "windows \"" << texture_windows->name << "\"\n";
+        file << "door \"" << ConvertWideToUtf8(_door->name) << "\"\n";
+        file << "top_walls \"" << ConvertWideToUtf8(texture_top_walls->name) << "\"\n";
+        file << "center_walls \"" << ConvertWideToUtf8(texture_center_walls->name) << "\"\n";
+        file << "bottom_walls \"" << ConvertWideToUtf8(texture_bottom_walls->name) << "\"\n";
+        file << "windows \"" << ConvertWideToUtf8(texture_windows->name) << "\"\n";
 
         file << "\n";
 
@@ -923,7 +923,7 @@ public:
             sf::Vector2i position;
             position.x = int(item->position.x) - int(this->position.x) + size.x/2*16;
             position.y = int(item->position.y) - int(this->position.y) + size.y * 16;
-            file << "Item " << char(34) << item->name << char(34) << " " << position.x << " " << position.y << "\n";
+            file << "Item " << char(34) << ConvertWideToUtf8(item->name) << char(34) << " " << position.x << " " << position.y << "\n";
         }
 
         if (_items.size() > 0)
@@ -936,7 +936,7 @@ public:
             sf::Vector2i position;
             position.x = int(furniture->position.x) - int(this->position.x) + size.x/2*16;
             position.y = int(furniture->position.y) - int(this->position.y) + size.y * 16;
-            file << "Furniture " << char(34) << furniture->name << char(34) << " " << position.x << " " << position.y << "\n";
+            file << "Furniture " << char(34) << ConvertWideToUtf8(furniture->name) << char(34) << " " << position.x << " " << position.y << "\n";
 
         }
 
@@ -950,7 +950,7 @@ public:
             sf::Vector2i position;
             position.x = int(wall->position.x) - int(this->position.x) + size.x/2*16;
             position.y = int(wall->position.y) - int(this->position.y) + size.y*16;
-            file << "Wall " << char(34) << wall->name << char(34) << " " << position.x << " " << position.y << "\n";
+            file << "Wall " << char(34) << ConvertWideToUtf8(wall->name) << char(34) << " " << position.x << " " << position.y << "\n";
             std::cout << "save - position of wall: " << position.x << " " << position.y << "\n";
         }
 

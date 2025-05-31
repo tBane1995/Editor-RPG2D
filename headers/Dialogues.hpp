@@ -43,10 +43,10 @@ public:
 
 class Dialogue {
 public:
-	short id;
+	int id;
 	std::vector < DialogueOption* > options;
 
-	Dialogue(short id) {
+	Dialogue(int id) {
 		this->id = id;
 		load();
 	}
@@ -58,7 +58,17 @@ public:
 		std::vector < DialogueOption* > stack;
 		std::string line;
 
-		std::ifstream file("dialogues\\new\\003.txt");
+		std::string filename = to_string(id);
+
+		if (filename.size() == 1)
+			filename = "00" + filename;
+
+		else if (filename.size() == 2)
+			filename = "0" + filename;
+
+		filename = "dialogues\\new\\pl-" + filename + ".txt";
+
+		std::ifstream file(filename);
 
 		while (std::getline(file, line)) {
 
@@ -158,7 +168,7 @@ while (true) {
 
 std::vector < Dialogue* > dialogues;
 
-Dialogue* getDialogue(short id) {
+Dialogue* getDialogue(int id) {
 	for (auto& d : dialogues)
 		if (d->id == id)
 			return d;
@@ -401,5 +411,8 @@ void loadDialogues() {
 	dialogues.clear();
 
 	dialogues.push_back(new Dialogue(0));
+	dialogues.push_back(new Dialogue(1));
+	dialogues.push_back(new Dialogue(2));
+	dialogues.push_back(new Dialogue(3));
 }
 #endif

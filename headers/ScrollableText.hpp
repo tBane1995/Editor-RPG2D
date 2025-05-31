@@ -14,8 +14,8 @@ public:
 		sf::Vector2f scrollbar_size = sf::Vector2f(16, size.y - 2.0f * dialog_border_width - 16);
 
 		textarea = new TextArea(text, cam->position, size.x - 2.0f * dialog_border_width - 2.0f * 8 - scrollbar_size.x);
+		textarea->setRectColor(panelColor_normal);
 		textarea->setPosition(sf::Vector2f(-size.x / 2.0f + dialog_border_width + 8, -size.y / 2.0f + dialog_border_width + 8));
-		textarea->setBackgroundColor(panelColor_normal);
 		sf::Vector2f scrollbar_position = sf::Vector2f(size.x / 2.0f - dialog_border_width - scrollbar_size.x - 8, -size.y / 2.0f + dialog_border_width + 8);
 		float scroll_max = textarea->getSize().y + size.y/2.0f;
 		float scroll_len = size.x;
@@ -27,7 +27,6 @@ public:
 		text_texture.setView(v);
 		text_texture.setSmooth(true);
 		text_texture.clear(sf::Color::Transparent);
-		text_texture.draw(textarea->background);
 		for (auto& text : textarea->texts)
 			text_texture.draw(text);
 		text_texture.display();
@@ -56,7 +55,7 @@ public:
 		sf::View v = sf::View(sf::FloatRect(sf::Vector2f(cam->position.x - size.x / 2.0f + dialog_border_width + 8, cam->position.y - size.y / 2.0f + dialog_border_width + 8), sf::Vector2f(size.x - 2 * (dialog_border_width + 8) - scrollbar->size.x, size.y - 2 * (dialog_border_width + 8))));
 		text_texture.setView(v);
 		text_texture.clear(sf::Color::Transparent);
-		text_texture.draw(textarea->background);
+		text_texture.draw(textarea->rect);
 		for (auto& text : textarea->texts)
 			text_texture.draw(text);
 		text_texture.display();
