@@ -1,5 +1,5 @@
-﻿#ifndef Scrollbar_hpp
-#define Scrollbar_hpp
+﻿#ifndef scrollbar_hpp
+#define scrollbar_hpp
 
 #pragma once
 

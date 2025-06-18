@@ -150,7 +150,7 @@ public:
 		}
 
 
-		if (renderer->renderMeshes == true) {
+		if (renderer->WE_renderMeshes == true) {
 			if (mesh != nullptr) {
 				mesh->draw(position);
 			}

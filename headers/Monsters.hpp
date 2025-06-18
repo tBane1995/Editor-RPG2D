@@ -319,15 +319,15 @@ public:
 	virtual void drawColliders() {
 
 
-		if (renderer->renderViewRange || isSelected || (!GUIwasOpen && !GUIwasClicked && !GUIwasHover && mouseIsHover))
+		if (renderer->WE_renderViewRange || isSelected || (!GUIwasOpen && !GUIwasClicked && !GUIwasHover && mouseIsHover))
 			window->draw(view_range_area);
 
-		if (renderer->renderActionRange || isSelected || (!GUIwasOpen && !GUIwasClicked && !GUIwasHover && mouseIsHover))
+		if (renderer->WE_renderActionRange || isSelected || (!GUIwasOpen && !GUIwasClicked && !GUIwasHover && mouseIsHover))
 			window->draw(action_range_area);
 
 		GameObject::drawColliders();
 
-		if (renderer->renderMonsterBases || isSelected || (!GUIwasOpen && !GUIwasClicked && !GUIwasHover && mouseIsHover)) {
+		if (renderer->WE_renderMonsterBases || isSelected || (!GUIwasOpen && !GUIwasClicked && !GUIwasHover && mouseIsHover)) {
 			for (auto& p : pathpoints)
 				window->draw(p);
 

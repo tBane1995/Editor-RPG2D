@@ -69,7 +69,8 @@ void selectGameObjects(float rect_x, float rect_y, float rect_w, float rect_h) {
 
     for (auto& go : gameObjects) {
 
-        if (isPartOfBuilding(go) == nullptr || editor_state == EditorStates::BuildingEditor) {
+        if ((editor_state == EditorStates::MapEditor && isPartOfBuilding(go) == nullptr) || 
+            (editor_state == EditorStates::BuildingEditor && go->type != GameObjectType::Building)) {
             
             if (go->mesh != nullptr) {
 
@@ -546,17 +547,6 @@ void drawGameObjectsOnRenderer() {
     // RENDER BUILDINGS FLOORS
     for (auto& building : buildings) {
         if (building->isVisible) {
-
-            /* TO-DO
-            if (building->mouseIsHover || building->isSelected) {
-                sf::Shader* sh = getShader("shaders\\highlighted")->shader;
-                sh->setUniform("texture", *building->floors->floorset->texture);
-                renderer->getTheCurrentFrame()->draw(*building->floors, sh);
-            }
-            else {
-                renderer->getTheCurrentFrame()->draw(*building->floors);
-            }
-            */
 
             renderer->getTheCurrentFrame()->draw(*building->floors); // to delete
 

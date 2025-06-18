@@ -407,6 +407,11 @@ void save_textures_as_packet() {
 	add_Texture_To_Save(L"flatObjects\\small_sands_rock_3", 16, 16);
 	add_Texture_To_Save(L"flatObjects\\small_sands_rock_4", 16, 16);
 
+	// spells textures
+	add_Animation_To_Save(L"spells\\fireball", 32, 32, 16, 16);
+	add_Animation_To_Save(L"spells\\water_cone", 32, 32, 16, 16);
+	add_Animation_To_Save(L"spells\\magic_circle", 64, 64, 32, 32);
+
 	// doors textures
 	add_Texture_To_Save(L"doors\\wooden_door[0]", 32, 63);
 	add_Texture_To_Save(L"doors\\wooden_door[1]", 32, 63);
@@ -1499,6 +1504,11 @@ void loadTextures() {
 	loadSingleTexture(L"flatObjects\\small_sands_rock_2.png", 16, 16);
 	loadSingleTexture(L"flatObjects\\small_sands_rock_3.png", 16, 16);
 	loadSingleTexture(L"flatObjects\\small_sands_rock_4.png", 16, 16);
+
+	// SPELLS OBJECTS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	loadAnimation(L"spells\\fireball", 32, 32, 16, 16);
+	loadAnimation(L"spells\\water_cone", 32, 32, 16, 16);
+	loadAnimation(L"spells\\magic_circle", 64, 64, 32, 32);
 
 	// ITEMS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

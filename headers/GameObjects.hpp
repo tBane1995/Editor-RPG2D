@@ -349,8 +349,34 @@ public:
 			isVisible = false;
 			isSelected = false;
 		}
+	}
 
-		
+	GameObject(std::wstring name, float x, float y) {
+		// FOR SPELLS (BOMB)
+		this->name = name;
+
+		textures.clear();
+
+		mesh = nullptr;
+
+		position.x = x;
+		position.y = y;
+		this->height = 32;
+
+		frame = 0;
+		last_action_time = currentTime;
+
+		sprite = sf::Sprite();
+
+		this->collisioning = false;
+		colliders.clear();
+		colliders.push_back(new Collider(32, 32, position, 0, 0, ColliderType::Elipse));
+
+		mouseIsHover = false;
+
+		isInTheMainList = false;
+		isVisible = false;
+		isSelected = false;
 	}
 
 	virtual ~GameObject() {
@@ -463,7 +489,7 @@ public:
 
 
 	virtual void drawColliders() {
-		if (renderer->renderColliders || isSelected || (!GUIwasOpen && !GUIwasClicked && !GUIwasHover && mouseIsHover)) {
+		if (renderer->WE_renderColliders || isSelected || (!GUIwasOpen && !GUIwasClicked && !GUIwasHover && mouseIsHover)) {
 
 			for (auto& col : colliders) {
 				renderer->getTheCurrentFrame()->draw(*col->shape);
@@ -484,7 +510,7 @@ public:
 		}
 
 
-		if (renderer->renderMeshes == true) {
+		if (renderer->WE_renderMeshes == true) {
 			if (mesh != nullptr) {
 				mesh->draw(position);
 			}

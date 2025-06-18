@@ -76,6 +76,8 @@
 #include "headers/SmallObjects.hpp"         // manage of small objects (grass, etc.)
 #include "headers/Dialogues.hpp"            
 #include "headers/Character.hpp"            // manage of Characters
+#include "headers/Spell.hpp"            // manage of Spells
+
 #include "headers/Prefabs.hpp"              // manage of all prefabs
 #include "headers/Buildings.hpp"            // manage of Buildings
 #include "headers/MouseMovedGameObjects.hpp"     // 
@@ -504,3 +506,4 @@ int main()
 
     return 0;
 }
+

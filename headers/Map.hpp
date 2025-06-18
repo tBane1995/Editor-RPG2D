@@ -451,15 +451,15 @@ public:
         water->update();    // TO-DO
         renderer->getTheCurrentFrame()->draw(*water);
 
-        if (renderer->renderTilesBorders == true)
+        if (renderer->WE_renderTilesBorders == true)
             renderer->getTheCurrentFrame()->draw(*borders);
     }
 
     void drawAllStatistics() {
-        if (renderer->renderBorders)
+        if (renderer->WE_renderBorders)
             renderer->getTheCurrentFrame()->draw(frame);
 
-        if (renderer->renderCoords)
+        if (renderer->WE_renderCoords)
             renderer->getTheCurrentFrame()->draw(coordsText);
     }
 
@@ -1677,6 +1677,18 @@ public:
 
         mapVisiblings();
         generateBorders();
+
+        sf::Vector2f pos1((cam->position.x - 100)/8*8, (cam->position.y + 100)/8*8);
+        Spell* fire_spell = new AreaFireballSpell(1, pos1.x, pos1.y);
+        gameObjects.push_back(fire_spell);
+
+        sf::Vector2f pos2 = pos1 - sf::Vector2f(256, 0);
+        Spell* water_spell = new AreaWaterConesSpell(3, pos2.x, pos2.y);
+        gameObjects.push_back(water_spell);
+
+        sf::Vector2f pos3 = pos2 - sf::Vector2f(256, 0);
+        Spell* circle_spell = new StaticSpell(L"magic_circle", pos3.x, pos3.y);
+        gameObjects.push_back(circle_spell);
     }
 
     void binary_load(std::wstring pathfile = L"world\\world.wrd") {

@@ -14,7 +14,8 @@ public:
     }
 
     ~OptionButton() {
-        delete checkbox;
+        if(checkbox != nullptr)
+            delete checkbox;
     }
 
     void update(bool hover_action = true) {
@@ -26,7 +27,8 @@ public:
 
     void draw() {
         ButtonWithText::draw();
-        checkbox->draw();
+        if(checkbox != nullptr)
+            checkbox->draw();
     }
 
 };
@@ -107,45 +109,66 @@ public:
     sf::RectangleShape bar;
 
     MenuButton* fileBtn;
-    MenuButton* viewBtn;
+    MenuButton* renderBtn;
     MenuButton* toolsBtn;
     MenuButton* helpBtn;
 
+    // WE - WORLD EDITOR /////////////////////////////////////////////////////////////
     // FILE
-    // Editor (main)
-    ButtonWithText* newWorldBtn;    
-    ButtonWithText* loadWorldBtn;
-    ButtonWithText* saveWorldBtn;
-
-    // Building Editor
-    ButtonWithText* closeBEBtn;
-
-    // Mesh Editor
-    ButtonWithText* closeMEBtn;    
+    ButtonWithText* WE_newWorldBtn;                        
+    ButtonWithText* WE_loadWorldBtn;                       
+    ButtonWithText* WE_saveWorldBtn;                       
 
     // RENDER
-    OptionButton* show_bordersBtn;
-    OptionButton* show_coordsBtn;
-    OptionButton* show_tilesBordersBtn;
-    OptionButton* show_actionRangeBtn;
-    OptionButton* show_viewRangeBtn;
-    OptionButton* show_collidersBtn;
-    OptionButton* show_meshesBtn;
-    OptionButton* show_monsterBasesBtn;
-    OptionButton* show_buildingsOutsidesBtn;
+    OptionButton* WE_show_bordersBtn;
+    OptionButton* WE_show_coordsBtn;
+    OptionButton* WE_show_tilesBordersBtn;
+    OptionButton* WE_show_actionRangeBtn;
+    OptionButton* WE_show_viewRangeBtn;
+    OptionButton* WE_show_collidersBtn;
+    OptionButton* WE_show_meshesBtn;
+    OptionButton* WE_show_monsterBasesBtn;
+    OptionButton* WE_show_buildingsOutsidesBtn;
 
     // TOOLS
-    OptionButton* show_paletteBtn;
-    OptionButton* show_gridBEBtn;
-    OptionButton* show_gridMEBtn;
+    OptionButton* WE_show_paletteBtn;
+    
+    // HELP
+    ButtonWithText* WE_settingsBtn;
+    ButtonWithText* WE_instructionsBtn;
+    ButtonWithText* WE_aboutBtn;
+
+    // BE - Building Editor ///////////////////////////////////////////////////////////////////////////////////
+    // FILE
+    ButtonWithText* BE_closeBtn; 
+
+    // RENDER
+    OptionButton* BE_show_collidersBtn;
+    OptionButton* BE_show_gridBtn;
+    OptionButton* BE_show_buildingsOutsidesBtn;
+
+    // TOOLS
+    OptionButton* BE_show_paletteBtn;
 
     // HELP
-    ButtonWithText* instructionsMEBtn;
-    ButtonWithText* instructionsBEBtn;
-    ButtonWithText* aboutMEBtn;
-    ButtonWithText* aboutBEBtn;
-    ButtonWithText* settingsMEBtn;
-    ButtonWithText* settingsBEBtn;
+    ButtonWithText* BE_settingsBtn;
+    ButtonWithText* BE_instructionsBtn;
+    ButtonWithText* BE_aboutBtn;
+
+    // ME - Mesh Editor ////////////////////////////////////////////////////////////////////////////////////////////
+    // FILE
+    ButtonWithText* ME_closeBtn; 
+
+    // RENDER
+    OptionButton* ME_show_gridBtn;
+
+    // HELP
+    ButtonWithText* ME_settingsBtn;
+    ButtonWithText* ME_instructionsBtn;
+    ButtonWithText* ME_aboutBtn;
+    
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     std::vector < MenuButton* > menu;
     MenuButton* clickedMenuButton;
@@ -186,17 +209,17 @@ public:
                 fileBtn->isOpen = false;
             };
 
-        viewBtn = new MenuButton("VIEW");
-        viewBtn->onclick_func = [this]() {
+        renderBtn = new MenuButton("RENDER");
+        renderBtn->onclick_func = [this]() {
             if (clickedMenuButton != nullptr)
                 clickedMenuButton->isOpen = false;
 
-            if (!viewBtn->isOpen) {
-                viewBtn->isOpen = true;
-                clickedMenuButton = viewBtn;
+            if (!renderBtn->isOpen) {
+                renderBtn->isOpen = true;
+                clickedMenuButton = renderBtn;
             }
             else
-                viewBtn->isOpen = false;
+                renderBtn->isOpen = false;
             };
 
         toolsBtn = new MenuButton("TOOLS");
@@ -225,143 +248,124 @@ public:
                 helpBtn->isOpen = false;
             };
 
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        // WORLD EDITOR
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        newWorldBtn = new ButtonWithText("New Map");
-        newWorldBtn->onclick_func = [this]() {
+        WE_newWorldBtn = new ButtonWithText("New Map");
+        WE_newWorldBtn->onclick_func = [this]() {
             mapa = new Mapa();
             };
 
-        loadWorldBtn = new ButtonWithText("Load Map");
-        loadWorldBtn->onclick_func = [this]() {
+        WE_loadWorldBtn = new ButtonWithText("Load Map");
+        WE_loadWorldBtn->onclick_func = [this]() {
             clickedMenuButton->isOpen = false;
             clickedMenuButton = nullptr;
             dialogs.push_back(new FileDialog(DialogType::OpenFile, L"Load Map", ".wrd"));
             };
 
-        saveWorldBtn = new ButtonWithText("Save Map");
-        saveWorldBtn->onclick_func = [this]() {
+        WE_saveWorldBtn = new ButtonWithText("Save Map");
+        WE_saveWorldBtn->onclick_func = [this]() {
             clickedMenuButton->isOpen = false;
             clickedMenuButton = nullptr;
             dialogs.push_back(new FileDialog(DialogType::SaveFile, L"Save Map", ".wrd"));
             };
 
-        closeBEBtn = new ButtonWithText("Close Building Editor");
-        closeBEBtn->onclick_func = [this]() {
-            editor_state = EditorStates::MapEditorInit;
+        WE_show_bordersBtn = new OptionButton("Map Borders");
+        WE_show_bordersBtn->checkbox = new CheckBox();
+        WE_show_bordersBtn->checkbox->value = renderer->WE_renderBorders;
+        WE_show_bordersBtn->onclick_func = [this]() {
+            (renderer->WE_renderBorders) ? renderer->WE_renderBorders = false : renderer->WE_renderBorders = true;
+            WE_show_bordersBtn->checkbox->value = renderer->WE_renderBorders;
             };
 
-        closeMEBtn = new ButtonWithText("Close Mesh Editor");
-        closeMEBtn->onclick_func = [this]() {
-            editor_state = EditorStates::MapEditorInit;
+        WE_show_coordsBtn = new OptionButton("Map Coords");
+        WE_show_coordsBtn->checkbox = new CheckBox();
+        WE_show_coordsBtn->checkbox->value = renderer->WE_renderCoords;
+        WE_show_coordsBtn->onclick_func = [this]() {
+            (renderer->WE_renderCoords) ? renderer->WE_renderCoords = false : renderer->WE_renderCoords = true;
+            WE_show_coordsBtn->checkbox->value = renderer->WE_renderCoords;
             };
 
-        show_bordersBtn = new OptionButton("Map Borders");
-        show_bordersBtn->checkbox = new CheckBox();
-        show_bordersBtn->checkbox->value = renderer->renderBorders;
-        show_bordersBtn->onclick_func = [this]() {
-            (renderer->renderBorders) ? renderer->renderBorders = false : renderer->renderBorders = true;
-            show_bordersBtn->checkbox->value = renderer->renderBorders;
+        WE_show_tilesBordersBtn = new OptionButton("Tiles Borders");
+        WE_show_tilesBordersBtn->checkbox = new CheckBox();
+        WE_show_tilesBordersBtn->checkbox->value = renderer->WE_renderTilesBorders;
+        WE_show_tilesBordersBtn->onclick_func = [this]() {
+            (renderer->WE_renderTilesBorders) ? renderer->WE_renderTilesBorders = false : renderer->WE_renderTilesBorders = true;
+            WE_show_tilesBordersBtn->checkbox->value = renderer->WE_renderTilesBorders;
             };
 
-        show_coordsBtn = new OptionButton("Map Coords");
-        show_coordsBtn->checkbox = new CheckBox();
-        show_coordsBtn->checkbox->value = renderer->renderCoords;
-        show_coordsBtn->onclick_func = [this]() {
-            (renderer->renderCoords) ? renderer->renderCoords = false : renderer->renderCoords = true;
-            show_coordsBtn->checkbox->value = renderer->renderCoords;
+        WE_show_actionRangeBtn = new OptionButton("Action Range");
+        WE_show_actionRangeBtn->checkbox = new CheckBox();
+        WE_show_actionRangeBtn->checkbox->value = renderer->WE_renderActionRange;
+        WE_show_actionRangeBtn->onclick_func = [this]() {
+            (renderer->WE_renderActionRange) ? renderer->WE_renderActionRange = false : renderer->WE_renderActionRange = true;
+            WE_show_actionRangeBtn->checkbox->value = renderer->WE_renderActionRange;
             };
 
-        show_tilesBordersBtn = new OptionButton("Tiles Borders");
-        show_tilesBordersBtn->checkbox = new CheckBox();
-        show_tilesBordersBtn->checkbox->value = renderer->renderTilesBorders;
-        show_tilesBordersBtn->onclick_func = [this]() {
-            (renderer->renderTilesBorders) ? renderer->renderTilesBorders = false : renderer->renderTilesBorders = true;
-            show_tilesBordersBtn->checkbox->value = renderer->renderTilesBorders;
+        WE_show_viewRangeBtn = new OptionButton("View Range");
+        WE_show_viewRangeBtn->checkbox = new CheckBox();
+        WE_show_viewRangeBtn->checkbox->value = renderer->WE_renderViewRange;
+        WE_show_viewRangeBtn->onclick_func = [this]() {
+            (renderer->WE_renderViewRange) ? renderer->WE_renderViewRange = false : renderer->WE_renderViewRange = true;
+            WE_show_viewRangeBtn->checkbox->value = renderer->WE_renderViewRange;
             };
 
-        show_actionRangeBtn = new OptionButton("Action Range");
-        show_actionRangeBtn->checkbox = new CheckBox();
-        show_actionRangeBtn->checkbox->value = renderer->renderActionRange;
-        show_actionRangeBtn->onclick_func = [this]() {
-            (renderer->renderActionRange) ? renderer->renderActionRange = false : renderer->renderActionRange = true;
-            show_actionRangeBtn->checkbox->value = renderer->renderActionRange;
+        WE_show_collidersBtn = new OptionButton("Colliders");
+        WE_show_collidersBtn->checkbox = new CheckBox();
+        WE_show_collidersBtn->checkbox->value = renderer->WE_renderColliders;
+        WE_show_collidersBtn->onclick_func = [this]() {
+            (renderer->WE_renderColliders) ? renderer->WE_renderColliders = false : renderer->WE_renderColliders = true;
+            WE_show_collidersBtn->checkbox->value = renderer->WE_renderColliders;
             };
 
-        show_viewRangeBtn = new OptionButton("View Range");
-        show_viewRangeBtn->checkbox = new CheckBox();
-        show_viewRangeBtn->checkbox->value = renderer->renderViewRange;
-        show_viewRangeBtn->onclick_func = [this]() {
-            (renderer->renderViewRange) ? renderer->renderViewRange = false : renderer->renderViewRange = true;
-            show_viewRangeBtn->checkbox->value = renderer->renderViewRange;
+        WE_show_meshesBtn = new OptionButton("Meshes");
+        WE_show_meshesBtn->checkbox = new CheckBox();
+        WE_show_meshesBtn->checkbox->value = renderer->WE_renderMeshes;
+        WE_show_meshesBtn->onclick_func = [this]() {
+            (renderer->WE_renderMeshes) ? renderer->WE_renderMeshes = false : renderer->WE_renderMeshes = true;
+            WE_show_meshesBtn->checkbox->value = renderer->WE_renderMeshes;
             };
 
-        show_collidersBtn = new OptionButton("Colliders");
-        show_collidersBtn->checkbox = new CheckBox();
-        show_collidersBtn->checkbox->value = renderer->renderColliders;
-        show_collidersBtn->onclick_func = [this]() {
-            (renderer->renderColliders) ? renderer->renderColliders = false : renderer->renderColliders = true;
-            show_collidersBtn->checkbox->value = renderer->renderColliders;
+        WE_show_monsterBasesBtn = new OptionButton("Monsters Bases");
+        WE_show_monsterBasesBtn->checkbox = new CheckBox();
+        WE_show_monsterBasesBtn->checkbox->value = renderer->WE_renderMonsterBases;
+        WE_show_monsterBasesBtn->onclick_func = [this]() {
+            (renderer->WE_renderMonsterBases) ? renderer->WE_renderMonsterBases = false : renderer->WE_renderMonsterBases = true;
+            WE_show_monsterBasesBtn->checkbox->value = renderer->WE_renderMonsterBases;
             };
 
-        show_meshesBtn = new OptionButton("Meshes");
-        show_meshesBtn->checkbox = new CheckBox();
-        show_meshesBtn->checkbox->value = renderer->renderMeshes;
-        show_meshesBtn->onclick_func = [this]() {
-            (renderer->renderMeshes) ? renderer->renderMeshes = false : renderer->renderMeshes = true;
-            show_meshesBtn->checkbox->value = renderer->renderMeshes;
+        WE_show_buildingsOutsidesBtn = new OptionButton("Buildings Outsides");
+        WE_show_buildingsOutsidesBtn->checkbox = new CheckBox();
+        WE_show_buildingsOutsidesBtn->checkbox->value = renderer->WE_renderBuildingsOutside;
+        WE_show_buildingsOutsidesBtn->onclick_func = [this]() {
+            (renderer->WE_renderBuildingsOutside) ? renderer->WE_renderBuildingsOutside = false : renderer->WE_renderBuildingsOutside = true;
+            WE_show_buildingsOutsidesBtn->checkbox->value = renderer->WE_renderBuildingsOutside;
             };
 
-        show_monsterBasesBtn = new OptionButton("Monsters Bases");
-        show_monsterBasesBtn->checkbox = new CheckBox();
-        show_monsterBasesBtn->checkbox->value = renderer->renderMonsterBases;
-        show_monsterBasesBtn->onclick_func = [this]() {
-            (renderer->renderMonsterBases) ? renderer->renderMonsterBases = false : renderer->renderMonsterBases = true;
-            show_monsterBasesBtn->checkbox->value = renderer->renderMonsterBases;
-            };
-
-        show_buildingsOutsidesBtn = new OptionButton("Buildings Outsides");
-        show_buildingsOutsidesBtn->checkbox = new CheckBox();
-        show_buildingsOutsidesBtn->checkbox->value = renderer->renderBuildingsOutside;
-        show_buildingsOutsidesBtn->onclick_func = [this]() {
-            (renderer->renderBuildingsOutside) ? renderer->renderBuildingsOutside = false : renderer->renderBuildingsOutside = true;
-            show_buildingsOutsidesBtn->checkbox->value = renderer->renderBuildingsOutside;
-            };
-
-        show_paletteBtn = new OptionButton("Show Palette");
-        show_paletteBtn->checkbox = new CheckBox();
-        show_paletteBtn->checkbox->value = true;
-        show_paletteBtn->onclick_func = [this]() {
+        WE_show_paletteBtn = new OptionButton("Show Palette");
+        WE_show_paletteBtn->checkbox = new CheckBox();
+        WE_show_paletteBtn->checkbox->value = true;
+        WE_show_paletteBtn->onclick_func = [this]() {
 
             if (palette->state == PaletteStates::Open) {
                 palette->close();
-                show_paletteBtn->checkbox->value = false;
+                WE_show_paletteBtn->checkbox->value = false;
 
             }else if(palette->state == PaletteStates::Close) {
                 palette->open();
-                show_paletteBtn->checkbox->value = true;
+                WE_show_paletteBtn->checkbox->value = true;
             }
             };
 
-        show_gridBEBtn = new OptionButton("Show Grid");
-        show_gridBEBtn->checkbox = new CheckBox();
-        show_gridBEBtn->checkbox->value = false;
-        show_gridBEBtn->onclick_func = [this]() {
-
-            (show_gridBEBtn->checkbox->value == true) ? show_gridBEBtn->checkbox->value = false : show_gridBEBtn->checkbox->value = true;
+        WE_settingsBtn = new ButtonWithText("Settings");
+        WE_settingsBtn->onclick_func = [this]() {
+            clickedMenuButton->isOpen = false;
+            clickedMenuButton = nullptr;
+            dialogs.push_back(new Panel());
             };
 
-        show_gridMEBtn = new OptionButton("Show Grid");
-        show_gridMEBtn->checkbox = new CheckBox();
-        show_gridMEBtn->checkbox->value = false;
-        show_gridMEBtn->onclick_func = [this]() {
-
-            (show_gridBEBtn->checkbox->value == true) ? show_gridBEBtn->checkbox->value = false : show_gridBEBtn->checkbox->value = true;
-            };
-
-        instructionsMEBtn = new ButtonWithText("Instructions");
-        instructionsMEBtn->onclick_func = [this]() {
+        WE_instructionsBtn = new ButtonWithText("Instructions");
+        WE_instructionsBtn->onclick_func = [this]() {
             clickedMenuButton->isOpen = false;
             clickedMenuButton = nullptr;
             dialogs.push_back(new ScrollableText(
@@ -398,7 +402,7 @@ public:
                 L"-Budynki - kilka podstawowych budynków\n"
                 L"\n"
 
-            L"b) Narzędzia:\n"
+                L"b) Narzędzia:\n"
                 L"-Gdy wybierzemy grupę terenu lub wody aktywuje się panel z narzędziami\n"
                 L"-Kursor\n"
                 L"-Pędziel\n"
@@ -423,10 +427,81 @@ public:
                 L"-Monster Bases - wyświetl punkt celu oraz ścieżkę do niego dla każdego potworka\n"
             ));
             };
-        aboutMEBtn = new ButtonWithText("About");
 
-        instructionsBEBtn = new ButtonWithText("Instructions");
-        instructionsBEBtn->onclick_func = [this]() {
+        WE_aboutBtn = new ButtonWithText("About");
+        WE_aboutBtn->onclick_func = [this]() {
+            clickedMenuButton->isOpen = false;
+            clickedMenuButton = nullptr;
+            dialogs.push_back(new ScrollableText(
+                L"Program Editor RPG2D został zaprojektowany i zaprogramowany przez tBane.\n"
+                L"Wersja 0.5\n"
+                L"© 2025\n"
+            ));
+            };
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // BUILDING EDITOR
+
+        // FILE
+        BE_closeBtn = new ButtonWithText("Close Building Editor");
+        BE_closeBtn->onclick_func = [this]() {
+            editor_state = EditorStates::MapEditorInit;
+            };
+
+
+        // RENDER
+        BE_show_collidersBtn = new OptionButton("Colliders");
+        BE_show_collidersBtn->checkbox = new CheckBox();
+        BE_show_collidersBtn->checkbox->value = renderer->BE_renderColliders;
+        BE_show_collidersBtn->onclick_func = [this]() {
+            (renderer->BE_renderColliders) ? renderer->BE_renderColliders = false : renderer->BE_renderColliders = true;
+            BE_show_collidersBtn->checkbox->value = renderer->BE_renderColliders;
+            };
+
+        BE_show_gridBtn = new OptionButton("Show Grid");
+        BE_show_gridBtn->checkbox = new CheckBox();
+        BE_show_gridBtn->checkbox->value = false;
+        BE_show_gridBtn->onclick_func = [this]() {
+
+            (BE_show_gridBtn->checkbox->value == true) ? BE_show_gridBtn->checkbox->value = false : BE_show_gridBtn->checkbox->value = true;
+            };
+
+        BE_show_buildingsOutsidesBtn = new OptionButton("Buildings Outsides");
+        BE_show_buildingsOutsidesBtn->checkbox = new CheckBox();
+        BE_show_buildingsOutsidesBtn->checkbox->value = renderer->WE_renderBuildingsOutside;
+        BE_show_buildingsOutsidesBtn->onclick_func = [this]() {
+            (renderer->BE_renderBuildingsOutside) ? renderer->BE_renderBuildingsOutside = false : renderer->BE_renderBuildingsOutside = true;
+            BE_show_buildingsOutsidesBtn->checkbox->value = renderer->BE_renderBuildingsOutside;
+            };
+        
+        // TOOLS
+        BE_show_paletteBtn = new OptionButton("Show Palette");
+        BE_show_paletteBtn->checkbox = new CheckBox();
+        BE_show_paletteBtn->checkbox->value = true;
+        BE_show_paletteBtn->onclick_func = [this]() {
+
+            if (palette->state == PaletteStates::Open) {
+                palette->close();
+                BE_show_paletteBtn->checkbox->value = false;
+
+            }
+            else if (palette->state == PaletteStates::Close) {
+                palette->open();
+                BE_show_paletteBtn->checkbox->value = true;
+            }
+            };
+
+        // HELP
+        BE_settingsBtn = new ButtonWithText("Settings");
+        BE_settingsBtn->onclick_func = [this]() {
+            clickedMenuButton->isOpen = false;
+            clickedMenuButton = nullptr;
+            dialogs.push_back(new Panel());
+            };
+
+        BE_instructionsBtn = new ButtonWithText("Instructions");
+        BE_instructionsBtn->onclick_func = [this]() {
             clickedMenuButton->isOpen = false;
             clickedMenuButton = nullptr;
             dialogs.push_back(new ScrollableText(
@@ -471,8 +546,10 @@ public:
             ));
             };
 
-        aboutMEBtn = new ButtonWithText("About");
-        aboutMEBtn->onclick_func = [this]() {
+        
+
+        BE_aboutBtn = new ButtonWithText("About");
+        BE_aboutBtn->onclick_func = [this]() {
             clickedMenuButton->isOpen = false;
             clickedMenuButton = nullptr;
             dialogs.push_back(new ScrollableText(
@@ -481,30 +558,49 @@ public:
                 L"© 2025\n"
             ));
             };
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // MESH EDITOR
 
-        aboutBEBtn = new ButtonWithText("About");
-        aboutBEBtn->onclick_func = [this]() {
+        // FILE
+        ME_closeBtn = new ButtonWithText("Close Mesh Editor");
+        ME_closeBtn->onclick_func = [this]() {
+            editor_state = EditorStates::MapEditorInit;
+            };
+
+        // RENDER
+        ME_show_gridBtn = new OptionButton("Show Grid");
+        ME_show_gridBtn->checkbox = new CheckBox();
+        ME_show_gridBtn->checkbox->value = false;
+        ME_show_gridBtn->onclick_func = [this]() {
+
+            (ME_show_gridBtn->checkbox->value == true) ? ME_show_gridBtn->checkbox->value = false : ME_show_gridBtn->checkbox->value = true;
+            };
+
+        // HELP
+        ME_settingsBtn = new ButtonWithText("Settings");
+        ME_settingsBtn->onclick_func = [this]() {
             clickedMenuButton->isOpen = false;
             clickedMenuButton = nullptr;
             dialogs.push_back(new Panel());
             };
 
-
-
-        settingsMEBtn = new ButtonWithText("Settings");
-        settingsMEBtn->onclick_func = [this]() {
+        ME_instructionsBtn = new ButtonWithText("Instructions");
+        ME_instructionsBtn->onclick_func = [this]() {
             clickedMenuButton->isOpen = false;
             clickedMenuButton = nullptr;
             dialogs.push_back(new Panel());
             };
 
-        settingsBEBtn = new ButtonWithText("Settings");
-        settingsBEBtn->onclick_func = [this]() {
+        ME_aboutBtn = new ButtonWithText("About");
+        ME_aboutBtn->onclick_func = [this]() {
             clickedMenuButton->isOpen = false;
             clickedMenuButton = nullptr;
-            dialogs.push_back(new Panel());
-        };
-
+            dialogs.push_back(new ScrollableText(
+                L"Program Editor RPG2D został zaprojektowany i zaprogramowany przez tBane.\n"
+                L"Wersja 0.5\n"
+                L"© 2025\n"
+            ));
+            };
     }
 
 
@@ -512,7 +608,7 @@ public:
         if (type == MenuBarType::MapEditor) {
             menu.clear();
             menu.push_back(fileBtn);
-            menu.push_back(viewBtn);
+            menu.push_back(renderBtn);
             menu.push_back(toolsBtn);
             menu.push_back(helpBtn);
 
@@ -526,30 +622,31 @@ public:
                 position.x += btn->rect.getLocalBounds().width;
             }
 
-            menu[0]->addOption(newWorldBtn);
-            menu[0]->addOption(loadWorldBtn);
-            menu[0]->addOption(saveWorldBtn);
+            menu[0]->addOption(WE_newWorldBtn);
+            menu[0]->addOption(WE_loadWorldBtn);
+            menu[0]->addOption(WE_saveWorldBtn);
 
-            menu[1]->addOption(show_bordersBtn);
-            menu[1]->addOption(show_coordsBtn);
-            menu[1]->addOption(show_tilesBordersBtn);
-            menu[1]->addOption(show_actionRangeBtn);
-            menu[1]->addOption(show_viewRangeBtn);
-            menu[1]->addOption(show_collidersBtn);
-            menu[1]->addOption(show_meshesBtn);
-            menu[1]->addOption(show_monsterBasesBtn);
-            menu[1]->addOption(show_buildingsOutsidesBtn);
+            menu[1]->addOption(WE_show_bordersBtn);
+            menu[1]->addOption(WE_show_coordsBtn);
+            menu[1]->addOption(WE_show_tilesBordersBtn);
+            menu[1]->addOption(WE_show_actionRangeBtn);
+            menu[1]->addOption(WE_show_viewRangeBtn);
+            menu[1]->addOption(WE_show_collidersBtn);
+            menu[1]->addOption(WE_show_meshesBtn);
+            menu[1]->addOption(WE_show_monsterBasesBtn);
+            menu[1]->addOption(WE_show_buildingsOutsidesBtn);
 
-            menu[2]->addOption(show_paletteBtn);
+            menu[2]->addOption(WE_show_paletteBtn);
 
-            menu[3]->addOption(instructionsMEBtn);
-            menu[3]->addOption(aboutMEBtn);
-            menu[3]->addOption(settingsMEBtn);
+            menu[3]->addOption(WE_settingsBtn);
+            menu[3]->addOption(WE_instructionsBtn);
+            menu[3]->addOption(WE_aboutBtn);
+            
         }
         else if (type == MenuBarType::BuildingEditor) {
             menu.clear();
             menu.push_back(fileBtn);
-            menu.push_back(viewBtn);
+            menu.push_back(renderBtn);
             menu.push_back(toolsBtn);
             menu.push_back(helpBtn);
 
@@ -563,15 +660,18 @@ public:
                 position.x += btn->rect.getLocalBounds().width;
             }
 
-            menu[0]->addOption(closeBEBtn);
+            menu[0]->addOption(BE_closeBtn);
 
-            menu[1]->addOption(show_collidersBtn);
+            menu[1]->addOption(BE_show_collidersBtn);
+            menu[1]->addOption(BE_show_gridBtn);
+            menu[1]->addOption(BE_show_buildingsOutsidesBtn);
 
-            menu[2]->addOption(show_paletteBtn);
+            menu[2]->addOption(BE_show_paletteBtn);
 
-            menu[3]->addOption(instructionsBEBtn);
-            menu[3]->addOption(aboutBEBtn);
-            menu[3]->addOption(settingsBEBtn);
+            menu[3]->addOption(BE_settingsBtn);
+            menu[3]->addOption(BE_instructionsBtn);
+            menu[3]->addOption(BE_aboutBtn);
+            
         }
         else if (type == MenuBarType::MeshEditor) {
             menu.clear();
@@ -589,13 +689,14 @@ public:
                 position.x += btn->rect.getLocalBounds().width;
             }
 
-            menu[0]->addOption(closeMEBtn);
+            menu[0]->addOption(ME_closeBtn);
 
-            //menu[1]->addOption(show_gridBtn);
+            menu[1]->addOption(ME_show_gridBtn);
 
-            menu[2]->addOption(instructionsMEBtn);
-            menu[2]->addOption(aboutMEBtn);
-            menu[2]->addOption(settingsMEBtn);
+            menu[2]->addOption(ME_settingsBtn);
+            menu[2]->addOption(ME_instructionsBtn);
+            menu[2]->addOption(ME_aboutBtn);
+            
         }   
     }
 

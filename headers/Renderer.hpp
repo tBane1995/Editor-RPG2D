@@ -15,15 +15,20 @@ public:
 	float contrast = 1.0f;		// 0.4f - 1.6f
 	float gamma = 1.0f;			// TO-DO - must a set the gamma
 
-	bool renderBorders;
-	bool renderCoords;
-	bool renderTilesBorders;
-	bool renderActionRange;
-	bool renderViewRange;
-	bool renderColliders;
-	bool renderMeshes;
-	bool renderMonsterBases;
-	bool renderBuildingsOutside;
+	// WORLD EDITOR
+	bool WE_renderBorders;
+	bool WE_renderCoords;
+	bool WE_renderTilesBorders;
+	bool WE_renderActionRange;
+	bool WE_renderViewRange;
+	bool WE_renderColliders;
+	bool WE_renderMeshes;
+	bool WE_renderMonsterBases;
+	bool WE_renderBuildingsOutside;
+
+	// BUILDING EDITOR
+	bool BE_renderColliders;
+	bool BE_renderBuildingsOutside;
 
 	Renderer() {
 		
@@ -37,16 +42,20 @@ public:
 
 		sh = getShader(L"shaders\\renderer")->shader;
 
-		renderBorders = true;
-		renderCoords = true;
-		renderTilesBorders = false;
-		renderActionRange = false;
-		renderViewRange = false;
-		renderColliders = false;
-		renderMeshes = false;
-		renderMonsterBases = false;
-		renderBuildingsOutside = true;
+		// WORLD EDITOR
+		WE_renderBorders = true;
+		WE_renderCoords = true;
+		WE_renderTilesBorders = false;
+		WE_renderActionRange = false;
+		WE_renderViewRange = false;
+		WE_renderColliders = false;
+		WE_renderMeshes = false;
+		WE_renderMonsterBases = false;
+		WE_renderBuildingsOutside = true;
 		
+		// BUILDING EDITOR
+		BE_renderColliders = false;
+		BE_renderBuildingsOutside = true;
 	}
 
 	~Renderer() {

@@ -23,6 +23,7 @@ public:
 
     Building(std::wstring location) : GameObject(GameObjectType::Building, -1, 0, 0) {
         this->id = -1;
+        type = GameObjectType::Building;
 
         size = sf::Vector2i(16, 16);
         colliders.push_back(new Collider(size.x * 16, size.y * 16, position, 0, -size.y / 2 * 16, ColliderType::Rectangle));
@@ -156,10 +157,15 @@ public:
         y2 = position.y;
     }
     virtual void mouseHovering() {
-        if (worldMousePosition.x > x1 && worldMousePosition.x < x2 && worldMousePosition.y > y1 && worldMousePosition.y < y2)
+        if (worldMousePosition.x > x1 && worldMousePosition.x < x2 && worldMousePosition.y > y1 && worldMousePosition.y < y2) {
             mouseIsHover = true;
-        else
+            //std::cout << "mouse is hover\n";
+        }
+        else {
             mouseIsHover = false;
+            //std::cout << "mouse is not hover\n";
+        }
+            
     }
 
     void setPosition(sf::Vector2f position) {
@@ -979,11 +985,11 @@ public:
     virtual void draw() {
         
 
-        if (renderer->renderBuildingsOutside) {
+        if (renderer->BE_renderBuildingsOutside) {
 
             bool show_outside_sprite = true;
 
-            if (editor_state == EditorStates::BuildingEditor || editor_state == EditorStates::MapEditorInit) {
+            if (editor_state == EditorStates::MapEditorInit) {
                 show_outside_sprite = false;
             }
             else {
@@ -1004,8 +1010,7 @@ public:
                     //cout << "is selected\n";
                     show_outside_sprite = false;
                 }
-                else if (player == nullptr && GUIwasOpen == false && GUIwasClicked == false && GUIwasHover == false && mouseIsHover) {
-                    //cout << "mouse is over\n";
+                else if (player == nullptr && ElementGUI_hovered == nullptr && ElementGUI_pressed == nullptr && mouseIsHover) {
                     show_outside_sprite = false;
                 }
                 else if (player != nullptr && playerInside()) {

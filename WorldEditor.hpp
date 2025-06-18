@@ -572,7 +572,7 @@ void Editor() {
                     }
 
                     if (event.key.code == sf::Keyboard::B) {
-                        menu_bar->show_paletteBtn->click();
+                        menu_bar->WE_show_paletteBtn->click();
                     }
 
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.key.code == sf::Keyboard::Z) {
@@ -716,6 +716,7 @@ void Editor() {
             /////////////////////////////////////////////////////////////////////////////////////////
 
             buildings.push_back(building_to_edit);
+            gameObjects.push_back(building_to_edit);
             building_to_edit_position = building_to_edit->position;
             building_to_edit->addGameObjectsToMainLists();
             building_to_edit->setPosition(sf::Vector2f(building_to_edit->size.x*16/2,building_to_edit->size.y*16));
@@ -737,7 +738,10 @@ void Editor() {
             reset_camera = new ButtonWithImage(getSingleTexture(L"GUI\\building_editor_side_menu\\reset_camera"));
             reset_camera->setPosition(sf::Vector2f(-screenWidth/2.0f + 48, -screenHeight/2.0f + 48 + menu_bar->getSize().y));
             reset_camera->onclick_func = []() {
-                cam->setPosition(building_to_edit->size.x * 16 / 2 + 160, building_to_edit->size.y * 16 / 2);
+                if (palette->state == PaletteStates::Open) {
+                    cam->setPosition(building_to_edit->size.x * 16 / 2 + 160, building_to_edit->size.y * 16 / 2);
+                }else
+                    cam->setPosition(building_to_edit->size.x * 16 / 2, building_to_edit->size.y * 16 / 2);
                 };
             reset_camera->hover_func = []() {
                 if (tip == nullptr || tip->btn != reset_camera) {
@@ -926,7 +930,7 @@ void Editor() {
                         menu_bar->handleEvent(event);
                         reset_camera->handleEvent(event);
 
-                        if (clicked_gameObject != nullptr) {
+                        if (clicked_gameObject != nullptr && clicked_gameObject->type != GameObjectType::Building) {
                             if (clicked_gameObject->isSelected == false) {
                                 unselectGameObjects();
 
@@ -1040,7 +1044,7 @@ void Editor() {
                     }
 
                     if (event.key.code == sf::Keyboard::B) {
-                        menu_bar->show_paletteBtn->click();
+                        menu_bar->BE_show_paletteBtn->click();
                     }
 
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.key.code == sf::Keyboard::Z) {
