@@ -271,18 +271,13 @@ void createSetsFromRuns(string path) {
 }
 
 
-void editWhitePixelsToTransparent(string monster_path) {
+void editPixels(string sprites_path, sf::Color pixelPrev, sf::Color pixelNew) {
 
-    cout << "editing white pixels to transparent: " << monster_path << "\n";
-
-    //sf::Color whiteColor = sf::Color(255, 255, 255);
-    sf::Color whiteColor = sf::Color(48, 48, 48);
-    sf::Color transparentColor = sf::Color(136, 68, 0, 255);
-    //sf::Color transparentColor = sf::Color::Transparent;
+    cout << "editing pixels: " << sprites_path << "\n";
 
     std::vector < std::string > png_files;
 
-    for (const auto& entry : filesystem::directory_iterator(monster_path)) {
+    for (const auto& entry : filesystem::directory_iterator(sprites_path)) {
         if (entry.is_regular_file() && entry.path().extension() == ".png") {
             png_files.push_back(entry.path().string());
         }
@@ -294,13 +289,92 @@ void editWhitePixelsToTransparent(string monster_path) {
 
         for (int y = 0; y < img.getSize().y; y++)
             for (int x = 0; x < img.getSize().x; x++) {
-                if (img.getPixel(x, y) == whiteColor) {
-                    img.setPixel(x, y, transparentColor);
+                if (img.getPixel(x, y) == pixelPrev) {
+                    img.setPixel(x, y, pixelNew);
                 }
 
             }
 
         img.saveToFile(png.c_str());
+    }
+
+}
+
+void addOutlinesForSprites(string sprites_path, sf::Color backgroundColor, sf::Color outlineColor) {
+
+    cout << "add outlines for sprites" << sprites_path << "\n";
+
+    std::vector < std::string > png_files;
+
+    for (const auto& entry : filesystem::directory_iterator(sprites_path)) {
+        if (entry.is_regular_file() && entry.path().extension() == ".png") {
+            png_files.push_back(entry.path().string());
+        }
+    }
+
+    for (auto& png : png_files) {
+
+        std::cout << png << "\n";
+
+        sf::Image img;
+        img.loadFromFile(png.c_str());
+
+        // resize
+        sf::Image resized_image;
+        resized_image.create(img.getSize().x / 2, img.getSize().y / 2, sf::Color::White);
+
+        for (int y = 0; y < resized_image.getSize().y; y++) {
+            for (int x = 0; x < resized_image.getSize().x; x++) {
+                resized_image.setPixel(x, y, img.getPixel(x * 2, y * 2));
+            }
+        }
+
+        // add outline
+        sf::Image image_with_outline;
+        image_with_outline.create(resized_image.getSize().x, resized_image.getSize().y, sf::Color::White);
+        
+        for (int y = 0; y < resized_image.getSize().y; y++)
+            for (int x = 0; x < resized_image.getSize().x; x++) {
+                if (resized_image.getPixel(x, y) == backgroundColor) {
+
+                    bool haveColoredNeighbour = false;
+
+                    if (x > 0 && resized_image.getPixel(x-1,y)!=backgroundColor) {
+                        haveColoredNeighbour = true;
+                    }
+
+                    if (x < resized_image.getSize().x-2 && resized_image.getPixel(x+1, y) != backgroundColor) {
+                        haveColoredNeighbour = true;
+                    }
+
+                    if (y > 0 && resized_image.getPixel(x, y - 1) != backgroundColor) {
+                        haveColoredNeighbour = true;
+                    }
+
+                    if (y < resized_image.getSize().y - 2 && resized_image.getPixel(x, y + 1) != backgroundColor) {
+                        haveColoredNeighbour = true;
+                    }
+
+                    if (haveColoredNeighbour)
+                        image_with_outline.setPixel(x, y, outlineColor);
+                    else
+                        image_with_outline.setPixel(x, y, backgroundColor);
+                }else
+                    image_with_outline.setPixel(x, y, resized_image.getPixel(x, y));
+
+            }
+
+        // resize
+        sf::Image final_image;
+        final_image.create(image_with_outline.getSize().x * 2, image_with_outline.getSize().y * 2, sf::Color::White);
+
+        for (int y = 0; y < final_image.getSize().y; y++) {
+            for (int x = 0; x < final_image.getSize().x; x++) {
+                final_image.setPixel(x, y, image_with_outline.getPixel(x/2, y/2));
+            }
+        }
+
+        final_image.saveToFile(png.c_str());
     }
 
 }
@@ -439,19 +513,12 @@ int main()
 {
 
     // TOOLS - be careful with that
-    //createSetsFromIdle("assets/monsters/kolcorozec/");
-    //createSetsFromRuns("assets/monsters/jaszczur/");
-    //editWhitePixelsToTransparent("assets/sets/items/shield");
-    //convertPNGsToSet();
-    ////
-    //editWhitePixelsToTransparent("assets\\sets\\items\\chain mail");
-    //
-    
-    //editWhitePixelsToTransparent("..\\new_bbody\\head\\boy-brown-haired");
-    //editWhitePixelsToTransparent("..\\new_bbody\\head\\man-brown-haired");
-    //editWhitePixelsToTransparent("..\\new_bbody\\head\\woman-brown-haired");
-    //deleteHeadFromBodySet("assets\\sets\\heads\\woman-blackhaired", "assets\\sets\\body\\woman-blackhaired");
-    
+    /*
+    addOutlinesForSprites("assets\\sets\\new_sets\\boy-black-haired", sf::Color::Transparent, sf::Color::Black);
+    editPixels("assets\\sets\\body\\man", sf::Color::White, sf::Color::Transparent);
+    editPixels("assets\\sets\\body\\woman", sf::Color::White, sf::Color::Transparent);
+    */
+   
     ProgressBar* progress_bar = new ProgressBar();
 
     float steps = 9.0f;
@@ -497,7 +564,7 @@ int main()
     //test_grid();
     //test_motion_blur();
     //test_load_textures();
-
+    
     // PROGRAMS
     Editor();
     //BuildingEditor();
