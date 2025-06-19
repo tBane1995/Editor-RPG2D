@@ -33505,7 +33505,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "none"
@@ -33527,7 +33527,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "none"
@@ -33549,7 +33549,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "none"
@@ -33571,7 +33571,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "none"
@@ -33593,7 +33593,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "none"
@@ -33615,7 +33615,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "none"
@@ -33637,7 +33637,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "items\wool shirt"
@@ -33659,7 +33659,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "items\skin jacket"
@@ -33703,7 +33703,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "items\torn shirt"
@@ -33725,7 +33725,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "items\skin jacket"
@@ -33769,7 +33769,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "items\skin jacket"
@@ -33791,7 +33791,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "none"
@@ -33813,7 +33813,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "none"
@@ -33835,7 +33835,7 @@ MaxMP: 10
 Strength: 5
 Dexterity: 5
 Intelligence: 5
-Body: "sets\head\man-black-haired"
+Body: "sets\body\man"
 Head: "sets\head\man-black-haired"
 Helmet: "none"
 Armor: "none"

@@ -513,6 +513,7 @@ public:
 		this->id = -1;
 
 		this->head = head;
+		this->body = body;
 
 		helmet = nullptr;
 		armor = nullptr;
@@ -547,7 +548,8 @@ public:
 
 		id = -1;
 		this->head = dynamic_cast<Character*>(object)->head;
-
+		this->body = dynamic_cast<Character*>(object)->body;
+		
 		helmet = dynamic_cast <Character*>(object)->helmet;
 		armor = dynamic_cast <Character*>(object)->armor;
 		pants = dynamic_cast <Character*>(object)->pants;
@@ -584,6 +586,7 @@ public:
 
 		this->id = id;
 		this->head = L"sets\\head\\man-black-haired";
+		this->body = L"sets\\body\\man";
 
 		helmet = nullptr;
 		armor = nullptr;
@@ -1056,16 +1059,55 @@ public:
 		renderTexture->display();
 	}
 
-	void update() {
-		//state = State::Attack;
-		//attacking();
+	void idling() {
 
+		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
+			(frame == 3) ? frame = 0 : frame += 1;
+			last_action_time = currentTime;
+		}
+
+		createRenderTexture();
+		sprite.setTexture(renderTexture->getTexture());
+		setPosition(position);
+	}
+
+	void running() {
+
+		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
+			(frame == 3) ? frame = 0 : frame += 1;
+			last_action_time = currentTime;
+		}
+
+		createRenderTexture();
+		sprite.setTexture(renderTexture->getTexture());
+		setPosition(position);
+	}
+
+	void attacking() {
+
+		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
+			(frame == 3) ? frame = 0 : frame += 1;
+			last_action_time = currentTime;
+		}
+
+		createRenderTexture();
+		sprite.setTexture(renderTexture->getTexture());
+		setPosition(position);
+	}
+
+	void update() {
+		
 		state = State::Idle;
-		idling();
+		//state = State::Attack;
+		state = State::Run;
 
 		loadSprites();
 		createRenderTexture();
 
+		//idling();
+		//attacking();
+		running();
+		
 		sprite.setTexture(renderTexture->getTexture());
 		sprite.setOrigin(32, 58);
 		setPosition(position);

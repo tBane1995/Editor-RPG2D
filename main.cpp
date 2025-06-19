@@ -300,6 +300,58 @@ void editPixels(string sprites_path, sf::Color pixelPrev, sf::Color pixelNew) {
 
 }
 
+void editPixels2(string sprites_path) {
+
+    cout << "editing pixels: " << sprites_path << "\n";
+
+    sf::Color pixelPrev1, pixelNew1;
+    sf::Color pixelPrev2, pixelNew2;
+    sf::Color pixelPrev3, pixelNew3;
+
+    
+    
+    pixelPrev1 = sf::Color(100,100,100);
+    pixelPrev2 = sf::Color(127,127,127);
+    pixelPrev3 = sf::Color(144,144,144);
+
+    pixelNew1 = sf::Color(96, 60, 40);
+    pixelNew2 = sf::Color(150, 94, 63);
+    pixelNew3 = sf::Color(185, 122, 87);
+
+    
+    std::vector < std::string > png_files;
+
+    for (const auto& entry : filesystem::directory_iterator(sprites_path)) {
+        if (entry.is_regular_file() && entry.path().extension() == ".png") {
+            png_files.push_back(entry.path().string());
+        }
+    }
+
+    for (auto& png : png_files) {
+        sf::Image img;
+        img.loadFromFile(png.c_str());
+
+        for (int y = 0; y < img.getSize().y; y++)
+            for (int x = 0; x < img.getSize().x; x++) {
+                if (img.getPixel(x, y) == pixelPrev1) {
+                    img.setPixel(x, y, pixelNew1);
+                }
+
+                if (img.getPixel(x, y) == pixelPrev2) {
+                    img.setPixel(x, y, pixelNew2);
+                }
+
+                if (img.getPixel(x, y) == pixelPrev3) {
+                    img.setPixel(x, y, pixelNew3);
+                }
+
+            }
+
+        img.saveToFile(png.c_str());
+    }
+
+}
+
 void addOutlinesForSprites(string sprites_path, sf::Color backgroundColor, sf::Color outlineColor) {
 
     cout << "add outlines for sprites" << sprites_path << "\n";
@@ -371,6 +423,100 @@ void addOutlinesForSprites(string sprites_path, sf::Color backgroundColor, sf::C
         for (int y = 0; y < final_image.getSize().y; y++) {
             for (int x = 0; x < final_image.getSize().x; x++) {
                 final_image.setPixel(x, y, image_with_outline.getPixel(x/2, y/2));
+            }
+        }
+
+        final_image.saveToFile(png.c_str());
+    }
+
+}
+
+
+void edit(string sprites_path) {
+
+    cout << "add outlines for sprites" << sprites_path << "\n";
+    sf::Color backgroundColor = sf::Color::Transparent;
+    sf::Color outlineColor = sf::Color::Black;
+
+    std::vector < std::string > png_files;
+
+    for (const auto& entry : filesystem::directory_iterator(sprites_path)) {
+        if (entry.is_regular_file() && entry.path().extension() == ".png") {
+            png_files.push_back(entry.path().string());
+        }
+    }
+
+    for (auto& png : png_files) {
+
+        std::cout << png << "\n";
+
+        sf::Image img;
+        img.loadFromFile(png.c_str());
+
+        // resize
+        sf::Image resized_image;
+        resized_image.create(img.getSize().x / 2, img.getSize().y / 2, sf::Color::White);
+
+        for (int y = 0; y < resized_image.getSize().y; y++) {
+            for (int x = 0; x < resized_image.getSize().x; x++) {
+                
+                sf::Color pixel_color = img.getPixel(x * 2, y * 2);
+
+                if (pixel_color == sf::Color::Black)
+                    pixel_color = sf::Color(128, 128, 128);
+
+                if (pixel_color == sf::Color(136,0,21))
+                    pixel_color = sf::Color(123, 81, 23);
+
+                resized_image.setPixel(x, y, pixel_color);
+
+
+            }
+        }
+
+        // add outline
+        sf::Image image_with_outline;
+        image_with_outline.create(resized_image.getSize().x, resized_image.getSize().y, sf::Color::White);
+
+        for (int y = 0; y < resized_image.getSize().y; y++)
+            for (int x = 0; x < resized_image.getSize().x; x++) {
+                if (resized_image.getPixel(x, y) == backgroundColor) {
+
+                    bool haveColoredNeighbour = false;
+
+                    if (x > 0 && resized_image.getPixel(x - 1, y) != backgroundColor) {
+                        haveColoredNeighbour = true;
+                    }
+
+                    if (x < resized_image.getSize().x - 2 && resized_image.getPixel(x + 1, y) != backgroundColor) {
+                        haveColoredNeighbour = true;
+                    }
+
+                    if (y > 0 && resized_image.getPixel(x, y - 1) != backgroundColor) {
+                        haveColoredNeighbour = true;
+                    }
+
+                    if (y < resized_image.getSize().y - 2 && resized_image.getPixel(x, y + 1) != backgroundColor) {
+                        haveColoredNeighbour = true;
+                    }
+
+                    if (haveColoredNeighbour)
+                        image_with_outline.setPixel(x, y, outlineColor);
+                    else
+                        image_with_outline.setPixel(x, y, backgroundColor);
+                }
+                else
+                    image_with_outline.setPixel(x, y, resized_image.getPixel(x, y));
+
+            }
+
+        // resize
+        sf::Image final_image;
+        final_image.create(image_with_outline.getSize().x * 2, image_with_outline.getSize().y * 2, sf::Color::White);
+
+        for (int y = 0; y < final_image.getSize().y; y++) {
+            for (int x = 0; x < final_image.getSize().x; x++) {
+                final_image.setPixel(x, y, image_with_outline.getPixel(x / 2, y / 2));
             }
         }
 
@@ -517,8 +663,11 @@ int main()
     addOutlinesForSprites("assets\\sets\\new_sets\\boy-black-haired", sf::Color::Transparent, sf::Color::Black);
     editPixels("assets\\sets\\body\\man", sf::Color::White, sf::Color::Transparent);
     editPixels("assets\\sets\\body\\woman", sf::Color::White, sf::Color::Transparent);
+    edit("assets\\sets\\items\\bow");
+    editPixels2("assets\\sets\\new_sets\\brown pants");
     */
-   
+    
+
     ProgressBar* progress_bar = new ProgressBar();
 
     float steps = 9.0f;
@@ -536,7 +685,8 @@ int main()
     loadTexturesFromPacket();
     end_time = clock1.getElapsedTime();
     std::cout << "-load time : " << (end_time - start_time).asSeconds() << " seconds \n";
-	
+    progress_bar->draw(2.0f / steps);
+
 	loadShaders();      progress_bar->draw(3.0f / steps);   sf::sleep(sf::seconds(0.1f));
 	loadItems();        progress_bar->draw(4.0f / steps);   sf::sleep(sf::seconds(0.1f));
     loadInventories();  progress_bar->draw(5.0f / steps);   sf::sleep(sf::seconds(0.1f));
