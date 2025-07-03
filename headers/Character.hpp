@@ -783,17 +783,10 @@ public:
 					}
 					else if (rightHand->type == ItemType::bow) {
 
-						armorAttackTextures[i] = getSingleTexture(L"sets\\" + armor->name + L"\\attackTop" + to_wstring(i));
-						armorAttackTextures[4 + i] = getSingleTexture(L"sets\\" + armor->name + L"\\attackRight" + to_wstring(i));
-						armorAttackTextures[8 + i] = getSingleTexture(L"sets\\" + armor->name + L"\\attackBottom" + to_wstring(i));
-						armorAttackTextures[12 + i] = getSingleTexture(L"sets\\" + armor->name + L"\\attackLeft" + to_wstring(i));
-
-						if (armor->name == L"items\\chain mail") {
-							armorAttackTextures[i] = getSingleTexture(L"sets\\" + armor->name + L"\\bowAttackTop" + to_wstring(i));
-							armorAttackTextures[4 + i] = getSingleTexture(L"sets\\" + armor->name + L"\\bowAttackRight" + to_wstring(i));
-							armorAttackTextures[8 + i] = getSingleTexture(L"sets\\" + armor->name + L"\\bowAttackBottom" + to_wstring(i));
-							armorAttackTextures[12 + i] = getSingleTexture(L"sets\\" + armor->name + L"\\bowAttackLeft" + to_wstring(i));
-						}
+						armorAttackTextures[i] = getSingleTexture(L"sets\\" + armor->name + L"\\bowAttackTop" + to_wstring(i));
+						armorAttackTextures[4 + i] = getSingleTexture(L"sets\\" + armor->name + L"\\bowAttackRight" + to_wstring(i));
+						armorAttackTextures[8 + i] = getSingleTexture(L"sets\\" + armor->name + L"\\bowAttackBottom" + to_wstring(i));
+						armorAttackTextures[12 + i] = getSingleTexture(L"sets\\" + armor->name + L"\\bowAttackLeft" + to_wstring(i));
 						
 					}
 				}
@@ -956,11 +949,13 @@ public:
 
 			(rightHand != item) ? rightHand = item : rightHand = nullptr;
 
+			loadBody();
+			loadHead();
+
 			loadRightHand();
 			loadLeftHand();
 			loadArmor();
-			loadBody();
-			loadHead();
+			
 		}
 
 	}
@@ -1097,16 +1092,16 @@ public:
 
 	void update() {
 		
-		state = State::Idle;
-		//state = State::Attack;
-		state = State::Run;
+		//state = State::Idle;
+		//state = State::Run;
+		state = State::Attack;
 
 		loadSprites();
 		createRenderTexture();
 
 		//idling();
-		//attacking();
-		running();
+		//running();
+		attacking();
 		
 		sprite.setTexture(renderTexture->getTexture());
 		sprite.setOrigin(32, 58);

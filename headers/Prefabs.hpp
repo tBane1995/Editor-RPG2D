@@ -115,7 +115,9 @@ void loadPrefabs() {
     prefabs.push_back(new Furniture(L"furnitures\\table_alchemist_2", 60, 26, 36));
     prefabs.push_back(new Furniture(L"furnitures\\table_herbalist", 60, 26, 36));
     prefabs.push_back(new Furniture(L"furnitures\\table_herbalist_2", 60, 26, 36));
+    prefabs.push_back(new Furniture(L"furnitures\\stone_table_1", 64, 26, 36));
     prefabs.push_back(new Furniture(L"furnitures\\bench", 60, 26, 36));
+    prefabs.push_back(new Furniture(L"furnitures\\stone_bench_1", 60, 26, 36));
     prefabs.push_back(new Furniture(L"furnitures\\chest", 60, 26, 36));
     prefabs.push_back(new Furniture(L"furnitures\\wardrobe", 64, 32, 60));
     prefabs.push_back(new Furniture(L"furnitures\\bookshelf", 64, 32, 60));

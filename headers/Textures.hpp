@@ -343,6 +343,8 @@ void save_textures_as_packet() {
 	add_Texture_To_Save(L"floors\\floor_1", 32, 32);
 	add_Texture_To_Save(L"floors\\floor_2", 32, 32);
 	add_Texture_To_Save(L"floors\\floor_3", 32, 32);
+	add_Texture_To_Save(L"floors\\floor_4", 32, 32);
+	add_Texture_To_Save(L"floors\\floor_5", 32, 32);
 
 	// highlands textures
 	add_Set_To_Save(L"highlands\\low_highlands", 64, 64, 32, 32);
@@ -434,7 +436,9 @@ void save_textures_as_packet() {
 	add_Texture_To_Save(L"furnitures\\table_alchemist_2", 32, 32);
 	add_Texture_To_Save(L"furnitures\\table_herbalist", 32, 32);
 	add_Texture_To_Save(L"furnitures\\table_herbalist_2", 32, 32);
+	add_Texture_To_Save(L"furnitures\\stone_table_1", 32, 32);
 	add_Texture_To_Save(L"furnitures\\bench", 32, 32);
+	add_Texture_To_Save(L"furnitures\\stone_bench_1", 32, 32);
 	add_Texture_To_Save(L"furnitures\\chest", 32, 32);
 	add_Texture_To_Save(L"furnitures\\wardrobe", 32, 50);
 	add_Texture_To_Save(L"furnitures\\bookshelf", 32, 50);
@@ -517,6 +521,8 @@ void save_textures_as_packet() {
 	add_Texture_To_Save(L"items\\plate armor", 32, 32);
 	add_Texture_To_Save(L"items\\chain mail", 32, 32);
 	add_Texture_To_Save(L"items\\skin jacket", 32, 32);
+	add_Texture_To_Save(L"items\\mage's robe", 32, 32);
+	add_Texture_To_Save(L"items\\gray apron", 32, 32);
 	add_Texture_To_Save(L"items\\torn shirt", 32, 32);
 	add_Texture_To_Save(L"items\\wool shirt", 32, 32);
 
@@ -595,6 +601,8 @@ void save_textures_as_packet() {
 	std::vector < std::wstring > armorSets;
 	armorSets.push_back(L"skin jacket");
 	armorSets.push_back(L"torn shirt");
+	armorSets.push_back(L"mage's robe");
+	armorSets.push_back(L"gray apron");
 	armorSets.push_back(L"wool shirt");
 	armorSets.push_back(L"chain mail");
 	armorSets.push_back(L"plate armor");
@@ -1437,6 +1445,8 @@ void loadTextures() {
 	loadSingleTexture(L"floors\\floor_1.png", 32, 32);
 	loadSingleTexture(L"floors\\floor_2.png", 32, 32);
 	loadSingleTexture(L"floors\\floor_3.png", 32, 32);
+	loadSingleTexture(L"floors\\floor_4.png", 32, 32);
+	loadSingleTexture(L"floors\\floor_5.png", 32, 32);
 
 	// NATURES ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1540,6 +1550,8 @@ void loadTextures() {
 	loadSingleTexture(L"items\\plate armor.png", 32, 32);
 	loadSingleTexture(L"items\\chain mail.png", 32, 32);
 	loadSingleTexture(L"items\\skin jacket.png", 32, 32);
+	loadSingleTexture(L"items\\mage's robe.png", 32, 32);
+	loadSingleTexture(L"items\\gray apron.png", 32, 32);
 	loadSingleTexture(L"items\\torn shirt.png", 32, 32);
 	loadSingleTexture(L"items\\wool shirt.png", 32, 32);
 
@@ -1633,7 +1645,9 @@ void loadTextures() {
 	loadSingleTexture(L"furnitures\\table_alchemist_2.png", 32, 32);
 	loadSingleTexture(L"furnitures\\table_herbalist.png", 32, 32);
 	loadSingleTexture(L"furnitures\\table_herbalist_2.png", 32, 32);
+	loadSingleTexture(L"furnitures\\stone_table_1.png", 32, 32);
 	loadSingleTexture(L"furnitures\\bench.png", 32, 32);
+	loadSingleTexture(L"furnitures\\stone_bench_1.png", 32, 32);
 	loadSingleTexture(L"furnitures\\chest.png", 32, 32);
 	loadSingleTexture(L"furnitures\\wardrobe.png", 32, 50);
 	loadSingleTexture(L"furnitures\\bookshelf.png", 32, 50);
@@ -1776,6 +1790,8 @@ void loadTextures() {
 	std::vector < std::wstring > armorSets;
 	armorSets.push_back(L"skin jacket");
 	armorSets.push_back(L"torn shirt");
+	armorSets.push_back(L"mage's robe");
+	armorSets.push_back(L"gray apron");
 	armorSets.push_back(L"wool shirt");
 	armorSets.push_back(L"chain mail");
 	armorSets.push_back(L"plate armor");

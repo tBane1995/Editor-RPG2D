@@ -465,11 +465,13 @@ public:
 
     void cursorHover() {
         // TO-DO
-        selectButton->cursorHover();
-        cancelButton->cursorHover();
+        if (dialogs.back() == this) {
+            selectButton->cursorHover();
+            cancelButton->cursorHover();
 
-        for (auto& entry : entries)
-            entry->cursorHover();
+            for (auto& entry : entries)
+                entry->cursorHover();
+        }
 
     }
 

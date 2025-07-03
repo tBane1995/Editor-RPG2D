@@ -202,6 +202,14 @@ void loadItems() {
 	item->attributes[Attribute::DEFEND] = 1;
 	items.push_back(item);
 
+	item = new Item(L"items\\mage's robe", ItemType::armor, L"szata maga");
+	item->attributes[Attribute::DEFEND] = 5;
+	items.push_back(item);
+
+	item = new Item(L"items\\gray apron", ItemType::armor, L"szary fartuch");
+	item->attributes[Attribute::DEFEND] = 5;
+	items.push_back(item);
+
 	// PANTS
 
 	item = new Item(L"items\\chain mail pants", ItemType::pants, L"nogawice kolcze");

@@ -60,6 +60,13 @@ public:
 
 };
 
+
+short countOfBasicTerrain;
+std::vector < TerrainPrefab* > terrainGameObjects;
+std::vector < FloorPrefab* > floorGameObjects;
+
+
+
 class Terrain : public sf::Drawable, public sf::Transformable {
 public:
 	short width, height;		// normal is a 16x16
@@ -109,6 +116,9 @@ public:
 		if (x < 0 || x >= width || y < 0 || y >= height)
 			return;
 
+		if (value > terrainGameObjects.size() - 1 || value < 0)
+			return;
+
 		tiles[y * width + x] = value;
 
 		short global_x = coords.x + x;	// 16*x + x
@@ -134,6 +144,9 @@ public:
 		short coord_y = (worldMousePosition.y - coords.y * 16) / 16;
 
 		if (coord_x < 0 || coord_x >= width || coord_y < 0 || coord_y >= height)
+			return;
+
+		if (value > terrainGameObjects.size() - 1 || value < 0)
 			return;
 
 		tiles[coord_y * width + coord_x] = short(value);
@@ -271,7 +284,7 @@ public:
 		if (x < 0 || x >= width || y < 0 || y >= height)
 			return;
 
-		if (value > 3 || value < 0)
+		if (value > floorGameObjects.size()-1 || value < 0)
 			return;
 
 		floors[y * width + x] = value;
@@ -300,7 +313,7 @@ public:
 		if (coord_x < 0 || coord_x >= width || coord_y < 0 || coord_y >= height)
 			return;
 
-		if (value > 3 || value < 0)
+		if (value > floorGameObjects.size()-1 || value < 0)
 			return;
 
 		floors[coord_y * width + coord_x] = value;
@@ -354,11 +367,6 @@ private:
 };
 
 Terrain* terrain;
-
-std::vector < TerrainPrefab* > terrainGameObjects;
-std::vector < FloorPrefab* > floorGameObjects;
-
-short countOfBasicTerrain;
 
 void createTerrainPrefabs() {
 
@@ -428,6 +436,8 @@ void createFloorsPrefabs() {
 	floorGameObjects.push_back(new FloorPrefab(L"floors\\floor_1", 1));
 	floorGameObjects.push_back(new FloorPrefab(L"floors\\floor_2", 2));
 	floorGameObjects.push_back(new FloorPrefab(L"floors\\floor_3", 3));
+	floorGameObjects.push_back(new FloorPrefab(L"floors\\floor_4", 4));
+	floorGameObjects.push_back(new FloorPrefab(L"floors\\floor_5", 5));
 
 }
 

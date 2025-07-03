@@ -102,6 +102,31 @@ void Editor() {
 
                 clearAllMainListsOfGameObjects();
                 mapa->load();
+
+
+                int map_size = sizeof(*mapa);
+
+                for (auto& chunk : mapa->chunks) {
+                    map_size += sizeof(*chunk);
+
+                    // terrain
+                    map_size += sizeof(*chunk->terrain);
+                    map_size += chunk->terrain->tiles.size() * sizeof(chunk->terrain->tiles.front());
+                    map_size += chunk->terrain->vertexes.getVertexCount() * sizeof(sf::Vertex);
+
+                    // water
+                    map_size += sizeof(*chunk->water);
+                    map_size += chunk->water->tiles.size() * sizeof(chunk->water->tiles.front());
+                    map_size += chunk->water->vertexes.getVertexCount() * sizeof(sf::Vertex);
+
+                    // borders
+                    map_size += sizeof(*chunk->borders);
+                    map_size += chunk->borders->tiles.size() * sizeof(sf::FloatRect);
+                    map_size += chunk->borders->outlines.getVertexCount() * sizeof(sf::Vertex);
+                }
+
+                std::cout << "map_sie: " << map_size << "\n";
+
                 mapa->mapVisiblings();
                 unselectGameObjects();
 

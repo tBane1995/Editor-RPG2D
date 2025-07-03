@@ -104,8 +104,6 @@ public:
 	
 	void update() {
 
-		std::cout<<position.x << " " << position.y << "\n";
-
 		if ((currentTime - start_time).asSeconds() >= life_time_seconds) {
 			state = SpellStates::complete;
 

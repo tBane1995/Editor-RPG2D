@@ -1625,12 +1625,14 @@ public:
                     std::getline(lineStream, name, '"');
                     std::getline(lineStream, name, '"');
                     character->body = ConvertUtf8ToWide(name);
+                    character->loadBody();
                 }
                 else if (phrase == "Head:") {
                     std::string name;
                     std::getline(lineStream, name, '"');
                     std::getline(lineStream, name, '"');
                     character->head = ConvertUtf8ToWide(name);
+                    character->loadHead();
                 }
                 else if (phrase == "Helmet:") {
                     std::string name;
@@ -1659,6 +1661,9 @@ public:
                     std::getline(lineStream, name, '"');
                     character->rightHand = getItem(ConvertUtf8ToWide(name));
                     character->loadRightHand();
+                    character->loadBody();
+                    character->loadHead();
+                    character->loadArmor();
                 }
                 else if (phrase == "LeftHand:") {
                     std::string name;

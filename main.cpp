@@ -667,7 +667,12 @@ int main()
     editPixels2("assets\\sets\\new_sets\\brown pants");
     */
     
+    //editPixels("assets\\sets\\new_sets\\brown tshirt", sf::Color::White, sf::Color::Transparent);
+    
 
+    editPixels("assets\\sets\\body\\man", sf::Color::White, sf::Color::Transparent);
+    editPixels("assets\\sets\\items\\gray apron", sf::Color::White, sf::Color::Transparent);
+    
     ProgressBar* progress_bar = new ProgressBar();
 
     float steps = 9.0f;
@@ -698,7 +703,7 @@ int main()
 	window->setKeyRepeatEnabled(false);	// TO-DO commentary
     // TO-DO
     //window->setFramerateLimit(60);
-    window->setVerticalSyncEnabled(true); 
+    window->setVerticalSyncEnabled(false); // for >80 FPS
     SetConsoleOutputCP(65001);  // for special letters ą,ć,ź etc 
 
     
