@@ -245,8 +245,9 @@ void Editor() {
             ///////////////////////////////////////////////////
             // cursor hovering
 
-            for (auto& dialog : dialogs)
-                dialog->cursorHover();
+            if (!dialogs.empty()) {
+                dialogs.back()->cursorHover();
+            }
 
             palette->cursorHover();
             menu_bar->cursorHover();
@@ -832,16 +833,24 @@ void Editor() {
             mousePosition = sf::Mouse::getPosition(*window);	// Pobierz aktualną pozycję myszy względem bieżącego okna
             worldMousePosition = window->mapPixelToCoords(mousePosition);
 
-            for (auto& dialog : dialogs)
-                dialog->update();
+            ///////////////////////////////////////////////////
+            // cursor hovering
+
+            if (!dialogs.empty()) {
+                dialogs.back()->cursorHover();
+            }
 
             palette->cursorHover();
             menu_bar->cursorHover();
-            reset_camera->cursorHover();
 
             if (context_menu != nullptr) {
                 context_menu->cursorHover();
             }
+
+            ///////////////////////////////////////////////////
+            // update 
+            for (auto& dialog : dialogs)
+                dialog->update();
 
             palette->update();
             menu_bar->update();

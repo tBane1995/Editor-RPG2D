@@ -108,7 +108,7 @@ public:
 	virtual void cursorHover() { }
 
 	virtual void handleEvent(sf::Event& event) {
-
+		std::cout << "dialog handle event\n";
 	}
 
 	virtual void update() {
