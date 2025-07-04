@@ -11,7 +11,7 @@ sf::Vector2f startWorldMousePosition;
 
 sf::RectangleShape selectArea;
 
-enum class MouseState { Idle, Press, Drawing, Selecting, MovingGameObjects };
+enum class MouseState { Idle, Press, Click, Drawing, Selecting, MovingGameObjects };
 MouseState mouse_state = MouseState::Idle;
 
 void mouseSelection() {

@@ -422,6 +422,8 @@ void Editor() {
                 }
                 else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
 
+                    mouse_state = MouseState::Click;
+
                     if (context_menu != nullptr) {
                         context_menu->handleEvent(event);
 
@@ -655,7 +657,7 @@ void Editor() {
             if (dialogs.empty()) {
                 if (!GUIwasHover && !GUIwasClicked) {
                     if (!(menu_bar->clickedMenuButton != nullptr && menu_bar->clickedMenuButton->isOpen)) {
-                        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                        if (mouse_state == MouseState::Press || mouse_state == MouseState::Drawing) {
                             if (painter->prefabToPaint != nullptr) {
                                 if (painter->tool == toolType::Brush || painter->tool == toolType::RectBrush) {
                                     if (painter->prefabToPaint->type == GameObjectType::Terrain || painter->prefabToPaint->type == GameObjectType::Water) {
@@ -950,6 +952,8 @@ void Editor() {
                 }
                 else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
 
+                    mouse_state = MouseState::Click;
+
                     if (context_menu != nullptr) {
                         context_menu->handleEvent(event);
 
@@ -998,6 +1002,8 @@ void Editor() {
                 }
                 else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 
+                    mouse_state = MouseState::Press;
+
                     startMousePosition = mousePosition;
                     startWorldMousePosition = worldMousePosition;
 
@@ -1042,7 +1048,7 @@ void Editor() {
                 }
                 else if (event.type == sf::Event::MouseMoved && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 
-                    if (mouse_state == MouseState::Idle) {
+                    if (mouse_state == MouseState::Press) {
                         float distance = sqrt(pow(startWorldMousePosition.x - worldMousePosition.x, 2) + pow(startWorldMousePosition.y - worldMousePosition.y, 2));
 
                         if (distance > 8) {
@@ -1111,11 +1117,12 @@ void Editor() {
             if (dialogs.empty()) {
                 if (!GUIwasHover && !GUIwasClicked) {
                     if (!(menu_bar->clickedMenuButton != nullptr && menu_bar->clickedMenuButton->isOpen)) {
-                        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                        if (mouse_state == MouseState::Press || mouse_state == MouseState::Drawing) {
                             if (painter->prefabToPaint != nullptr) {
                                 if (painter->tool == toolType::Brush || painter->tool == toolType::RectBrush) {
                                     if (painter->prefabToPaint->type == GameObjectType::Floor) {
                                         editFloor();
+                                        mouse_state = MouseState::Drawing;
                                     }
                                         
                                 }

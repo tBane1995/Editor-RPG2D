@@ -509,7 +509,7 @@ void updateGameObjects() {
 
             go->isVisible = true;
             
-            if (dialogs.empty() && ElementGUI_hovered == nullptr && ElementGUI_pressed == nullptr) {
+            if (dialogs.empty() && ElementGUI_hovered == nullptr && ElementGUI_pressed == nullptr && mouse_state != MouseState::Drawing) {
                 go->mouseHovering();
             }
                 
