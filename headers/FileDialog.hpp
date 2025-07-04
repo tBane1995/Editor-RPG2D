@@ -281,6 +281,9 @@ public:
         }
 
         cancelButton = new ButtonWithText("cancel", 17, TextAlignment::Center, btn_size);
+        cancelButton->onclick_func = [this]() {
+            state = FileDialogState::Canceled;
+            };
 
         submitbar = sf::RectangleShape(sf::Vector2f(rect_width, selectedFilename->getSize().y + 3 * margin_vert + selectButton->getSize().y));
         submitbar.setFillColor(panelColor_medium);
