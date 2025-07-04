@@ -811,7 +811,8 @@ public:
 		texture = new sf::Texture;
 		texture->loadFromFile(ConvertWideToUtf8(L"assets\\" + pathfile));
 		texture->setRepeated(true);
-
+		texture->setSmooth(true);
+		
 		this->cx = cx;
 		this->cy = cy;
 
@@ -825,6 +826,7 @@ public:
 		texture = new sf::Texture;
 		texture->loadFromImage(image);
 		texture->setRepeated(true);
+		texture->setSmooth(true);
 
 		this->cx = cx;
 		this->cy = cy;
@@ -838,6 +840,8 @@ public:
 
 		this->texture = new sf::Texture();
 		this->texture->loadFromImage(image);
+		texture->setRepeated(true);
+		texture->setSmooth(true);
 		cx = texture->getSize().x / 2;
 		cy = texture->getSize().y / 2;
 	}
@@ -851,6 +855,7 @@ public:
 		texture->create(width, height);
 		texture->update(pixels.data());
 		texture->setRepeated(true);
+		texture->setSmooth(true);
 
 		this->cx = cx;
 		this->cy = cy;

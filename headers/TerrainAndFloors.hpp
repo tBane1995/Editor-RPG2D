@@ -1,7 +1,7 @@
 ﻿#ifndef TerrainAndFloors_hpp
 #define TerrainAndFloors_hpp
 
-float tileSide = 16.0f;
+short tileSide = 16;
 
 class TerrainPrefab : public GameObject {
 public:
@@ -300,8 +300,8 @@ public:
 		//cout << "tu: " << tu << ", tv: " << tv << "\n";
 
 		quad[0].texCoords = sf::Vector2f(tu, tv);
-		quad[1].texCoords = sf::Vector2f(tu + tileSide, tv);
-		quad[2].texCoords = sf::Vector2f(tu + tileSide, tv + tileSide);
+		quad[1].texCoords = sf::Vector2f(tu + tileSide - 1, tv);
+		quad[2].texCoords = sf::Vector2f(tu + tileSide - 1, tv + tileSide);
 		quad[3].texCoords = sf::Vector2f(tu, tv + tileSide);
 	}
 
@@ -357,9 +357,8 @@ private:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-
 		states.transform *= getTransform();
-		states.texture = &*floorset->texture;	// TO-DO
+		states.texture = &*floorset->texture;
 		target.draw(vertexes, states);
 
 
@@ -375,7 +374,7 @@ void createTerrainPrefabs() {
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_0_water", 0));           // 1
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_1_sands", 1));           // 2
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_2_grass", 2));           // 3
-	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_3_gravel", 3));           // 4
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_3_gravel", 3));          // 4
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_4_steps", 4));           // 5
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_5_highlands", 5));       // 6
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_6", 6));                 // 7

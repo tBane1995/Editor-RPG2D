@@ -447,6 +447,7 @@ void Editor() {
                             }
                             else if (painter->tool == toolType::AddGameObject) {
                                 painter->addGameObjectsToMapAndLists(painter->prefabsToPaint, false);
+                                mouse_state = MouseState::Drawing;
                                 //std::cout << "add gameobject\n";
                             }
                             else if (mouse_state == MouseState::Selecting) {
@@ -468,6 +469,8 @@ void Editor() {
                 }
                 else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 
+                    mouse_state = MouseState::Press;
+
                     startMousePosition = mousePosition;
                     startWorldMousePosition = worldMousePosition;
 
@@ -479,33 +482,31 @@ void Editor() {
 
                     if (painter->tool == toolType::Cursor || painter->tool == toolType::Rectangle || painter->tool == toolType::Elipse) {
                         if (!GUIwasOpen && !GUIwasHover && !GUIwasClicked) {   // TO-DO - now not nowork
-                            if (mouse_state == MouseState::Idle) {
 
-                                clicked_gameObject = getGameObject(worldMousePosition);
-                                if (isPartOfBuilding(clicked_gameObject) != nullptr)
-                                    clicked_gameObject = isPartOfBuilding(clicked_gameObject);
+                            clicked_gameObject = getGameObject(worldMousePosition);
+                            if (isPartOfBuilding(clicked_gameObject) != nullptr)
+                                clicked_gameObject = isPartOfBuilding(clicked_gameObject);
 
-                                if (clicked_gameObject != nullptr && clicked_gameObject->isSelected) {
-                                    // MOVING GAMEOBJECTS
+                            if (clicked_gameObject != nullptr && clicked_gameObject->isSelected) {
+                                // MOVING GAMEOBJECTS
 
-                                    sf::Vector2f center(0, 0);
-                                    for (auto& obj : selectedGameObjects)
-                                        center += obj->_object->position;
+                                sf::Vector2f center(0, 0);
+                                for (auto& obj : selectedGameObjects)
+                                    center += obj->_object->position;
 
-                                    center.x /= selectedGameObjects.size();
-                                    center.y /= selectedGameObjects.size();
+                                center.x /= selectedGameObjects.size();
+                                center.y /= selectedGameObjects.size();
 
-                                    sf::Vector2f offset;
-                                    for (auto& obj : selectedGameObjects) {
-                                        offset = obj->_object->position - worldMousePosition;
-                                        obj->setOffset(offset);
-                                    }
-
-                                    mouse_state = MouseState::MovingGameObjects;
+                                sf::Vector2f offset;
+                                for (auto& obj : selectedGameObjects) {
+                                    offset = obj->_object->position - worldMousePosition;
+                                    obj->setOffset(offset);
                                 }
-                                else {
-                                    unselectGameObjects();
-                                }
+
+                                mouse_state = MouseState::MovingGameObjects;
+                            }
+                            else {
+                                unselectGameObjects();
                             }
 
                         }
@@ -513,7 +514,7 @@ void Editor() {
                 }
                 else if (event.type == sf::Event::MouseMoved && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                     
-                    if (mouse_state == MouseState::Idle) {
+                    if (mouse_state == MouseState::Press) {
                         if (ElementGUI_hovered == nullptr && ElementGUI_pressed == nullptr) {
                             float distance = sqrt(pow(startWorldMousePosition.x - worldMousePosition.x, 2) + pow(startWorldMousePosition.y - worldMousePosition.y, 2));
 
@@ -657,8 +658,11 @@ void Editor() {
                         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                             if (painter->prefabToPaint != nullptr) {
                                 if (painter->tool == toolType::Brush || painter->tool == toolType::RectBrush) {
-                                    if (painter->prefabToPaint->type == GameObjectType::Terrain || painter->prefabToPaint->type == GameObjectType::Water)
+                                    if (painter->prefabToPaint->type == GameObjectType::Terrain || painter->prefabToPaint->type == GameObjectType::Water) {
                                         editTiles();
+                                        mouse_state = MouseState::Drawing;
+                                    }
+                                        
                                 }
                             }
                         }
@@ -985,7 +989,6 @@ void Editor() {
 
                     ElementGUI_pressed = nullptr;
 
-                    mouse_state = MouseState::Click;
                     mouse_state = MouseState::Idle;
 
                 }

@@ -11,8 +11,7 @@ sf::Vector2f startWorldMousePosition;
 
 sf::RectangleShape selectArea;
 
-float mouseDoubleClickTime = 0.1f;
-enum class MouseState { Idle, Click, Selecting, MovingGameObjects };
+enum class MouseState { Idle, Press, Drawing, Selecting, MovingGameObjects };
 MouseState mouse_state = MouseState::Idle;
 
 void mouseSelection() {
