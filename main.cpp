@@ -54,12 +54,9 @@
 #include "headers/EditableTextArea.hpp"
 #include "headers/Buttons.hpp"
 #include "headers/Scrollbar.hpp"
-#include "headers/Dialog.hpp"
-#include "headers/Confirm.hpp"
-#include "headers/Panel.hpp"
-#include "headers/ScrollableText.hpp"
-#include "headers/FileDialog.hpp"
 #include "headers/CheckBox.hpp"
+
+#include "headers/Dialog.hpp"
 
 #include "headers/HitTexts.hpp"             // Hit texts
 #include "headers/Items.hpp"                // manage of items, itemsOnMap, Inventory and InventoryOnMap
@@ -84,6 +81,11 @@
 #include "headers/GameObjectsManager.hpp"   // manage of GameObjects - update/sort/render/
 #include "headers/Map.hpp"
 #include "headers/Quests.hpp"
+
+#include "headers/Confirm.hpp"
+#include "headers/Panel.hpp"
+#include "headers/ScrollableText.hpp"
+#include "headers/FileDialog.hpp"
 
 #include "headers/PrefabToPaint.hpp"
 

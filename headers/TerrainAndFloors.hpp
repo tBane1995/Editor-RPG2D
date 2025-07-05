@@ -301,8 +301,8 @@ public:
 
 		quad[0].texCoords = sf::Vector2f(tu, tv);
 		quad[1].texCoords = sf::Vector2f(tu + tileSide - 1, tv);
-		quad[2].texCoords = sf::Vector2f(tu + tileSide - 1, tv + tileSide);
-		quad[3].texCoords = sf::Vector2f(tu, tv + tileSide);
+		quad[2].texCoords = sf::Vector2f(tu + tileSide - 1, tv + tileSide - 1);
+		quad[3].texCoords = sf::Vector2f(tu, tv + tileSide - 1);
 	}
 
 	void edit(sf::Vector2f worldMousePosition, short value) {
@@ -326,9 +326,9 @@ public:
 		//cout << "tu: " << tu << ", tv: " << tv << "\n";
 
 		quad[0].texCoords = sf::Vector2f(tu, tv);
-		quad[1].texCoords = sf::Vector2f(tu + tileSide, tv);
-		quad[2].texCoords = sf::Vector2f(tu + tileSide, tv + tileSide);
-		quad[3].texCoords = sf::Vector2f(tu, tv + tileSide);
+		quad[1].texCoords = sf::Vector2f(tu + tileSide - 1, tv);
+		quad[2].texCoords = sf::Vector2f(tu + tileSide - 1, tv + tileSide - 1);
+		quad[3].texCoords = sf::Vector2f(tu, tv + tileSide - 1);
 	}
 
 	void setPosition(sf::Vector2f position) {

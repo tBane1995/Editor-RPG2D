@@ -74,12 +74,15 @@ void drawFrame(sf::Vector2f position, sf::Vector2f size) {
 	window->draw(bottom_right_corner);
 }
 
+enum class DialogState { Idle, Close };
+
 class Dialog {
 public:
 	DialogType type;
 	sf::Vector2f position;
 	sf::Vector2f size;
 	sf::RectangleShape rect;
+	DialogState state;
 
 	Dialog(DialogType type, sf::Vector2f size) {
 		this->type = type;
@@ -87,6 +90,7 @@ public:
 
 		setSize(size);
 
+		state = DialogState::Idle;
 		
 	}
 

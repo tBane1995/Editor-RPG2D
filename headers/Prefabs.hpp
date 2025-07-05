@@ -64,6 +64,7 @@ void loadPrefabs() {
     prefabs.push_back(new Object(L"objects\\stone_altar_1", 74, 56, 64, true));
 
     prefabs.push_back(new Object(L"objects\\wooden_stake_1", 26, 16, 32, true, ColliderType::Elipse));
+    prefabs.push_back(new Object(L"objects\\wooden_fence_1", 64, 16, 32, true, ColliderType::Rectangle));
 
 
     // HIGHLANDS

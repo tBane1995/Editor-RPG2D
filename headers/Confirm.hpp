@@ -38,7 +38,14 @@ public:
 		float margin_bottom = 48;
 
 		btn_yes->setPosition(sf::Vector2f(position.x + x1, position.y + rect.getSize().y/2 - dialog_border_width - margin_bottom));
+		btn_yes->onclick_func = [this]() {
+			state = DialogState::Close;
+			};
+
 		btn_no->setPosition(sf::Vector2f(position.x + x2, position.y + rect.getSize().y/2 - dialog_border_width - margin_bottom));
+		btn_no->onclick_func = [this]() {
+			state = DialogState::Close;
+			};
 
 		value = ConfirmValue::Undefinded;
 	}
@@ -52,6 +59,12 @@ public:
 
 		if (btn_no != nullptr)
 			delete btn_no;
+	}
+
+	void cursorHover() {
+		
+		btn_yes->cursorHover();
+		btn_no->cursorHover();
 	}
 
 	void handleEvent(sf::Event& event) {

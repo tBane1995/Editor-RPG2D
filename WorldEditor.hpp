@@ -158,9 +158,14 @@ void Editor() {
         }
         else if (editor_state == EditorStates::MapEditor) {
 
-            // MOVING THE MAP BY KEYS /////////////////////////////////
-            
+            if (!dialogs.empty()) {
+                if (dialogs.back()->state == DialogState::Close) {
+                    delete dialogs.back();
+                    dialogs.pop_back();
+                }
+            }
 
+            // MOVING THE MAP BY KEYS /////////////////////////////////
             if (dialogs.empty()) {
                 float moveSpeed = 300.0f * dt;
                 bool cam_moved = false;
@@ -287,145 +292,16 @@ void Editor() {
 
                 if (event.type == sf::Event::Closed) {
                     window->close();
-                }
-                else if (!dialogs.empty()) {
-
-                    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-
-                        delete dialogs.back();
-                        dialogs.pop_back();
-                    }
-                    else if (dialogs.size() >= 2 && dialogs.back()->type == DialogType::Confirm && dialogs[dialogs.size() - 2]->type == DialogType::SaveFile) {
-                        Confirm* confirm = dynamic_cast<Confirm*>(dialogs.back());
-                        FileDialog* dial = dynamic_cast<FileDialog*>(dialogs[dialogs.size() - 2]);
-                        confirm->handleEvent(event);
-
-                        if (confirm->value != ConfirmValue::Undefinded) {
-                            if (confirm->value == ConfirmValue::True) {
-                                std::wstring filename = dial->getPathfile();
-                                if (filename.find(L".wrd") != filename.length() - 4)
-                                    filename = filename + L".wrd";
-
-                                mapa->save(filename);
-                                delete confirm;
-                                delete dial;
-                                dialogs.pop_back();
-                                dialogs.pop_back();
-                            }
-                            else if (confirm->value == ConfirmValue::False) {
-                                dial->state = FileDialogState::Idle;
-                                delete confirm;
-                                dialogs.pop_back();
-                            }
-                        }
-
-                    }
-                    else if (dialogs.back()->type == DialogType::SaveFile) {
-                        FileDialog* dial = dynamic_cast<FileDialog*>(dialogs.back());
-                        dial->handleEvent(event);
-
-                        if (dial->state == FileDialogState::Canceled) {
-                            delete dial;
-                            dialogs.pop_back();
-                        }
-                        else if (dial->state == FileDialogState::FileSelected) {
-                            
-                            dial->state = FileDialogState::Idle;
-                            dial->selectButton->state = ButtonState::Idle;
-                            dial->selectButton->changeColor();
-
-                            std::wstring pathfile = dial->getPathfile();
-
-                            if (pathfile.find(L".wrd") != pathfile.length() - 4)
-                                pathfile = pathfile + L".wrd";
-
-                            std::wstring filename = getShortName(dial->getPathfile());
-
-                            std::wcout << L"filename: " << filename << L"\n";
-                            std::wcout << L"link: " << pathfile << L"\n";
-
-                            std::ifstream file(pathfile); 
-                            if (file.is_open()) {
-                                dialogs.push_back(new Confirm(L"Plik " + filename + L" już istnieje. Czy chcesz go zamienić?"));
-                            }
-                            else {
-                                mapa->save(pathfile);
-                                delete dial;
-                                dialogs.pop_back();
-                            }
-                            file.close();
-
-                            
-                            
-                            
-                        }
-
-                    }
-                    else if (dialogs.back()->type == DialogType::OpenFile) {
-                        FileDialog* dial = dynamic_cast<FileDialog*>(dialogs.back());
-                        dial->handleEvent(event);
-
-                        if (dial->cancelButton->state == ButtonState::Pressed) {
-                            delete dial;
-                            dialogs.pop_back();
-                        }
-                        else if (dial->state == FileDialogState::FileSelected) {
-                            
-                            std::cout << "file selected\n";
-                            dial->selectButton->state == ButtonState::Idle;
-                            
-                            std::wstring pathfile = dial->getPathfile();
-                            std::wstring filename = getShortName(pathfile);
-
-                            if (pathfile.find(L".wrd") != pathfile.length() - 4)
-                                pathfile = pathfile + L".wrd";
-
-                            std::wcout << "filename: " << filename << L"\n";
-                            std::wcout << "link: " << pathfile << L"\n";
-
-                            std::ifstream file(pathfile);
-                            if (file.is_open()) {
-                                mapa->load(pathfile);
-                                delete dial;
-                                dialogs.pop_back();
-                            }
-                            else {
-                                // TO-DO - Info Dialog
-                                // dialogs.push_back(new Info(L"Plik " + filename + L" nie istnieje."));
-                                std::wcout << L"Plik " + filename + L" nie istnieje.\n";
-                                delete dial;
-                                dialogs.pop_back();
-                            }
-
-                            
-
-                            
-                        }
-
-                    }
-                    else if (dialogs.back()->type == DialogType::ScrollableText) {
-                        ScrollableText* scrolltext = dynamic_cast<ScrollableText*>(dialogs.back());
-                        scrolltext->handleEvent(event);
-                    }
-                    else if (dialogs.back()->type == DialogType::Confirm) {
-                        Confirm* confirm = dynamic_cast<Confirm*>(dialogs.back());
-                        confirm->handleEvent(event);
-
-                        if (confirm->value != ConfirmValue::Undefinded) {
-                            delete dialogs.back();
-                            dialogs.pop_back();
-                        }
-                    }
-                    else if (dialogs.back()->type == DialogType::Panel) {
-                        dialogs.back()->handleEvent(event);
-                    }
-
+                    exit(0);
                 }
                 else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
-
+                    
                     mouse_state = MouseState::Click;
 
-                    if (context_menu != nullptr) {
+                    if (!dialogs.empty()) {
+                        dialogs.back()->handleEvent(event);
+                    }
+                    else if (context_menu != nullptr) {
                         context_menu->handleEvent(event);
 
                     }
@@ -477,46 +353,62 @@ void Editor() {
                     startMousePosition = mousePosition;
                     startWorldMousePosition = worldMousePosition;
 
-                    palette->handleEvent(event);
-                    menu_bar->handleEvent(event);
+                    
 
-                    if (context_menu != nullptr)
+                    if (!dialogs.empty()) {
+                        dialogs.back()->handleEvent(event);
+                    }
+                    else if (context_menu != nullptr) {
                         context_menu->handleEvent(event);
+                    }
+                    else {
 
-                    if (painter->tool == toolType::Cursor || painter->tool == toolType::Rectangle || painter->tool == toolType::Elipse) {
-                        if (!GUIwasOpen && !GUIwasHover && !GUIwasClicked) {   // TO-DO - now not nowork
+                        palette->handleEvent(event);
+                        menu_bar->handleEvent(event);
 
-                            clicked_gameObject = getGameObject(worldMousePosition);
-                            if (isPartOfBuilding(clicked_gameObject) != nullptr)
-                                clicked_gameObject = isPartOfBuilding(clicked_gameObject);
+                        if (painter->tool == toolType::Cursor || painter->tool == toolType::Rectangle || painter->tool == toolType::Elipse) {
+                            if (!GUIwasOpen && !GUIwasHover && !GUIwasClicked) {   // TO-DO - now not nowork
 
-                            if (clicked_gameObject != nullptr && clicked_gameObject->isSelected) {
-                                // MOVING GAMEOBJECTS
+                                clicked_gameObject = getGameObject(worldMousePosition);
+                                if (isPartOfBuilding(clicked_gameObject) != nullptr)
+                                    clicked_gameObject = isPartOfBuilding(clicked_gameObject);
 
-                                sf::Vector2f center(0, 0);
-                                for (auto& obj : selectedGameObjects)
-                                    center += obj->_object->position;
+                                if (clicked_gameObject != nullptr && clicked_gameObject->isSelected) {
+                                    // MOVING GAMEOBJECTS
 
-                                center.x /= selectedGameObjects.size();
-                                center.y /= selectedGameObjects.size();
+                                    sf::Vector2f center(0, 0);
+                                    for (auto& obj : selectedGameObjects)
+                                        center += obj->_object->position;
 
-                                sf::Vector2f offset;
-                                for (auto& obj : selectedGameObjects) {
-                                    offset = obj->_object->position - worldMousePosition;
-                                    obj->setOffset(offset);
+                                    center.x /= selectedGameObjects.size();
+                                    center.y /= selectedGameObjects.size();
+
+                                    sf::Vector2f offset;
+                                    for (auto& obj : selectedGameObjects) {
+                                        offset = obj->_object->position - worldMousePosition;
+                                        obj->setOffset(offset);
+                                    }
+
+                                    mouse_state = MouseState::MovingGameObjects;
+                                }
+                                else {
+                                    unselectGameObjects();
                                 }
 
-                                mouse_state = MouseState::MovingGameObjects;
                             }
-                            else {
-                                unselectGameObjects();
-                            }
-
                         }
                     }
+                        
+
+                    
                 }
                 else if (event.type == sf::Event::MouseMoved && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                     
+                    if (!dialogs.empty()) {
+                        dialogs.back()->handleEvent(event);
+                        std::cout << "event\n";
+                    }
+
                     if (mouse_state == MouseState::Press) {
                         if (ElementGUI_hovered == nullptr && ElementGUI_pressed == nullptr) {
                             float distance = sqrt(pow(startWorldMousePosition.x - worldMousePosition.x, 2) + pow(startWorldMousePosition.y - worldMousePosition.y, 2));
@@ -568,8 +460,19 @@ void Editor() {
                 else if (event.type == sf::Event::KeyPressed) {
 
                     if (event.key.code == sf::Keyboard::Escape) {
-                        window->close();
-                        exit(0);
+                        if (!dialogs.empty()) {
+                            dialogs.back()->state = DialogState::Close;
+                        }
+                        else {
+                            
+                            Confirm* confirm = new Confirm(L"Czy na pewno chcesz wyjść z programu?");
+                            confirm->btn_yes->onclick_func = []() {
+                                window->close();
+                                exit(0);
+                                };
+
+                            dialogs.push_back(confirm);
+                        }
                     }
 
                     if (event.key.code == sf::Keyboard::F5) {
@@ -884,80 +787,10 @@ void Editor() {
 
                     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
 
-                        delete dialogs.back();
-                        dialogs.pop_back();
-                    }
-                    else if (dialogs.size() >= 2 && dialogs.back()->type == DialogType::Confirm && dialogs[dialogs.size() - 2]->type == DialogType::SaveFile) {
-                        Confirm* confirm = dynamic_cast<Confirm*>(dialogs.back());
-                        FileDialog* dial = dynamic_cast<FileDialog*>(dialogs[dialogs.size() - 2]);
-                        confirm->handleEvent(event);
-
-                        if (confirm->value != ConfirmValue::Undefinded) {
-                            if (confirm->value == ConfirmValue::True) {
-                                mapa->save(dial->getPathfile());
-                                delete confirm;
-                                delete dial;
-                                dialogs.pop_back();
-                                dialogs.pop_back();
-                            }
-                            else if (confirm->value == ConfirmValue::False) {
-                                dial->state = FileDialogState::Idle;
-                                delete confirm;
-                                dialogs.pop_back();
-                            }
-                        }
-
-                    }
-                    else if (dialogs.back()->type == DialogType::SaveFile) {
-                        FileDialog* dial = dynamic_cast<FileDialog*>(dialogs.back());
-                        dial->handleEvent(event);
-
-                        if (dial->state == FileDialogState::Canceled) {
-                            delete dial;
-                            dialogs.pop_back();
-                        }
-                        else if (dial->state == FileDialogState::FileSelected) {
-                            std::wstring filename = getShortName(dial->getPathfile());
-                            dialogs.push_back(new Confirm(L"Plik " + getShortName(filename) + L" już istnieje. Czy chcesz go zamienić?"));
-                            dial->state = FileDialogState::Idle;
-                            //dial->selectButton->state = ButtonState::Idle;
-                            //dial->selectButton->changeColor();
-                        }
-
-                    }
-                    else if (dialogs.back()->type == DialogType::OpenFile) {
-                        FileDialog* dial = dynamic_cast<FileDialog*>(dialogs.back());
-                        dial->handleEvent(event);
-
-                        if (dial->cancelButton->state == ButtonState::Pressed) {
-                            delete dial;
-                            dialogs.pop_back();
-                        }
-                        else if (dial->state == FileDialogState::FileSelected) {
-                            dial->selectButton->state == ButtonState::Idle;
-                            mapa->load(dial->getPathfile());
-                            delete dial;
-                            dialogs.pop_back();
-                        }
-
-                    }
-                    else if (dialogs.back()->type == DialogType::ScrollableText) {
-                        ScrollableText* scrolltext = dynamic_cast<ScrollableText*>(dialogs.back());
-                        scrolltext->handleEvent(event);
-                    }
-                    else if (dialogs.back()->type == DialogType::Confirm) {
-                        Confirm* confirm = dynamic_cast<Confirm*>(dialogs.back());
-                        confirm->handleEvent(event);
-
-                        if (confirm->value != ConfirmValue::Undefinded) {
-                            delete dialogs.back();
-                            dialogs.pop_back();
+                        if (!dialogs.empty()) {
+                            dialogs.back()->state = DialogState::Close;
                         }
                     }
-                    else if (dialogs.back()->type == DialogType::Panel) {
-                        dialogs.back()->handleEvent(event);
-                    }
-
                 }
                 else if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
 

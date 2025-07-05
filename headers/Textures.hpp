@@ -384,7 +384,8 @@ void save_textures_as_packet() {
 	add_Texture_To_Save(L"objects\\pile_of_wood_1", 64, 80);
 	add_Texture_To_Save(L"objects\\pile_of_wood_2", 64, 80);
 	add_Texture_To_Save(L"objects\\stone_altar_1", 66, 66);
-	add_Texture_To_Save(L"objects\\wooden_stake_1", 34, 44);
+	add_Texture_To_Save(L"objects\\wooden_stake_1", 32, 44);
+	add_Texture_To_Save(L"objects\\wooden_fence_1", 32, 44);
 
 	add_Animation_To_Save(L"objects\\brazier", 64, 64, 32, 40);
 

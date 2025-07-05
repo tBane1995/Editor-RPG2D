@@ -5959,7 +5959,7 @@ Chunk y=6 x=21
 Nature "natures\tree9" y=1696 x=5440
 FlatObject "flatObjects\stonepath_1" y=1776 x=5424
 FlatObject "flatObjects\stonepath_1" y=1776 x=5568
-FlatObject "flatObjects\stonepath_1" y=1760 x=5616
+FlatObject "flatObjects\stonepath_1" y=1760 x=5600
 
 Chunk y=6 x=22
 1 1 1 1 1 1 1 1 24 13 0 0 0 0 0 0
@@ -5979,8 +5979,12 @@ Chunk y=6 x=22
 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3
 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3
 Object "objects\wooden_stake_1" y=1664 x=5824
-FlatObject "flatObjects\stonepath_1" y=1760 x=5664
-FlatObject "flatObjects\stonepath_1" y=1744 x=5712
+Object "objects\wooden_fence_1" y=1664 x=5872
+FlatObject "flatObjects\sandspath_1" y=1728 x=5696
+FlatObject "flatObjects\sandspath_1" y=1744 x=5664
+FlatObject "flatObjects\sandspath_2" y=1712 x=5776
+FlatObject "flatObjects\sandspath_1" y=1728 x=5728
+FlatObject "flatObjects\sandspath_1" y=1744 x=5776
 
 Chunk y=6 x=23
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -6002,6 +6006,8 @@ Chunk y=6 x=23
 Object "objects\wooden_stake_1" y=1664 x=5920
 Object "objects\wooden_stake_1" y=1664 x=6016
 Object "objects\wooden_stake_1" y=1664 x=6112
+Object "objects\wooden_fence_1" y=1664 x=5968
+Object "objects\wooden_fence_1" y=1664 x=6064
 
 Chunk y=6 x=24
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 16 21
@@ -6022,6 +6028,9 @@ Chunk y=6 x=24
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
 Object "objects\wooden_stake_1" y=1664 x=6208
 Object "objects\wooden_stake_1" y=1664 x=6304
+Object "objects\wooden_fence_1" y=1664 x=6160
+Object "objects\wooden_fence_1" y=1664 x=6256
+Object "objects\wooden_fence_1" y=1664 x=6352
 
 Chunk y=6 x=25
 1 1 1 1 1 1 1 1 1 30 2 2 2 2 2 2
@@ -6041,6 +6050,12 @@ Chunk y=6 x=25
 3 1 1 1 1 1 1 1 1 1 30 2 2 2 2 2
 3 1 1 1 1 1 1 1 1 1 30 2 2 2 2 2
 Object "objects\wooden_stake_1" y=1664 x=6400
+FlatObject "flatObjects\stonepath_1" y=1728 x=6640
+FlatObject "flatObjects\stonepath_1" y=1712 x=6592
+FlatObject "flatObjects\sandspath_1" y=1728 x=6544
+FlatObject "flatObjects\sandspath_1" y=1728 x=6480
+FlatObject "flatObjects\sandspath_1" y=1712 x=6448
+FlatObject "flatObjects\sandspath_2" y=1744 x=6448
 
 Chunk y=6 x=26
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -6059,6 +6074,11 @@ Chunk y=6 x=26
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+FlatObject "flatObjects\stonepath_1" y=1712 x=6896
+FlatObject "flatObjects\stonepath_1" y=1728 x=6848
+FlatObject "flatObjects\stonepath_1" y=1728 x=6784
+FlatObject "flatObjects\stonepath_1" y=1712 x=6720
+FlatObject "flatObjects\stonepath_1" y=1696 x=6672
 
 Chunk y=6 x=27
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -6078,6 +6098,10 @@ Chunk y=6 x=27
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 FlatObject "flatObjects\stonepath_1" y=1712 x=7152
+FlatObject "flatObjects\stonepath_1" y=1728 x=7088
+FlatObject "flatObjects\stonepath_1" y=1744 x=7040
+FlatObject "flatObjects\stonepath_1" y=1728 x=6992
+FlatObject "flatObjects\stonepath_1" y=1712 x=6944
 
 Chunk y=6 x=28
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -6889,6 +6913,7 @@ Chunk y=7 x=22
 31 1 1 1 1 1 1 1 1 1 1 22 0 0 0 0
 40 29 1 1 1 1 1 1 1 1 1 22 0 0 0 0
 Object "objects\wooden_stake_1" y=1808 x=5824
+Object "objects\wooden_fence_1" y=1808 x=5872
 
 Chunk y=7 x=23
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
@@ -6910,6 +6935,8 @@ Chunk y=7 x=23
 Object "objects\wooden_stake_1" y=1808 x=5920
 Object "objects\wooden_stake_1" y=1808 x=6016
 Object "objects\wooden_stake_1" y=1808 x=6112
+Object "objects\wooden_fence_1" y=1808 x=6064
+Object "objects\wooden_fence_1" y=1808 x=5968
 
 Chunk y=7 x=24
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
@@ -6930,6 +6957,9 @@ Chunk y=7 x=24
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 Object "objects\wooden_stake_1" y=1808 x=6208
 Object "objects\wooden_stake_1" y=1808 x=6304
+Object "objects\wooden_fence_1" y=1808 x=6352
+Object "objects\wooden_fence_1" y=1808 x=6256
+Object "objects\wooden_fence_1" y=1808 x=6160
 
 Chunk y=7 x=25
 3 1 1 1 1 1 1 1 1 1 30 2 2 2 2 2

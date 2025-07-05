@@ -1,4 +1,4 @@
-#ifndef FileDialog_hpp
+﻿#ifndef FileDialog_hpp
 #define FileDialog_hpp
 
 bool sortkey(std::filesystem::directory_entry first, std::filesystem::directory_entry second) {
@@ -35,8 +35,6 @@ bool sortkey(std::filesystem::directory_entry first, std::filesystem::directory_
             return false;
     }
 }
-
-enum class FileDialogState { Idle, Canceled, FileSelected };
 
 class FileDialog : public Dialog {
 public:
@@ -177,8 +175,6 @@ public:
 
     sf::Vector2f position = sf::Vector2f(0, 0);
 
-    FileDialogState state;
-
     sf::RectangleShape rect;        // main big panel
     float rect_width;
     float rect_height;
@@ -212,8 +208,6 @@ public:
     
 
     FileDialog(DialogType type, std::wstring title, std::string acceptable_extension="") : Dialog(type, sf::Vector2f(512+(dialog_border_width +8)*2, 304+(dialog_border_width +8)*2)) {
-
-        state = FileDialogState::Idle;
 
         rect_height = 0;
         rect_width = 512;
@@ -270,19 +264,30 @@ public:
         if(type == DialogType::OpenFile){
             selectButton = new ButtonWithText("open", 17, TextAlignment::Center, btn_size);
             selectButton->onclick_func = [this]() {
-                    state = FileDialogState::FileSelected;
+                state = DialogState::Close;
+                    mapa->load(getPathfile());
                 };
         }
-        else {
+        else if(type == DialogType::SaveFile) {
             selectButton = new ButtonWithText("save", 17, TextAlignment::Center, btn_size);
             selectButton->onclick_func = [this]() {
-                state = FileDialogState::FileSelected;
+                state = DialogState::Close;
+
+                std::wstring filename = getShortName(getPathfile());
+                Confirm* confirm = new Confirm(L"Plik " + filename + L" już istnieje. Czy chcesz go zamienić?");
+                confirm->btn_yes->onclick_func = [this]() {
+                    mapa->save(getPathfile());
+                    delete dialogs.back();
+                    dialogs.pop_back();
+                    };
+                dialogs.push_back(confirm);
+                
                 };
         }
 
         cancelButton = new ButtonWithText("cancel", 17, TextAlignment::Center, btn_size);
         cancelButton->onclick_func = [this]() {
-            state = FileDialogState::Canceled;
+            state = DialogState::Close;
             };
 
         submitbar = sf::RectangleShape(sf::Vector2f(rect_width, selectedFilename->getSize().y + 3 * margin_vert + selectButton->getSize().y));
@@ -487,7 +492,7 @@ public:
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Enter) {
                 selectButton->state = ButtonState::Pressed;
-                state = FileDialogState::FileSelected;
+                state = DialogState::Close;
             }
         }
         else {

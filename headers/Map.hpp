@@ -1170,6 +1170,10 @@ public:
 
         clearAllMainListsOfGameObjects();
 
+        for (auto& chunk : chunks) {
+            delete chunk;
+        }
+
         // create chunks
         width = 40;
         height = 40;
