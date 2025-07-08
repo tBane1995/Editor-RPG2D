@@ -280,7 +280,7 @@ public:
 
         if (event.type == sf::Event::MouseWheelScrolled) {
             if (scroll_area.getGlobalBounds().contains(worldMousePosition)) {
-                std::cout << "scroll\n";
+                //std::cout << "scroll\n";
 
                 int d = 0;
                 if (event.mouseWheelScroll.delta > 0) d = 1;

@@ -465,15 +465,10 @@ public:
                     for (auto& prefab : prefabsToPaint) {
 
                         prefab->_object->setPosition(sf::Vector2f(x, y));
+                        prefab->update();
+                        prefab->_object->mouseIsHover = false;
 
-                        if (prefab->_object->type == GameObjectType::Unit || prefab->_object->type == GameObjectType::Monster || prefab->_object->type == GameObjectType::Character) {
-                            dynamic_cast<Unit*>(prefab->_object)->idling();
-                        }
-                        else {
-                            prefab->update();
-                            prefab->_object->mouseIsHover = false;
-
-                        }
+   
                     }
                 }
             }
@@ -506,10 +501,8 @@ public:
         }
         else {
             for (auto& p : prefabsToPaint) {
-                if (p->_object->type != GameObjectType::Building) {
-                    p->draw();
-                }
-                else {
+
+                if (p->_object->type == GameObjectType::Building) {
                     Building* b = dynamic_cast<Building*>(p->_object);
                     sf::Texture* tex = (b->getTextureWithDoors());
                     sf::Sprite spr;
@@ -520,6 +513,10 @@ public:
                     b = nullptr;
                     delete tex;
                     tex = nullptr;
+                }
+                
+                else {
+                    p->draw();
 
                 }
             }

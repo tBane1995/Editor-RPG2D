@@ -125,7 +125,7 @@ void Editor() {
                     map_size += chunk->borders->outlines.getVertexCount() * sizeof(sf::Vertex);
                 }
 
-                std::cout << "map_sie: " << map_size << "\n";
+                //std::cout << "map_size: " << map_size << "\n";
 
                 mapa->mapVisiblings();
                 unselectGameObjects();
@@ -753,7 +753,7 @@ void Editor() {
 
             GUIwasHover = false;
             GUIwasClicked = false;
-            GUIwasOpen = false;
+            GUIwasOpen = false; 
 
             ElementGUI_hovered = nullptr;
 
@@ -772,6 +772,7 @@ void Editor() {
 
             palette->cursorHover();
             menu_bar->cursorHover();
+            reset_camera->cursorHover();
 
             if (context_menu != nullptr) {
                 context_menu->cursorHover();
@@ -938,6 +939,7 @@ void Editor() {
                             pos = obj->_object->position;
                         }
                     }
+                    
                 }
                 else if (event.type == sf::Event::KeyPressed) {
 
@@ -1029,7 +1031,9 @@ void Editor() {
             updateGameObjects();
             sortGameObjects();
 
+            reset_camera->update();
             painter->update();
+            
 
             if (tip != nullptr)
                 tip->update();

@@ -1092,16 +1092,16 @@ public:
 
 	void update() {
 		
-		//state = State::Idle;
+		state = State::Idle;
 		//state = State::Run;
-		state = State::Attack;
+		//state = State::Attack;
 
 		loadSprites();
 		createRenderTexture();
 
-		//idling();
+		idling();
 		//running();
-		attacking();
+		//attacking();
 		
 		sprite.setTexture(renderTexture->getTexture());
 		sprite.setOrigin(32, 58);
@@ -1116,5 +1116,26 @@ public:
 
 std::vector < Character* > characters;
 
+std::vector < Character* > characters_prefabs;
 
+void loadCharacterPrefabs() {
+	characters_prefabs.clear();
+
+	characters_prefabs.push_back(new Character(L"man black haired", L"sets\\body\\man", L"sets\\head\\man-black-haired"));
+	characters_prefabs.push_back(new Character(L"man brown haired", L"sets\\body\\man", L"sets\\head\\man-brown-haired"));
+	characters_prefabs.push_back(new Character(L"man gray haired", L"sets\\body\\man", L"sets\\head\\man-gray-haired"));
+	characters_prefabs.push_back(new Character(L"man red haired", L"sets\\body\\man", L"sets\\head\\man-red-haired"));
+
+	characters_prefabs.push_back(new Character(L"boy black haired", L"sets\\body\\man", L"sets\\head\\boy-black-haired"));
+	characters_prefabs.push_back(new Character(L"boy brown haired", L"sets\\body\\man", L"sets\\head\\boy-brown-haired"));
+	characters_prefabs.push_back(new Character(L"boy gray haired", L"sets\\body\\man", L"sets\\head\\boy-gray-haired"));
+	characters_prefabs.push_back(new Character(L"boy red haired", L"sets\\body\\man", L"sets\\head\\boy-red-haired"));
+
+	characters_prefabs.push_back(new Character(L"woman black haired", L"sets\\body\\woman", L"sets\\head\\woman-black-haired"));
+	characters_prefabs.push_back(new Character(L"woman brown haired", L"sets\\body\\woman", L"sets\\head\\woman-brown-haired"));
+	characters_prefabs.push_back(new Character(L"woman gray haired", L"sets\\body\\woman", L"sets\\head\\woman-gray-haired"));
+	characters_prefabs.push_back(new Character(L"woman red haired", L"sets\\body\\woman", L"sets\\head\\woman-red-haired"));
+
+	
+}
 #endif

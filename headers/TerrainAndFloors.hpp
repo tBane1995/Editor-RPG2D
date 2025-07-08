@@ -372,12 +372,12 @@ void createTerrainPrefabs() {
 
 	terrainGameObjects.clear();
 
-	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_0_water", 0));           // 1
-	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_1_sands", 1));           // 2
-	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_2_grass", 2));           // 3
-	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_3_gravel", 3));           // 4
-	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_4_steps", 4));           // 5
-	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_5_highlands", 5));       // 6
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\water", 0));           // 1
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\sands", 1));           // 2
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\grass", 2));           // 3
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\gravel", 3));           // 4
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\steps", 4));           // 5
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\highlands", 5));       // 6
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_6", 6));                 // 7
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_7", 7));                 // 8
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_8", 8));                 // 9

@@ -231,6 +231,7 @@ void save_textures_as_packet() {
 	add_Texture_To_Save(L"GUI\\groupButtons\\groupButton-smallObjects", 34, 26);
 	add_Texture_To_Save(L"GUI\\groupButtons\\groupButton-objects", 34, 26);
 	add_Texture_To_Save(L"GUI\\groupButtons\\groupButton-buildings", 34, 26);
+	add_Texture_To_Save(L"GUI\\groupButtons\\groupButton-characters", 34, 26);
 	add_Texture_To_Save(L"GUI\\groupButtons\\groupButton-directions", 34, 26);
 
 	// small buttons textures
@@ -317,12 +318,12 @@ void save_textures_as_packet() {
 
 	// tiles textures
 	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\0_tileset", 0, 0);
-	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\tile_0_water", 32, 32);
-	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\tile_1_sands", 32, 32);
-	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\tile_2_grass", 32, 32);
-	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\tile_3_gravel", 32, 32);
-	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\tile_4_steps", 32, 32);
-	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\tile_5_highlands", 32, 32);
+	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\water", 32, 32);
+	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\sands", 32, 32);
+	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\grass", 32, 32);
+	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\gravel", 32, 32);
+	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\steps", 32, 32);
+	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\highlands", 32, 32);
 	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\tile_6", 32, 32);
 	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\tile_7", 32, 32);
 	add_Unique_Terrains_And_Walls_Textures_To_Save(L"tiles\\tile_8", 32, 32);
@@ -1248,6 +1249,7 @@ void loadTextures() {
 	loadSingleTexture(L"GUI\\groupButtons\\groupButton-smallObjects.png", 34, 26);
 	loadSingleTexture(L"GUI\\groupButtons\\groupButton-objects.png", 34, 26);
 	loadSingleTexture(L"GUI\\groupButtons\\groupButton-buildings.png", 34, 26);
+	loadSingleTexture(L"GUI\\groupButtons\\groupButton-characters.png", 34, 26);
 	loadSingleTexture(L"GUI\\groupButtons\\groupButton-directions.png", 34, 26);
 
 	// small buttons textures
@@ -1328,12 +1330,12 @@ void loadTextures() {
 
 	// TILES //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	loadSingleTexture(L"tiles\\0_tileset.png", 0, 0);
-	loadSingleTexture(L"tiles\\tile_0_water.png", 32, 32);
-	loadSingleTexture(L"tiles\\tile_1_sands.png", 32, 32);
-	loadSingleTexture(L"tiles\\tile_2_grass.png", 32, 32);
-	loadSingleTexture(L"tiles\\tile_3_gravel.png", 32, 32);
-	loadSingleTexture(L"tiles\\tile_4_steps.png", 32, 32);
-	loadSingleTexture(L"tiles\\tile_5_highlands.png", 32, 32);
+	loadSingleTexture(L"tiles\\water.png", 32, 32);
+	loadSingleTexture(L"tiles\\sands.png", 32, 32);
+	loadSingleTexture(L"tiles\\grass.png", 32, 32);
+	loadSingleTexture(L"tiles\\gravel.png", 32, 32);
+	loadSingleTexture(L"tiles\\steps.png", 32, 32);
+	loadSingleTexture(L"tiles\\highlands.png", 32, 32);
 	loadSingleTexture(L"tiles\\tile_6.png", 32, 32);
 	loadSingleTexture(L"tiles\\tile_7.png", 32, 32);
 	loadSingleTexture(L"tiles\\tile_8.png", 32, 32);

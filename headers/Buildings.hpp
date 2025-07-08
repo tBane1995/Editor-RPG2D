@@ -993,39 +993,29 @@ public:
                 show_outside_sprite = false;
             }
             else {
+                for (auto& object : gameObjects) {
 
-                if (mouse_state == MouseState::Selecting) {
-                    show_outside_sprite = true;
-                }
-                else {
-
-                    for (auto& object : gameObjects) {
-
-                        if (object != this && intersection(object, this) && object->isSelected) {
-                            show_outside_sprite = false;
-                            break;
-                        }
-
-                    }
-
-                    if (show_outside_sprite == false) {
-                        std::cout << "selected object is selected and is inside of building\n";
-                    }
-                    else if (player == nullptr && isSelected) {
-                        //cout << "is selected\n";
+                    if (object != this && intersection(object, this) && object->isSelected) {
                         show_outside_sprite = false;
+                        break;
                     }
-                    else if (player == nullptr && ElementGUI_hovered == nullptr && ElementGUI_pressed == nullptr && mouseIsHover) {
-                        show_outside_sprite = false;
-                    }
-                    else if (player != nullptr && playerInside()) {
-                        //cout << "player inside\n";
-                        show_outside_sprite = false;
-                    }
+
                 }
 
-                
-
+                if (show_outside_sprite == false) {
+                    //std::cout << "selected object is selected and is inside of building\n";
+                }
+                else if (player == nullptr && isSelected) {
+                    //cout << "is selected\n";
+                    show_outside_sprite = false;
+                }
+                else if (player == nullptr && ElementGUI_hovered == nullptr && ElementGUI_pressed == nullptr && mouseIsHover) {
+                    show_outside_sprite = false;
+                }
+                else if (player != nullptr && playerInside()) {
+                    //cout << "player inside\n";
+                    show_outside_sprite = false;
+                }
             }
 
             if (show_outside_sprite) {
@@ -1038,7 +1028,18 @@ public:
 };
 
 std::vector < Building* > buildings;
+
 Building* building_to_edit = nullptr;
 sf::Vector2f building_to_edit_position;
 
+std::vector < Building* > buildings_prefabs;
+
+void loadBuildingPrefabs() {
+    buildings_prefabs.clear();
+    buildings_prefabs.push_back(new Building(L"assets\\buildings\\mud_house.bld"));
+    buildings_prefabs.push_back(new Building(L"assets\\buildings\\stone_house.bld"));
+    buildings_prefabs.push_back(new Building(L"assets\\buildings\\wooden_house.bld"));
+    buildings_prefabs.push_back(new Building(L"assets\\buildings\\brick_house.bld"));
+    buildings_prefabs.push_back(new Building(L"assets\\buildings\\mulch_house.bld"));
+}
 #endif 

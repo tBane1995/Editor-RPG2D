@@ -574,7 +574,7 @@ public:
 		view_range_area.setScale(1.0f, colliders[0]->length / colliders[0]->width);
 	}
 
-	void idling() {
+	virtual void idling() {
 
 		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
 			(frame == 3) ? frame = 0 : frame += 1;
@@ -586,7 +586,7 @@ public:
 		setPosition(position);
 	}
 
-	void running() {
+	virtual void running() {
 
 		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
 			(frame == 3) ? frame = 0 : frame += 1;
@@ -598,7 +598,7 @@ public:
 		setPosition(position);
 	}
 
-	void attacking() {
+	virtual void attacking() {
 
 		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
 			(frame == 3) ? frame = 0 : frame += 1;

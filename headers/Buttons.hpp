@@ -539,25 +539,27 @@ public:
 
     void cursorHover() {
         if (mouse_state != MouseState::Selecting) {
-            float w = 0.0f;
-            float h = 0.0f;
-            float x = sprite.getPosition().x;
-            float y = sprite.getPosition().y;
+
+            sf::FloatRect rect;
+            rect.width = 0.0f;
+            rect.height = 0.0f;
 
             if (texture)
             {
-                w = texture->texture->getSize().x;
-                h = texture->texture->getSize().y;
+                rect.width = texture->texture->getSize().x;
+                rect.height = texture->texture->getSize().y;
             }
             else
             {
-                w = sprite.getTextureRect().width;
-                h = sprite.getTextureRect().height;
+                rect.width = sprite.getTextureRect().width;
+                rect.height = sprite.getTextureRect().height;
 
             }
 
-            if (worldMousePosition.x > x - w / 2.0f && worldMousePosition.x < x + w / 2.0f &&
-                worldMousePosition.y > y - h / 2.0f && worldMousePosition.y < y + h / 2.0f) {
+            rect.left = sprite.getPosition().x - rect.width / 2.0f;
+            rect.top = sprite.getPosition().y - rect.height / 2.0f;
+
+            if (rect.contains(worldMousePosition)) {
 
                 ElementGUI_hovered = this;
             }
@@ -568,25 +570,26 @@ public:
 
 
         if (true) { // TO-DO
-            float w = 0.0f;
-            float h = 0.0f;
-            float x = sprite.getPosition().x;
-            float y = sprite.getPosition().y;
+            sf::FloatRect rect;
+            rect.width = 0.0f;
+            rect.height = 0.0f;
 
             if (texture)
             {
-                w = texture->texture->getSize().x;
-                h = texture->texture->getSize().y;
+                rect.width = texture->texture->getSize().x;
+                rect.height = texture->texture->getSize().y;
             }
             else
             {
-                w = sprite.getTextureRect().width;
-                h = sprite.getTextureRect().height;
+                rect.width = sprite.getTextureRect().width;
+                rect.height = sprite.getTextureRect().height;
 
             }
 
-            if (worldMousePosition.x > x - w / 2.0f && worldMousePosition.x < x + w / 2.0f &&
-                worldMousePosition.y > y - h / 2.0f && worldMousePosition.y < y + h / 2.0f) {
+            rect.left = sprite.getPosition().x - rect.width / 2.0f;
+            rect.top = sprite.getPosition().y - rect.height / 2.0f;
+
+            if (rect.contains(worldMousePosition)) {
 
                 if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 					ElementGUI_pressed = this;

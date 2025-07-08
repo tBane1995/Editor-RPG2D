@@ -66,6 +66,26 @@ public:
 
                 origin = sf::Vector2f(texture.getSize().x / 2, texture.getSize().y / 2);
             }
+            else if (this->object->type == GameObjectType::Character) {
+                texture = dynamic_cast<Character*>(this->object)->renderTexture->getTexture();
+
+                rect = sf::IntRect(0, 0, texture.getSize().x, texture.getSize().y);
+
+                if (texture.getSize().x > texture.getSize().y) {
+                    scale.x = 64.0f / float(texture.getSize().x) * 0.75f;
+                    scale.y = 64.0f / float(texture.getSize().x) * 0.75f;
+                }
+                else if (texture.getSize().x < texture.getSize().y) {
+                    scale.x = 64.0f / float(texture.getSize().y) * 0.75f;
+                    scale.y = 64.0f / float(texture.getSize().y) * 0.75f;
+                }
+                else {
+                    scale.x = 64.0f / float(texture.getSize().x) * 0.75f;
+                    scale.y = 64.0f / float(texture.getSize().x) * 0.75f;
+                }
+
+                origin = sf::Vector2f(texture.getSize().x / 2, texture.getSize().y / 2);
+            }
             else if (this->object->type != GameObjectType::ItemOnMap) {
                 if (this->object != nullptr && this->object->texture != nullptr)
                     texture = *this->object->texture->texture;
@@ -102,8 +122,12 @@ public:
     GameObjectAndTextureInfo(GameObject* object, sf::Vector2f scale, sf::IntRect rect) {
         this->object = object;
 
-        if(object->type == GameObjectType::Building)
+        if (object->type == GameObjectType::Building) {
             this->texture = *(dynamic_cast<Building*>(object)->sprite.getTexture());
+        }
+        else if (object->type == GameObjectType::Character) {
+            this->texture = dynamic_cast<Character*>(object)->renderTexture->getTexture();
+        }
         else 
             this->texture = *this->object->texture->texture;
 
@@ -122,6 +146,17 @@ public:
         this->scale = scale;
 
         this->origin = sf::Vector2f(32-8, 32-8);
+    }
+
+    GameObjectAndTextureInfo(GameObject* object, const sf::Texture* texture, sf::Vector2f scale, sf::IntRect rect) {
+        this->object = object;
+
+        this->texture = *texture;
+
+        this->rect = rect;
+        this->scale = scale;
+
+        this->origin = sf::Vector2f(32 - 8, 32 - 8);
     }
 
     ~GameObjectAndTextureInfo() {
@@ -251,6 +286,7 @@ public:
     ButtonWithImage* btnGroupSmallObjects;
     ButtonWithImage* btnGroupObjects;
     ButtonWithImage* btnGroupBuildings;
+    ButtonWithImage* btnGroupCharacters;
     ButtonWithImage* btnGroupDirections;
 
     ButtonWithImage* btnToolsEmpty;
@@ -935,17 +971,9 @@ public:
     void setBuildingsToPalette() {
 
         gameObjectsAndTexturesInfo.clear();
-
-        std::vector < Building* > buildings;
-        buildings.push_back(new Building(L"assets\\buildings\\mud_house.bld"));
-        buildings.push_back(new Building(L"assets\\buildings\\stone_house.bld"));
-        buildings.push_back(new Building(L"assets\\buildings\\wooden_house.bld"));
-        buildings.push_back(new Building(L"assets\\buildings\\brick_house.bld"));
-        buildings.push_back(new Building(L"assets\\buildings\\mulch_house.bld"));
-
         float part_size = 64;
 
-        for (auto& building : buildings) {
+        for (auto& building : buildings_prefabs) {
             sf::Texture* texture = building->getTextureWithDoors();
             std::cout << "Texture Size: " << texture->getSize().x << "x" << texture->getSize().y << "\n";
 
@@ -963,7 +991,14 @@ public:
                 }
             }
         }
+    }
 
+    void setCharactersToPalette() {
+        gameObjectsAndTexturesInfo.clear();
+
+        for (auto& c : characters_prefabs) {
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(c, &c->renderTexture->getTexture(), sf::Vector2f(1, 1), sf::IntRect(0, 0, 64, 64)));
+        }
 
     }
 
@@ -1593,12 +1628,36 @@ public:
             };
         btnGroupBuildings->onclick_func = [this]() {
             painter->tool = toolType::Cursor;
-            selectedGroupButton = btnGroupSmallObjects;
+            selectedGroupButton = btnGroupBuildings;
             selectedPaletteButton = nullptr;
             painter->setPrefabToPaint(nullptr);
             createPaletteButtons(5, 9);
             deleteToolsButtons();
             setBuildingsToPalette();
+            delete_scrollbar();
+            loadPalette();
+            create_scrollbar();
+            };
+
+        btnGroupCharacters = new ButtonWithImage();
+        btnGroupCharacters->setTexture(getSingleTexture(L"GUI\\groupButtons\\groupButton-characters"));
+        btnGroupCharacters->hover_func = [this]() {
+            if (tip == nullptr || tip->btn != btnGroupCharacters) {
+                if (tip != nullptr)
+                    delete tip;
+                tip = new Tip(L"Characters", btnGroupCharacters);
+            }
+
+            };
+
+        btnGroupCharacters->onclick_func = [this]() {
+            painter->tool = toolType::Cursor;
+            selectedGroupButton = btnGroupCharacters;
+            selectedPaletteButton = nullptr;
+            painter->setPrefabToPaint(nullptr);
+            createPaletteButtons(5, 9);
+            deleteToolsButtons();
+            setCharactersToPalette();
             delete_scrollbar();
             loadPalette();
             create_scrollbar();
@@ -1633,6 +1692,7 @@ public:
             groupButtons.push_back(btnGroupSmallObjects);
             groupButtons.push_back(btnGroupObjects);
             groupButtons.push_back(btnGroupBuildings);
+            groupButtons.push_back(btnGroupCharacters);
             groupButtons.push_back(btnGroupDirections);
             groupButtons.push_back(new ButtonWithImage(btnGroupEmpty));
         }
@@ -1653,8 +1713,15 @@ public:
         sf::Vector2f button_size(68, 52);
 
         visibleGroups.clear();
-        for (short i = 0; i < visible_group_count.x * visible_group_count.y; i++)
-            visibleGroups.push_back(groupButtons[i + group_scroll]);
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 4; x++) {
+                int index = (y % 2 * (groupButtons.size())/2) + x + group_scroll;
+                if(index >= 0 && index < groupButtons.size())
+                    visibleGroups.push_back(groupButtons[index]);
+            }
+        }
+
+
 
         sf::Vector2f position;
         position.y = -screenHeight / 2.0f + nav_size.y / 2 + 30;

@@ -677,7 +677,7 @@ int main()
     
     ProgressBar* progress_bar = new ProgressBar();
 
-    float steps = 9.0f;
+    float steps = 11.0f;
 
     
     // LOADS
@@ -694,15 +694,17 @@ int main()
     std::cout << "-load time : " << (end_time - start_time).asSeconds() << " seconds \n";
     progress_bar->draw(2.0f / steps);
 
-	loadShaders();      progress_bar->draw(3.0f / steps);   sf::sleep(sf::seconds(0.1f));
-	loadItems();        progress_bar->draw(4.0f / steps);   sf::sleep(sf::seconds(0.1f));
-    loadInventories();  progress_bar->draw(5.0f / steps);   sf::sleep(sf::seconds(0.1f));
-    loadDialogues();    progress_bar->draw(6.0f / steps);   sf::sleep(sf::seconds(0.1f));
-    loadQuests();       progress_bar->draw(7.0f / steps);   sf::sleep(sf::seconds(0.1f));
-    loadMeshes();       progress_bar->draw(8.0f / steps);   sf::sleep(sf::seconds(0.1f));
-    loadPrefabs();      progress_bar->draw(9.0f / steps);   sf::sleep(sf::seconds(0.1f));
-
-	window->setKeyRepeatEnabled(false);	// TO-DO commentary
+	loadShaders();          progress_bar->draw(3.0f / steps);   sf::sleep(sf::seconds(0.1f));
+	loadItems();            progress_bar->draw(4.0f / steps);   sf::sleep(sf::seconds(0.1f));
+    loadInventories();      progress_bar->draw(5.0f / steps);   sf::sleep(sf::seconds(0.1f));
+    loadDialogues();        progress_bar->draw(6.0f / steps);   sf::sleep(sf::seconds(0.1f));
+    loadQuests();           progress_bar->draw(7.0f / steps);   sf::sleep(sf::seconds(0.1f));
+    loadMeshes();           progress_bar->draw(8.0f / steps);   sf::sleep(sf::seconds(0.1f));
+    loadPrefabs();          progress_bar->draw(9.0f / steps);   sf::sleep(sf::seconds(0.1f));
+    loadBuildingPrefabs();  progress_bar->draw(10.0f / steps);  sf::sleep(sf::seconds(0.1f));
+    loadCharacterPrefabs(); progress_bar->draw(11.0f / steps);  sf::sleep(sf::seconds(0.1f));
+	
+    window->setKeyRepeatEnabled(false);	// TO-DO commentary
     // TO-DO
     //window->setFramerateLimit(60);
     window->setVerticalSyncEnabled(false); // for >80 FPS
