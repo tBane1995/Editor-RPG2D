@@ -5,6 +5,7 @@
 sf::Font basicFont;
 sf::Font dialogueFont;
 
+enum class WrapperType { Normal, Simple };
 
 void loadFonts() {
 	basicFont = sf::Font();
@@ -40,7 +41,7 @@ std::string ConvertWideToUtf8(std::wstring wide) {
     return std::string(wide.begin(), wide.end());
 }
 
-std::vector < std::wstring > wrapText(const std::wstring& text, const sf::Font& font, short characterSize, short maxWidth)
+std::vector < std::wstring > wrapTextSimple(const std::wstring& text, sf::Font& font, short characterSize, short maxWidth)
 {
     std::vector < std::wstring > result;
     std::wistringstream lineStream(text);
@@ -149,6 +150,111 @@ std::vector < std::wstring > wrapText(const std::wstring& text, const sf::Font& 
 
     return result;
 }
+
+std::vector < std::wstring > wrapTextNormal(std::wstring text, sf::Font& font, float characterSize, int line_width) {
+
+    std::vector < sf::Text* > wrapped_text;
+
+    std::wstring line = L"";
+    std::wstring word = L"";
+
+    for (auto& character : text) {
+        if (sf::Text(word + character, font, characterSize).getGlobalBounds().width > line_width) {
+
+            if (line != L"") {
+                sf::Text* t = new sf::Text(line, font, characterSize);
+                wrapped_text.push_back(t);
+                line = L"";
+            }
+
+            // word longer than line
+            std::wstring l = L"";
+            word = word + character;
+            for (wchar_t& c : word) {
+                if (sf::Text(l + c, font, characterSize).getGlobalBounds().width > line_width) {
+                    sf::Text* t = new sf::Text(l, font, characterSize);
+                    wrapped_text.push_back(t);
+                    l = c;
+                }
+                else
+                    l = l + c;
+            }
+
+            sf::Text* t = new sf::Text(l, font, characterSize);
+            wrapped_text.push_back(t);
+
+            word = L"";
+        }
+        else if (sf::Text(line + word + character, font, characterSize).getGlobalBounds().width > line_width)
+        {
+            sf::Text* t = new sf::Text(line, font, characterSize);
+            wrapped_text.push_back(t);
+
+            line = L"";
+            word = word + character;
+        }
+        else if (character == L'\n') {
+
+            if (sf::Text(line + word, font, characterSize).getGlobalBounds().width > line_width) {
+                sf::Text* t = new sf::Text(line, font, characterSize);
+                wrapped_text.push_back(t);
+
+                sf::Text* t2 = new sf::Text(word + L"\n", font, characterSize);
+                wrapped_text.push_back(t2);
+
+                line = L"";
+                word = L"";
+            }
+            else {
+                sf::Text* t = new sf::Text(line + word + L"\n", font, characterSize);
+                wrapped_text.push_back(t);
+
+                line = L"";
+                word = L"";
+            }
+
+        }
+        else if (character == L' ' || character == L'\t') {
+            if (sf::Text(line + word, font, characterSize).getGlobalBounds().width > line_width) {
+                sf::Text* t = new sf::Text(line + L"\n", font, characterSize);
+                wrapped_text.push_back(t);
+                line = L"";
+            }
+            else {
+                line = line + word + character;
+            }
+
+            word = L"";
+        }
+        else {
+            word = word + character;
+        }
+    }
+
+    if (line != L"" || word != L"") {
+        sf::Text* t = new sf::Text(line + word, font, characterSize);
+        wrapped_text.push_back(t);
+    }
+
+    std::vector <std::wstring > result;
+    for (auto& t : wrapped_text) {
+        result.push_back(t->getString().toWideString());
+    }
+
+    return result;
+
+}
+
+std::vector < std::wstring > wrapText(const std::wstring& text, WrapperType wtype, sf::Font& font, short characterSize, short maxWidth) {
+
+    if (wtype == WrapperType::Simple) {
+        return wrapTextSimple(text, font, characterSize, maxWidth);
+    }
+    else if (wtype == WrapperType::Normal) {
+        return wrapTextNormal(text, font, characterSize, maxWidth);
+    }
+}
+
 std::string getShortName(std::string fullname) {
 
 	std::string shortname = "";

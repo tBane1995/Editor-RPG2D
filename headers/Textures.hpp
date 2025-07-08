@@ -811,8 +811,7 @@ public:
 
 		texture = new sf::Texture;
 		texture->loadFromFile(ConvertWideToUtf8(L"assets\\" + pathfile));
-		texture->setRepeated(true);
-		texture->setSmooth(true);
+
 		
 		this->cx = cx;
 		this->cy = cy;
@@ -826,8 +825,6 @@ public:
 
 		texture = new sf::Texture;
 		texture->loadFromImage(image);
-		texture->setRepeated(true);
-		texture->setSmooth(true);
 
 		this->cx = cx;
 		this->cy = cy;
@@ -841,8 +838,7 @@ public:
 
 		this->texture = new sf::Texture();
 		this->texture->loadFromImage(image);
-		texture->setRepeated(true);
-		texture->setSmooth(true);
+
 		cx = texture->getSize().x / 2;
 		cy = texture->getSize().y / 2;
 	}
@@ -855,8 +851,7 @@ public:
 
 		texture->create(width, height);
 		texture->update(pixels.data());
-		texture->setRepeated(true);
-		texture->setSmooth(true);
+
 
 		this->cx = cx;
 		this->cy = cy;
@@ -1206,97 +1201,6 @@ void loadAnimation(std::wstring pathfile, int tile_width, int tile_height, float
 
 
 		}
-}
-
-void generateTileSet() {
-	sf::Image masks[16];
-
-	for (int i = 0; i < 16; i++) {
-		masks[i].create(64, 64);
-		if (!masks[i].loadFromFile("assets\\tiles\\basic2\\" + std::to_string(i) + ".png")) {
-			std::cout << "Błąd wczytywania maski: " << i << "\n";
-			return;
-		}
-	}
-
-	std::cout << "Wczytano maski\n";
-
-	std::vector<SingleTexture*> tiles = getSingleTextures(L"tiles\\tile_");
-	std::cout << "Tiles: " << tiles.size() << "\n";
-
-	unsigned int N = tiles.size();
-	unsigned int M = 14;  // Liczba masek
-	unsigned int totalTiles = (N * (N - 1) / 2) * M;
-
-	// Obliczanie wymiarów wynikowej tekstury
-	unsigned int tileSize = 64;
-	unsigned int tilesPerRow = std::ceil(std::sqrt(totalTiles));  // Najbardziej kwadratowy układ
-	unsigned int rows = (totalTiles + tilesPerRow - 1) / tilesPerRow;
-
-	sf::Image tile_set_image;
-	tile_set_image.create(tilesPerRow * tileSize, rows * tileSize, sf::Color::Transparent);
-
-	sf::Image first_tile, second_tile, mask, result_tile;
-	first_tile.create(tileSize, tileSize);
-	second_tile.create(tileSize, tileSize);
-	result_tile.create(tileSize, tileSize);
-
-	// Na początku zapiszemy bazowe kafelki, by się nie powtarzały
-	unsigned int tileIndex = 0;
-
-	for (short tile_id = 0; tile_id < N; tile_id++) {
-		unsigned int newX = (tileIndex % tilesPerRow) * tileSize;
-		unsigned int newY = (tileIndex / tilesPerRow) * tileSize;
-
-		tile_set_image.copy(tiles[tile_id]->texture->copyToImage(), newX, newY);
-		tileIndex++;
-	}
-
-	// Teraz generujemy przejściowe kafelki
-	for (short tile_1_id = 0; tile_1_id < N; tile_1_id++) {
-		for (short tile_2_id = tile_1_id + 1; tile_2_id < N; tile_2_id++) {
-			first_tile = tiles[tile_1_id]->texture->copyToImage();
-			second_tile = tiles[tile_2_id]->texture->copyToImage();
-
-			for (short mask_id = 1; mask_id < 15; mask_id++) { // Pomiń 0 i 15
-				mask = masks[mask_id];
-
-				for (unsigned int y = 0; y < tileSize; y++) {
-					for (unsigned int x = 0; x < tileSize; x++) {
-						sf::Color pixel = mask.getPixel(x, y);
-
-						if (pixel.r == 237 && pixel.g == 28 && pixel.b == 36) {
-							result_tile.setPixel(x, y, first_tile.getPixel(x, y));
-						}
-						else if (pixel.r == 127 && pixel.g == 127 && pixel.b == 127) {
-							result_tile.setPixel(x, y, second_tile.getPixel(x, y));
-						}
-						else {
-							result_tile.setPixel(x, y, pixel);
-						}
-					}
-				}
-
-				unsigned int newX = (tileIndex % tilesPerRow) * tileSize;
-				unsigned int newY = (tileIndex / tilesPerRow) * tileSize;
-
-				if (newY >= rows * tileSize) {
-					std::cerr << "Za dużo kafelków! Przekracza rozmiar tekstury.\n";
-					return;
-				}
-
-				tile_set_image.copy(result_tile, newX, newY);
-				tileIndex++;
-			}
-		}
-	}
-
-	// Zapisujemy obraz do pliku
-	tile_set_image.saveToFile("assets\\tiles\\tile_set_final.png");
-
-	SingleTexture* texture_tile_set = new SingleTexture(tile_set_image);
-	singleTextures.push_back(texture_tile_set);
-	std::cout << "Zapisano tile_set_final.png\n";
 }
 
 void loadTextures() {

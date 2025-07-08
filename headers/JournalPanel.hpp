@@ -43,7 +43,7 @@ public:
 
 		// DESCRIPTION OF QUEST
 		description.setPosition(cam->position.x-100, cam->position.y-180);
-		std::vector < std::wstring > descriptionLines = wrapText((cursor < actualQuests.size()) ? actualQuests[cursor]->steps[actualQuests[cursor]->currentStep]->text : L"-",basicFont, 18, 490);
+		std::vector < std::wstring > descriptionLines = wrapText((cursor < actualQuests.size()) ? actualQuests[cursor]->steps[actualQuests[cursor]->currentStep]->text : L"-", WrapperType::Simple, basicFont, 18, 490);
 		
 		std::wstring descriptionText = L"";
 

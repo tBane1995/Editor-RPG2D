@@ -4,6 +4,7 @@
 enum class TextAlignment { Left, Center };
 enum class VerticalAlignment{ Top, Center };
 
+
 class TextArea {
 public:
 	sf::Vector2f position;
@@ -13,6 +14,7 @@ public:
 	sf::Font font;
 	TextAlignment alignment;
 	VerticalAlignment vertical_alignment;
+	WrapperType wrapper_type;
 
 	std::wstring text;
 	std::vector < std::wstring > lines;
@@ -25,7 +27,11 @@ public:
 
 	
 
-	TextArea(std::wstring text, sf::Vector2f position = sf::Vector2f(0, 0), float line_length = 0, sf::Vector2f size = sf::Vector2f(0, 0), TextAlignment alignment = TextAlignment::Left, VerticalAlignment vert_alignment = VerticalAlignment::Center) {
+	TextArea(std::wstring text, sf::Vector2f position = sf::Vector2f(0, 0), 
+		float line_length = 0, sf::Vector2f size = sf::Vector2f(0, 0), 
+		TextAlignment alignment = TextAlignment::Left, VerticalAlignment vert_alignment = VerticalAlignment::Center,
+		WrapperType wrapperType = WrapperType::Simple) {
+
 		this->text = text;
 		this->position = position;
 		this->line_length = line_length - 2 * characterSize * 0.2f;
@@ -33,7 +39,9 @@ public:
 		this->alignment = alignment;
 		this->vertical_alignment = vert_alignment;
 
-		lines = wrapText(text, font, characterSize, line_length - 2*margin);
+		this->wrapper_type = wrapperType;
+
+		lines = wrapText(text, wrapper_type, font, characterSize, line_length - 2*margin);
 
 		//std::cout << "lines size: " << lines.size() << "\n";
 
@@ -124,7 +132,7 @@ public:
 
 		characterSize = val;
 
-		lines = wrapText(text, font, characterSize, line_length - 2*margin);
+		lines = wrapText(text, wrapper_type, font, characterSize, line_length - 2 * margin);
 
 		generateText();
 	}
@@ -132,7 +140,7 @@ public:
 	void setFont(sf::Font& font) {
 		this->font = font;
 
-		lines = wrapText(text, font, characterSize, line_length - 2*margin);
+		lines = wrapText(text, wrapper_type, font, characterSize, line_length - 2 * margin);
 
 		generateText();
 	}
@@ -147,7 +155,7 @@ public:
 
 		this->text = text;
 
-		lines = wrapText(text, font, characterSize, line_length - 2*margin);
+		lines = wrapText(text, wrapper_type, font, characterSize, line_length - 2 * margin);
 
 		generateText();
 	}

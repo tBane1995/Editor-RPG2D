@@ -331,7 +331,10 @@ void Editor() {
                             }
                             else if (mouse_state == MouseState::Selecting) {
                                 mouseSelection();
-                                selectGameObjects();
+                                
+                                if (painter->tool != toolType::Rectangle && painter->tool != toolType::Elipse) {
+                                    selectGameObjects();
+                                }
                                 //std::cout << "selecting\n";
                             }
                         }
@@ -420,7 +423,17 @@ void Editor() {
                         
                     }
 
-                    if (mouse_state == MouseState::Selecting) {
+                    // TO-DO
+                    if (mouse_state == MouseState::Selecting && (painter->tool == toolType::Rectangle || painter->tool == toolType::Elipse)) {
+                        if(painter->tool == toolType::Rectangle)
+                            std::cout << "rect\n";
+
+                        if (painter->tool == toolType::Elipse)
+                            std::cout << "elipse\n";
+
+                        mouseSelection();
+                    }
+                    else if (mouse_state == MouseState::Selecting) {
                         mouseSelection();
                         selectGameObjects();
                         //std::cout << "selecting\n";
@@ -456,6 +469,17 @@ void Editor() {
                             }
                         }
                     }
+                    else {
+                        palette->handleEvent(event);
+                    }
+                }
+                else if (event.type == sf::Event::MouseWheelScrolled) {
+                    if (!dialogs.empty()) {
+                        dialogs.back()->handleEvent(event);
+                    }
+                    else {
+                        palette->handleEvent(event);
+                    }
                 }
                 else if (event.type == sf::Event::KeyPressed) {
 
@@ -476,35 +500,39 @@ void Editor() {
                     }
 
                     if (event.key.code == sf::Keyboard::F5) {
-                        mapa->save();
+                        if (dialogs.empty()) {
+                            mapa->save();
+                        }
                     }
 
                     if (event.key.code == sf::Keyboard::F6) {
-                        mapa->load();
+                        if (dialogs.empty()) {
+                            mapa->load();
+                        }
                     }
 
                     if (event.key.code == sf::Keyboard::M) {
-                        mapa->saveAsPNG("mapa.png");
-                    }
-
-                    if (event.key.code == sf::Keyboard::N) {
-                        for (auto& m : meshes) {
-                            m->save();
+                        if (dialogs.empty()) {
+                            mapa->saveAsPNG("mapa.png");
                         }
                     }
 
                     if (event.key.code == sf::Keyboard::G) {
-                        mapa->binary_save(L"world\\test_world.wrd");
-                        std::cout << "saved\n";
+                        if (dialogs.empty()) {
+                            mapa->binary_save(L"world\\test_world.wrd");
+                        }
                     }
 
                     if (event.key.code == sf::Keyboard::H) {
-                        mapa->binary_load(L"world\\test_world.wrd");
-                        std::cout << "loaded\n";
+                        if (dialogs.empty()) {
+                            mapa->binary_load(L"world\\test_world.wrd");
+                        }
                     }
 
                     if (event.key.code == sf::Keyboard::B) {
-                        menu_bar->WE_show_paletteBtn->click();
+                        if (dialogs.empty()) {
+                            menu_bar->WE_show_paletteBtn->click();
+                        }
                     }
 
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && event.key.code == sf::Keyboard::Z) {
@@ -517,9 +545,6 @@ void Editor() {
 
                 }
 
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                    palette->handleEvent(event);
-                }
             } // events
 
             // FRAMES PER SECONDS
@@ -586,7 +611,9 @@ void Editor() {
             mapa->update();
 
             if (context_menu == nullptr && mouse_state == MouseState::Selecting) {
-                selectGameObjects();
+                if (painter->tool != toolType::Rectangle && painter->tool != toolType::Elipse) {
+                    selectGameObjects();
+                }
             }
 
             updateGameObjects();

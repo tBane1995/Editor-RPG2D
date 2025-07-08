@@ -345,7 +345,10 @@ public:
         pos.y = position.y + rect_height / 2.0f - cancelButton->getSize().y - margin_vert;
         selectButton->setPosition(pos);
 
+        scrollbar->setScrollAreaSize(entriesRect.getSize());
+        scrollbar->setScrollAreaPosition(entriesRect.getPosition() - cam->position);
     }
+
 
     ~FileDialog() {
         delete titleText;
@@ -408,7 +411,7 @@ public:
         scrollbarPos.y = position.y - (rect_height) / 2.0f + titlebar.getSize().y;
         if (scrollbar != nullptr)
             delete scrollbar;
-        scrollbar = new Scrollbar(scrollbarSize, scrollbarPos, 0, paths.size() - 1, 0, 7);
+        scrollbar = new Scrollbar(scrollbarSize, scrollbarPos, 0, paths.size() - 1, 0, 1, 7);
         scrollbar->onclick_func = [this]() {
             setFilenamesTexts();
             };
@@ -483,9 +486,7 @@ public:
 
     void handleEvent(sf::Event& event) {
 
-        // TO-DO - to add ScrollBar onclick()
         scrollbar->handleEvent(event);
-        //
 
         selectedFilename->handleEvent(event);
 
@@ -533,7 +534,7 @@ public:
         for (auto& entry : entries)
             entry->draw();
 
-        scrollbar->draw();
+        
 
         // submit bar
         window->draw(submitbar);
@@ -542,6 +543,8 @@ public:
         selectedFilename->draw();
         selectButton->draw();
         cancelButton->draw();
+
+        scrollbar->draw();
     }
 };
 

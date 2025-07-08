@@ -4,8 +4,6 @@
 sf::Vector2i mousePosition;
 sf::Vector2f worldMousePosition;
 
-sf::Time mouse_start_time;
-
 sf::Vector2i startMousePosition;
 sf::Vector2f startWorldMousePosition;
 

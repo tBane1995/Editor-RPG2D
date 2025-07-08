@@ -56,13 +56,14 @@ public:
 		this->dialogue_to_edit = dialogue_to_edit;
 		
 		text = getTextFromDialogue();
-		std::cout << ConvertWideToUtf8(text) << "\n";
+		//std::cout << ConvertWideToUtf8(text) << "\n";
 
 		float line_length = Dialog::getSize().x - 2 * corner_size;
 		sf::Vector2f text_area_rect_size = Dialog::getSize() - sf::Vector2f(2 * corner_size, 2 * corner_size);
 		
 		sf::Vector2f text_area_pos(-Dialog::getSize().x/2.0f + corner_size, -Dialog::getSize().y/2.0f + corner_size);
-		text_area = new TextArea(text, text_area_pos, line_length, text_area_rect_size);
+		text_area = new TextArea(text, text_area_pos, line_length, text_area_rect_size, 
+			TextAlignment::Left, VerticalAlignment::Top, WrapperType::Normal);
 	}
 
 	~DialogueEditor() { }

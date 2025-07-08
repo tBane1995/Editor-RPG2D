@@ -383,7 +383,6 @@ public:
                 L"-F6 - wczytaj mapę\n"
                 L"-B - pokaż/ukryj paletę\n"
                 L"-M - wykonaj zapis mapy do pliku PNG (w głównym folderze z programem tworzy plik \"mapa.png\")\n"
-                L"-N - zapisz meshe GameObjectów\n"
                 L"-G - zapis binarny mapy jako \"world\\test_world.wrd\"\n"
                 L"-H - wczytanie zapisu binarnego mapy \"world\\test_world.wrd\"\n"
                 L"\n"

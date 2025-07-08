@@ -1,7 +1,7 @@
 ﻿#ifndef TerrainAndFloors_hpp
 #define TerrainAndFloors_hpp
 
-short tileSide = 16;
+float tileSide = 16.0f;
 
 class TerrainPrefab : public GameObject {
 public:
@@ -275,7 +275,7 @@ public:
 				quad[2].position = sf::Vector2f((coord_x + 1) * tileSide, (coord_y + 1) * tileSide);
 				quad[3].position = sf::Vector2f(coord_x * tileSide, (coord_y + 1) * tileSide);
 
-				edit(x, y, flo->floors[y*width + x]);
+				edit(x, y, flo->floors[y * width + x]);
 			}
 	}
 
@@ -284,7 +284,7 @@ public:
 		if (x < 0 || x >= width || y < 0 || y >= height)
 			return;
 
-		if (value > floorGameObjects.size()-1 || value < 0)
+		if (value > floorGameObjects.size() - 1 || value < 0)
 			return;
 
 		floors[y * width + x] = value;
@@ -300,9 +300,9 @@ public:
 		//cout << "tu: " << tu << ", tv: " << tv << "\n";
 
 		quad[0].texCoords = sf::Vector2f(tu, tv);
-		quad[1].texCoords = sf::Vector2f(tu + tileSide - 1, tv);
-		quad[2].texCoords = sf::Vector2f(tu + tileSide - 1, tv + tileSide - 1);
-		quad[3].texCoords = sf::Vector2f(tu, tv + tileSide - 1);
+		quad[1].texCoords = sf::Vector2f(tu + tileSide, tv);
+		quad[2].texCoords = sf::Vector2f(tu + tileSide, tv + tileSide);
+		quad[3].texCoords = sf::Vector2f(tu, tv + tileSide);
 	}
 
 	void edit(sf::Vector2f worldMousePosition, short value) {
@@ -313,7 +313,7 @@ public:
 		if (coord_x < 0 || coord_x >= width || coord_y < 0 || coord_y >= height)
 			return;
 
-		if (value > floorGameObjects.size()-1 || value < 0)
+		if (value > floorGameObjects.size() - 1 || value < 0)
 			return;
 
 		floors[coord_y * width + coord_x] = value;
@@ -326,15 +326,15 @@ public:
 		//cout << "tu: " << tu << ", tv: " << tv << "\n";
 
 		quad[0].texCoords = sf::Vector2f(tu, tv);
-		quad[1].texCoords = sf::Vector2f(tu + tileSide - 1, tv);
-		quad[2].texCoords = sf::Vector2f(tu + tileSide - 1, tv + tileSide - 1);
-		quad[3].texCoords = sf::Vector2f(tu, tv + tileSide - 1);
+		quad[1].texCoords = sf::Vector2f(tu + tileSide, tv);
+		quad[2].texCoords = sf::Vector2f(tu + tileSide, tv + tileSide);
+		quad[3].texCoords = sf::Vector2f(tu, tv + tileSide);
 	}
 
 	void setPosition(sf::Vector2f position) {
-		
-		coords.x = position.x/16;
-		coords.y = position.y/16;
+
+		coords.x = position.x / 16;
+		coords.y = position.y / 16;
 
 		short coord_x, coord_y;
 
@@ -357,8 +357,9 @@ private:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
+
 		states.transform *= getTransform();
-		states.texture = &*floorset->texture;
+		states.texture = &*floorset->texture;	// TO-DO
 		target.draw(vertexes, states);
 
 
@@ -374,7 +375,7 @@ void createTerrainPrefabs() {
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_0_water", 0));           // 1
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_1_sands", 1));           // 2
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_2_grass", 2));           // 3
-	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_3_gravel", 3));          // 4
+	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_3_gravel", 3));           // 4
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_4_steps", 4));           // 5
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_5_highlands", 5));       // 6
 	terrainGameObjects.push_back(new TerrainPrefab(L"tiles\\tile_6", 6));                 // 7

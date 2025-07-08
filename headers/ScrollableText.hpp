@@ -17,25 +17,37 @@ public:
 		textarea->setRectColor(panelColor_normal);
 		textarea->setPosition(sf::Vector2f(-size.x / 2.0f + dialog_border_width + 8, -size.y / 2.0f + dialog_border_width + 8));
 		sf::Vector2f scrollbar_position = sf::Vector2f(size.x / 2.0f - dialog_border_width - scrollbar_size.x - 8, -size.y / 2.0f + dialog_border_width + 8);
-		float scroll_max = textarea->getSize().y + size.y/2.0f;
-		float scroll_len = size.x;
-		scrollbar = new Scrollbar(scrollbar_size, scrollbar_position, 0, scroll_max, 0, scroll_len, ScrollbarPartSize::_16);
+		float line_hgh = textarea->font.getLineSpacing(textarea->characterSize);
+		float scroll_max = textarea->getSize().y - this->getSize().y + line_hgh;
+		float scroll_step = line_hgh;
+		float scroll_len = size.y - 2.0f * (dialog_border_width + 8);
+		scrollbar = new Scrollbar(scrollbar_size, scrollbar_position, 0, scroll_max, 0, scroll_step, scroll_len, ScrollbarPartSize::_16);
 
 		// TO-DO - generowanie tekstury przewijalnej dla tekstu - dodać scrollbar onclick
 		text_texture.create(size.x - 2.0f * (dialog_border_width + 8) - scrollbar_size.x, size.y - 2.0f * (dialog_border_width + 8));
-		sf::View v = sf::View(sf::FloatRect(sf::Vector2f(cam->position.x - size.x / 2.0f + dialog_border_width + 8, cam->position.y - size.y / 2.0f + dialog_border_width + 8), sf::Vector2f(size.x - 2 * (dialog_border_width + 8) - scrollbar->size.x, size.y - 2 * (dialog_border_width + 8))));
+		sf::View v = sf::View(sf::FloatRect(
+			sf::Vector2f(cam->position.x - size.x / 2.0f + dialog_border_width + 8, cam->position.y - size.y / 2.0f + dialog_border_width + 8), 
+			sf::Vector2f(size.x - 2 * (dialog_border_width + 8) - scrollbar->size.x, size.y - 2 * (dialog_border_width + 8))));
 		text_texture.setView(v);
 		text_texture.setSmooth(true);
 		text_texture.clear(sf::Color::Transparent);
+
 		for (auto& text : textarea->texts)
 			text_texture.draw(text);
 		text_texture.display();
 		text_sprite = sf::Sprite(text_texture.getTexture());
+
 		sf::Vector2f textpos;
 		textpos.x = cam->position.x + position.x - size.x / 2.0f + dialog_border_width + 8;
 		textpos.y = cam->position.y + position.y - size.y / 2.0f + dialog_border_width + 8;
 		text_sprite.setPosition(textpos);
-		// TO-DO
+
+		sf::Vector2f scroll_rect_size;
+		scroll_rect_size.x = this->text_texture.getSize().x + scrollbar->size.x;
+		scroll_rect_size.y = scrollbar->size.y;
+
+		scrollbar->setScrollAreaSize(scroll_rect_size);
+		scrollbar->setScrollAreaPosition(sf::Vector2f(text_sprite.getPosition() - cam->position));
 	}
 
 	~ScrollableText() {
@@ -50,6 +62,7 @@ public:
 		sf::Vector2f position;
 		position.x = textarea->position.x;
 		position.y = dialog_border_width + 8 - scrollbar->scroll_value - size.y / 2.0f;
+		std::cout << position.y << "\n";
 		textarea->setPosition(position);
 
 		sf::View v = sf::View(sf::FloatRect(sf::Vector2f(cam->position.x - size.x / 2.0f + dialog_border_width + 8, cam->position.y - size.y / 2.0f + dialog_border_width + 8), sf::Vector2f(size.x - 2 * (dialog_border_width + 8) - scrollbar->size.x, size.y - 2 * (dialog_border_width + 8))));
@@ -64,12 +77,14 @@ public:
 
 	void update() {
 		GUIwasOpen = true;
+		scrollbar->update();
 	}
 
 	void draw() {
 		Panel::draw();
-		scrollbar->draw();
+		
 		window->draw(text_sprite);
+		scrollbar->draw();
 	}
 
 };

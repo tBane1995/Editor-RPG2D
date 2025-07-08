@@ -291,6 +291,9 @@ public:
 
         loadPalette();
         create_scrollbar();
+
+        
+        
     }
 
     void deletePaletteButtons() {
@@ -1025,7 +1028,11 @@ public:
         scrollbar_position.x = screenWidth / 2.0f - scrollbar_size.x;
         scrollbar_position.y = screenHeight / 2.0f - size.y * 64;
         short scrollbar_max_value = ceil(float(gameObjectsAndTexturesInfo.size()) / 5.0f);
-        scrollbar = new Scrollbar(scrollbar_size, scrollbar_position, 0, scrollbar_max_value, 0, size.y, ScrollbarPartSize::_20);
+        scrollbar = new Scrollbar(scrollbar_size, scrollbar_position, 0, scrollbar_max_value, 0, 1, size.y, ScrollbarPartSize::_20);
+    
+        scrollbar->setScrollAreaSize(sf::Vector2f(rect.getSize().x, scrollbar->size.y));
+        scrollbar->setScrollAreaPosition(sf::Vector2f(screenWidth / 2.0f - rect.getSize().x, screenHeight / 2.0f - scrollbar->size.y));
+
     }
 
     void createToolsButtons() {
@@ -1155,10 +1162,13 @@ public:
         btnToolsRectangle->onclick_func = [this]() {
             selectedToolButton = btnToolsRectangle;
             painter->tool = toolType::Rectangle;
+
             if (painter->prefabToPaint == nullptr) {
                 painter->setPrefabToPaint(gameObjectsAndTexturesInfo[1]->object);
                 selectedPaletteButton = paletteButtons[1];
             }
+
+            unselectGameObjects();
             };
 
 
@@ -1177,10 +1187,14 @@ public:
         btnToolsElipse->onclick_func = [this]() {
             selectedToolButton = btnToolsElipse;
             painter->tool = toolType::Elipse;
+
             if (painter->prefabToPaint == nullptr) {
                 painter->setPrefabToPaint(gameObjectsAndTexturesInfo[1]->object);
                 selectedPaletteButton = paletteButtons[1];
             }
+
+            unselectGameObjects();
+
             };
 
 
@@ -1718,6 +1732,10 @@ public:
     void handleEvent(sf::Event& event) {
 
         if (state == PaletteStates::Open) {
+
+            scrollbar->handleEvent(event);
+            
+
             for (auto& tool : toolsButtons)
                 tool->handleEvent(event);
 
@@ -1730,7 +1748,8 @@ public:
             for (auto& btn : paletteButtons)
                 btn->handleEvent(event);
 
-            scrollbar->handleEvent(event);
+            
+                
 
             loadPalette();
         }
@@ -1738,7 +1757,7 @@ public:
 
     void update() {
 
-        rect.setPosition(cam->position.x + screenWidth / 2.0f - rect.getSize().x/2, cam->position.y + screenHeight / 2.0f - rect.getSize().y/2);
+        rect.setPosition(cam->position.x + screenWidth / 2.0f - rect.getSize().x/2, cam->position.y + screenHeight / 2.0f - rect.getSize().y);
 
         bool hover_action;
 
@@ -1778,6 +1797,7 @@ public:
             }
 
             scrollbar->draw();
+
         }
     }
 };

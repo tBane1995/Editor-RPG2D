@@ -5797,7 +5797,7 @@ Nature "natures\bush_1" y=1696 x=3952
 FlatObject "flatObjects\stonepath_1" y=1680 x=4080
 FlatObject "flatObjects\stonepath_1" y=1648 x=4080
 FlatObject "flatObjects\path_2" y=1776 x=3984
-FlatObject "flatObjects\path_2" y=1760 x=4016
+FlatObject "flatObjects\path_2" y=1760 x=4032
 Character "13" y=1568 x=4016
 
 Chunk y=6 x=16

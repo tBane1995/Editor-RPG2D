@@ -80,7 +80,7 @@ public:
 		this->count = count;
 		collected = false;
 
-		//sprite.setScale(0.75f, 0.75f);
+		sprite.setScale(0.75f, 0.75f);
 	}
 
 	ItemOnMap(GameObject* object, short count = 1) : GameObject(object) {
@@ -90,7 +90,7 @@ public:
 		this->count = count;
 		collected = false;
 
-		//sprite.setScale(0.75f, 0.75f);
+		sprite.setScale(0.75f, 0.75f);
 	}
 
 	virtual ~ItemOnMap() { }

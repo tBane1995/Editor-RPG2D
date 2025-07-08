@@ -15,13 +15,18 @@ public:
     sf::Vector2f size;
     sf::Vector2f position;
 
+    sf::RectangleShape scroll_area; // area where mouseScroll active scrollbar
+    sf::Vector2f scroll_area_size;
+    sf::Vector2f scroll_area_position;
+
     sf::Color bar_color;
     sf::Color scroll_color;
 
     short min_value;
     short max_value;
-    short scroll_value;
-    short scroll_length;
+    short scroll_value;         
+    short scroll_step;          // shift value
+    short scroll_length;        // length of scrollbar (in units)
 
     float start_mouse_y;
     bool is_pressed;
@@ -44,15 +49,14 @@ public:
     sf::Sprite spr_scroll_center;
     sf::Sprite spr_scroll_bottom;
 
-    
-
-    Scrollbar(sf::Vector2f size, sf::Vector2f position, short min_value, short max_value, short scroll_value, short scroll_length, ScrollbarPartSize part_size = ScrollbarPartSize::_16) : ElementGUI() {
+    Scrollbar(sf::Vector2f size, sf::Vector2f position, short min_value, short max_value, short scroll_value, short scroll_step, short scroll_length, ScrollbarPartSize part_size = ScrollbarPartSize::_16) : ElementGUI() {
 
         this->size = size;
         this->position = position;
 
         this->min_value = min_value;
         this->max_value = max_value;
+        this->scroll_step = scroll_step;
         this->scroll_length = scroll_length;
 
         setValue(scroll_value);
@@ -163,6 +167,14 @@ public:
             spr_scroll_bottom.setPosition(p.x, p.y + size.x + size.x + getScrollSizeY() - 2 * size.x);
         }
 
+        scroll_area = sf::RectangleShape();
+        scroll_area.setFillColor(sf::Color(128, 48, 8, 128));
+        scroll_area_size = size;
+        scroll_area_position = position;
+
+        setScrollAreaSize(scroll_area_size);
+        setScrollAreaPosition(scroll_area_position);
+        
     }
 
     void setPosition(sf::Vector2f pos) {
@@ -191,6 +203,17 @@ public:
         spr_scroll_top.setPosition(p.x, p.y + size.x);
         spr_scroll_center.setPosition(p.x, p.y + size.x + size.x);
         spr_scroll_bottom.setPosition(p.x, p.y + size.x + size.x + getScrollSizeY() - 2 * size.x);
+
+    }
+
+    void setScrollAreaSize(sf::Vector2f size) {
+        scroll_area_size = size;
+        scroll_area.setSize(scroll_area_size);
+    }
+
+    void setScrollAreaPosition(sf::Vector2f position) {
+        scroll_area_position = position;
+        scroll_area.setPosition(scroll_area_position + cam->position);
     }
 
     void setValue(short value) {
@@ -255,8 +278,27 @@ public:
 
     void handleEvent(sf::Event& event) {
 
+        if (event.type == sf::Event::MouseWheelScrolled) {
+            if (scroll_area.getGlobalBounds().contains(worldMousePosition)) {
+                std::cout << "scroll\n";
 
-        if (event.type == sf::Event::MouseButtonPressed) {
+                int d = 0;
+                if (event.mouseWheelScroll.delta > 0) d = 1;
+                if (event.mouseWheelScroll.delta < 0) d = -1;
+
+                int newValue = scroll_value - d * scroll_step;
+
+                setValue(newValue);
+                scrollPositioning();
+
+                GUIwasClicked = true;
+                ElementGUI_pressed = this;
+                if (onclick_func) {
+                    onclick_func();
+                }
+            }
+        }
+        else if (event.type == sf::Event::MouseButtonPressed) {
             if (event.mouseButton.button == sf::Mouse::Left) {
                 if (isScrollHover()) {
                     start_mouse_y = worldMousePosition.y - scroll_top.getPosition().y;
@@ -330,7 +372,8 @@ public:
         if (isScrollHover() || isBarHover()) {
             GUIwasHover = true;
         }
-            
+
+        scroll_area.setPosition(scroll_area_position + cam->position);
     }
 
     void draw() {
@@ -354,6 +397,9 @@ public:
         window->draw(spr_scroll_top);
         window->draw(spr_scroll_center);
         window->draw(spr_scroll_bottom);
+
+        // SCROLL AREA
+        window->draw(scroll_area);
     }
 };
 

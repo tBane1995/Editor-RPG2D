@@ -773,7 +773,7 @@ public:
 			sf::Vector2f scrollbar_position;
 			scrollbar_position.x = parent->position.x + parent->rect.getSize().x / 2.0f - 16 - border_width - corner_size;
 			scrollbar_position.y = slots.front()->position.y - slots.front()->texture->texture->getSize().y / 2.0f;
-			scrollbar = new Scrollbar(scrollbar_size, scrollbar_position, 0, items_list.size(), 0, slots_count.x*slots_count.y);
+			scrollbar = new Scrollbar(scrollbar_size, scrollbar_position, 0, 1, items_list.size(), 0, slots_count.x*slots_count.y);
 		}
 
 		~Equipment() {

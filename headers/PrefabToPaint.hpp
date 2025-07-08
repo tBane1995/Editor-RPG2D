@@ -222,9 +222,9 @@ public:
         int end_x = std::max(ceil(startWorldMousePosition.x / tileSide), ceil(worldMousePosition.x / tileSide));
         int end_y = std::max(ceil(startWorldMousePosition.y / tileSide), ceil(worldMousePosition.y / tileSide));
 
-        std::cout << "start: " << start_x << ", " << start_y << "\n";
-        std::cout << "end: " << end_x << ", " << end_y << "\n";
-        std::cout << "\n\n";
+        //std::cout << "start: " << start_x << ", " << start_y << "\n";
+        //std::cout << "end: " << end_x << ", " << end_y << "\n";
+        //std::cout << "\n\n";
 
         for (int y = start_y; y < end_y; y++)
             for (int x = start_x; x < end_x; x++) {
