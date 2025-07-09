@@ -989,7 +989,10 @@ public:
 
             bool show_outside_sprite = true;
 
-            if (editor_state == EditorStates::MapEditorInit) {
+            if (!dialogs.empty()) {
+                //show_outside_sprite = true;
+            }
+            else if (editor_state == EditorStates::MapEditorInit) {
                 show_outside_sprite = false;
             }
             else {

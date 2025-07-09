@@ -399,7 +399,7 @@ public:
         window->draw(spr_scroll_bottom);
 
         // SCROLL AREA
-        window->draw(scroll_area);
+        //window->draw(scroll_area);
     }
 };
 

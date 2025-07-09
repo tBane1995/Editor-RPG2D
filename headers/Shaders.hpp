@@ -46,13 +46,12 @@ void loadShaders() {
 	loadShader(L"shaders\\water.frag");
 	loadShader(L"shaders\\lake", L"shaders\\vertex.vert", L"shaders\\lake.frag");
 	loadShader(L"shaders\\river", L"shaders\\vertex.vert", L"shaders\\river.frag");
+	loadShader(L"shaders\\swamp", L"shaders\\vertex.vert", L"shaders\\swamp.frag");
 	loadShader(L"shaders\\palette_lake", L"shaders\\vertex.vert", L"shaders\\palette_lake.frag");
 	loadShader(L"shaders\\shadow", L"shaders\\vertex.vert", L"shaders\\shadow.frag");
-	loadShader(L"shaders\\circle.frag");
-	loadShader(L"shaders\\jagged_circle.frag");
-	loadShader(L"shaders\\circles.frag");
 	loadShader(L"shaders\\renderer.frag");
 	loadShader(L"shaders\\highlighted.frag");
+	
 
 }
 
@@ -72,8 +71,8 @@ void updateShaders() {
 
 	sf::Vector2f resolution(screenWidth, screenHeight);
 
-	for(auto & s : shaders)
-		s->shader->setUniform("time", currentTime.asSeconds());
+	//for(auto & s : shaders)
+		//s->shader->setUniform("time", currentTime.asSeconds());
 
 	// lake shader
 	Shader* s = getShader(L"shaders\\lake");
@@ -88,6 +87,11 @@ void updateShaders() {
 	s = getShader(L"shaders\\river");
 	s->shader->setUniform("resolution", resolution);
 	s->shader->setUniform("direction", sf::Vector2f(1.0f, -1.0f));
+
+	// swamp
+	s = getShader(L"shaders\\swamp");
+	s->shader->setUniform("resolution", resolution);
+	s->shader->setUniform("time", currentTime.asSeconds());
 }
 
 

@@ -671,8 +671,6 @@ int main()
     
     //editPixels("assets\\sets\\new_sets\\brown tshirt", sf::Color::White, sf::Color::Transparent);
     
-
-    editPixels("assets\\sets\\body\\man", sf::Color::White, sf::Color::Transparent);
     editPixels("assets\\sets\\items\\gray apron", sf::Color::White, sf::Color::Transparent);
     
     ProgressBar* progress_bar = new ProgressBar();

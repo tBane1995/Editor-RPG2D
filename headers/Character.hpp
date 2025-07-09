@@ -1054,8 +1054,7 @@ public:
 		renderTexture->display();
 	}
 
-	void idling() {
-
+	void generateNextFrame() {
 		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
 			(frame == 3) ? frame = 0 : frame += 1;
 			last_action_time = currentTime;
@@ -1064,30 +1063,18 @@ public:
 		createRenderTexture();
 		sprite.setTexture(renderTexture->getTexture());
 		setPosition(position);
+	}
+
+	void idling() {
+
 	}
 
 	void running() {
 
-		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
-			(frame == 3) ? frame = 0 : frame += 1;
-			last_action_time = currentTime;
-		}
-
-		createRenderTexture();
-		sprite.setTexture(renderTexture->getTexture());
-		setPosition(position);
 	}
 
 	void attacking() {
 
-		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
-			(frame == 3) ? frame = 0 : frame += 1;
-			last_action_time = currentTime;
-		}
-
-		createRenderTexture();
-		sprite.setTexture(renderTexture->getTexture());
-		setPosition(position);
 	}
 
 	void update() {
@@ -1098,8 +1085,9 @@ public:
 
 		loadSprites();
 		createRenderTexture();
+		generateNextFrame();
 
-		idling();
+		//idling();
 		//running();
 		//attacking();
 		

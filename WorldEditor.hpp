@@ -97,8 +97,7 @@ void Editor() {
 
                 mapa = new Mapa();
 
-                ///cam->setPosition(sf::Vector2f(1280, 320+32));
-                cam->setPosition(sf::Vector2f(1650, 1700));
+                //cam->setPosition(sf::Vector2f(1650, 1700));
 
                 clearAllMainListsOfGameObjects();
                 mapa->load();
@@ -411,67 +410,70 @@ void Editor() {
                         dialogs.back()->handleEvent(event);
                         std::cout << "event\n";
                     }
-
-                    if (mouse_state == MouseState::Press) {
-                        if (ElementGUI_hovered == nullptr && ElementGUI_pressed == nullptr) {
-                            float distance = sqrt(pow(startWorldMousePosition.x - worldMousePosition.x, 2) + pow(startWorldMousePosition.y - worldMousePosition.y, 2));
-
-                            if (distance > 8) {
-                                mouse_state = MouseState::Selecting;
-                            }
-                        }
-                        
-                    }
-
-                    // TO-DO
-                    if (mouse_state == MouseState::Selecting && (painter->tool == toolType::Rectangle || painter->tool == toolType::Elipse)) {
-                        if(painter->tool == toolType::Rectangle)
-                            std::cout << "rect\n";
-
-                        if (painter->tool == toolType::Elipse)
-                            std::cout << "elipse\n";
-
-                        mouseSelection();
-                    }
-                    else if (mouse_state == MouseState::Selecting) {
-                        mouseSelection();
-                        selectGameObjects();
-                        //std::cout << "selecting\n";
-                    }
-                    else if (mouse_state == MouseState::MovingGameObjects) {
-                        for (auto& obj : selectedGameObjects) {
-                            Chunk* chunk;
-                            sf::Vector2f pos;
-
-                            (obj->_object->type == GameObjectType::Monster) ? pos = dynamic_cast<Monster*>(obj->_object)->base : pos = obj->_object->position;
-                            chunk = mapa->getChunk(pos);
-
-                            if (chunk != nullptr)
-                                chunk->deleteGameObject(obj->_object);
-
-                            obj->update();
-                            if (obj->_object->type == GameObjectType::Monster) {
-                                Monster* m = dynamic_cast<Monster*>(obj->_object);
-                                m->base = obj->_object->position;
-                                m->state = State::Idle;
-                                m->path.clear();    // TO-DO
-                            }
-
-                            (obj->_object->type == GameObjectType::Monster) ? pos = dynamic_cast<Monster*>(obj->_object)->base : pos = obj->_object->position;
-                            chunk = mapa->getChunk(pos);
-
-                            if (chunk != nullptr) {
-                                //std::cout << "new chunk is [" << chunk->coords.x << ", " << chunk->coords.y << "]\n";
-                                chunk->addGameObject(obj->_object);
-                            }
-                            else {
-                                //std::cout << "new chunk is nullptr\n";
-                            }
-                        }
-                    }
                     else {
-                        palette->handleEvent(event);
+                        if (mouse_state == MouseState::Press) {
+                            if (ElementGUI_hovered == nullptr && ElementGUI_pressed == nullptr) {
+                                float distance = sqrt(pow(startWorldMousePosition.x - worldMousePosition.x, 2) + pow(startWorldMousePosition.y - worldMousePosition.y, 2));
+
+                                if (distance > 8) {
+                                    mouse_state = MouseState::Selecting;
+                                }
+                            }
+
+                        }
+
+                        // TO-DO
+                        if (mouse_state == MouseState::Selecting && (painter->tool == toolType::Rectangle || painter->tool == toolType::Elipse)) {
+                            if (painter->tool == toolType::Rectangle)
+                                std::cout << "rect\n";
+
+                            if (painter->tool == toolType::Elipse)
+                                std::cout << "elipse\n";
+
+                            mouseSelection();
+                        }
+                        else if (mouse_state == MouseState::Selecting) {
+                            mouseSelection();
+                            selectGameObjects();
+                            //std::cout << "selecting\n";
+                        }
+                        else if (mouse_state == MouseState::MovingGameObjects) {
+                            for (auto& obj : selectedGameObjects) {
+                                Chunk* chunk;
+                                sf::Vector2f pos;
+
+                                (obj->_object->type == GameObjectType::Monster) ? pos = dynamic_cast<Monster*>(obj->_object)->base : pos = obj->_object->position;
+                                chunk = mapa->getChunk(pos);
+
+                                if (chunk != nullptr)
+                                    chunk->deleteGameObject(obj->_object);
+
+                                obj->update();
+                                if (obj->_object->type == GameObjectType::Monster) {
+                                    Monster* m = dynamic_cast<Monster*>(obj->_object);
+                                    m->base = obj->_object->position;
+                                    m->state = State::Idle;
+                                    m->path.clear();    // TO-DO
+                                }
+
+                                (obj->_object->type == GameObjectType::Monster) ? pos = dynamic_cast<Monster*>(obj->_object)->base : pos = obj->_object->position;
+                                chunk = mapa->getChunk(pos);
+
+                                if (chunk != nullptr) {
+                                    //std::cout << "new chunk is [" << chunk->coords.x << ", " << chunk->coords.y << "]\n";
+                                    chunk->addGameObject(obj->_object);
+                                }
+                                else {
+                                    //std::cout << "new chunk is nullptr\n";
+                                }
+                            }
+                        }
+                        else {
+                            palette->handleEvent(event);
+                        }
                     }
+
+                    
                 }
                 else if (event.type == sf::Event::MouseWheelScrolled) {
                     if (!dialogs.empty()) {

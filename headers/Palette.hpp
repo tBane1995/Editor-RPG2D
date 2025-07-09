@@ -68,22 +68,7 @@ public:
             }
             else if (this->object->type == GameObjectType::Character) {
                 texture = dynamic_cast<Character*>(this->object)->renderTexture->getTexture();
-
                 rect = sf::IntRect(0, 0, texture.getSize().x, texture.getSize().y);
-
-                if (texture.getSize().x > texture.getSize().y) {
-                    scale.x = 64.0f / float(texture.getSize().x) * 0.75f;
-                    scale.y = 64.0f / float(texture.getSize().x) * 0.75f;
-                }
-                else if (texture.getSize().x < texture.getSize().y) {
-                    scale.x = 64.0f / float(texture.getSize().y) * 0.75f;
-                    scale.y = 64.0f / float(texture.getSize().y) * 0.75f;
-                }
-                else {
-                    scale.x = 64.0f / float(texture.getSize().x) * 0.75f;
-                    scale.y = 64.0f / float(texture.getSize().x) * 0.75f;
-                }
-
                 origin = sf::Vector2f(texture.getSize().x / 2, texture.getSize().y / 2);
             }
             else if (this->object->type != GameObjectType::ItemOnMap) {
@@ -137,26 +122,27 @@ public:
         
     }
 
-    GameObjectAndTextureInfo(GameObject* object, sf::Texture* texture, sf::Vector2f scale, sf::IntRect rect) {
+    GameObjectAndTextureInfo(GameObject* object, sf::Texture* texture, sf::Vector2f origin, sf::Vector2f scale, sf::IntRect rect) {
         this->object = object;
 
         this->texture = *texture;
 
+        this->origin = origin;
         this->rect = rect;
         this->scale = scale;
 
-        this->origin = sf::Vector2f(32-8, 32-8);
+        
     }
 
-    GameObjectAndTextureInfo(GameObject* object, const sf::Texture* texture, sf::Vector2f scale, sf::IntRect rect) {
+    GameObjectAndTextureInfo(GameObject* object, const sf::Texture* texture, sf::Vector2f origin, sf::Vector2f scale, sf::IntRect rect) {
+        // FOR CHARACTER
         this->object = object;
 
         this->texture = *texture;
 
+        this->origin = origin;
         this->rect = rect;
         this->scale = scale;
-
-        this->origin = sf::Vector2f(32 - 8, 32 - 8);
     }
 
     ~GameObjectAndTextureInfo() {
@@ -590,77 +576,77 @@ public:
 
         gameObjectsAndTexturesInfo.clear();
 
-        for (int i = 0; i < countOfBasicWater - 1; i++) {
-
-            // WATER_TERRAIN
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 0]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 2]));
-            
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 3]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 4]));
-
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 3]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 4]));
-
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 3]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 4]));
-
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 5]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 6]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 6]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 6]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 7]));
-
-            gameObjectsAndTexturesInfo.push_back(nullptr);
-            gameObjectsAndTexturesInfo.push_back(nullptr);
-            gameObjectsAndTexturesInfo.push_back(nullptr);
-            gameObjectsAndTexturesInfo.push_back(nullptr);
-            gameObjectsAndTexturesInfo.push_back(nullptr);
+        for (int i = 1; i < countOfBasicWater; i++) {
 
             // TERRAIN_WATER
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 8]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 9]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 9]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 9]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 10]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 8]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 9]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 9]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 9]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 10]));
 
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 11]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 12]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 11]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 12]));
 
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 11]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 12]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 11]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 12]));
 
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 11]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i + 1]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 12]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 11]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[i]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 12]));
 
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 13]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 14]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 14]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 14]));
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + i * 16 + 15]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 13]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 14]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 14]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 14]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 15]));
 
-            if (i != countOfBasicWater - 2) {
+            gameObjectsAndTexturesInfo.push_back(nullptr);
+            gameObjectsAndTexturesInfo.push_back(nullptr);
+            gameObjectsAndTexturesInfo.push_back(nullptr);
+            gameObjectsAndTexturesInfo.push_back(nullptr);
+            gameObjectsAndTexturesInfo.push_back(nullptr);
+
+            // WATER_TERRAIN
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 0]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 2]));
+            
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 3]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 4]));
+
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 3]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 4]));
+
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 3]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(terrainGameObjects[1]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 4]));
+
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 5]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 6]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 6]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 6]));
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(waterGameObjects[countOfBasicWater + (i - 1) * 16 + 7]));
+
+            if (i < countOfBasicWater - 1) {
                 gameObjectsAndTexturesInfo.push_back(nullptr);
                 gameObjectsAndTexturesInfo.push_back(nullptr);
                 gameObjectsAndTexturesInfo.push_back(nullptr);
@@ -986,7 +972,7 @@ public:
                     rect.width = std::min(part_size - 16, float(texture->getSize().x - x - 8));
                     rect.height = std::min(part_size - 16, float(texture->getSize().y - y - 8));
 
-                    gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(building, texture, sf::Vector2f(1, 1), rect));
+                    gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(building, texture, sf::Vector2f(32-8,32-8), sf::Vector2f(1, 1), rect));
 
                 }
             }
@@ -996,8 +982,19 @@ public:
     void setCharactersToPalette() {
         gameObjectsAndTexturesInfo.clear();
 
+        sf::IntRect rect(8, 8, 48, 48);
+        int i = 0;
         for (auto& c : characters_prefabs) {
-            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(c, &c->renderTexture->getTexture(), sf::Vector2f(1, 1), sf::IntRect(0, 0, 64, 64)));
+            
+            gameObjectsAndTexturesInfo.push_back(new GameObjectAndTextureInfo(c, &c->renderTexture->getTexture(), sf::Vector2f(32, 32 - 8), sf::Vector2f(1, 1), sf::IntRect(0, 0, 48, 48)));
+            i++;
+
+            if (i == 4) {
+                gameObjectsAndTexturesInfo.push_back(nullptr);
+                i = 0;
+            }
+                
+            
         }
 
     }

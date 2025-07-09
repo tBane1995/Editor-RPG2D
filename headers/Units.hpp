@@ -413,8 +413,9 @@ public:
 
 	sf::Vector2f target; 
 
-	Unit(std::wstring name, std::wstring body, float width, float length, float height) : GameObject(name, width, length, height, true, ColliderType::Elipse) {
+	Unit(std::wstring name, std::wstring body, float width, float length, float height) : GameObject(width, length, height, true, ColliderType::Elipse) {
 
+		this->name = name;
 		this->body = body;
 
 		attributes[Attribute::HP] = 40;
@@ -574,40 +575,26 @@ public:
 		view_range_area.setScale(1.0f, colliders[0]->length / colliders[0]->width);
 	}
 
-	virtual void idling() {
-
+	void generateNextFrame() {
 		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
 			(frame == 3) ? frame = 0 : frame += 1;
 			last_action_time = currentTime;
 		}
-		
-		texture = idleTextures[direction * 4 + frame];
+
 		sprite.setTexture(*texture->texture);
 		setPosition(position);
+	}
+
+	virtual void idling() {
+
 	}
 
 	virtual void running() {
 
-		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
-			(frame == 3) ? frame = 0 : frame += 1;
-			last_action_time = currentTime;
-		}
-
-		texture = runTextures[direction * 4 + frame];
-		sprite.setTexture(*texture->texture);
-		setPosition(position);
 	}
 
 	virtual void attacking() {
 
-		if ((currentTime - last_action_time).asSeconds() > 0.2f) {
-			(frame == 3) ? frame = 0 : frame += 1;
-			last_action_time = currentTime;
-		}
-
-		texture = attackTextures[direction * 4 + frame];
-		sprite.setTexture(*texture->texture);
-		setPosition(position);
 	}
 
 	

@@ -191,7 +191,7 @@ public:
 	}
 
 	GameObject(std::wstring name, float width, float length, float height, float width_left, float width_right) {
-		// CREATE PREFAB: DOORS/GATES
+		// CREATE DOORS/GATES PREFAB
 		this->name = name;
 
 		textures = getAnimation(name);
@@ -228,6 +228,38 @@ public:
 		isInTheMainList = false;
 		isVisible = false;
 		isSelected = false;
+	}
+
+	GameObject(float width, float length, float height, bool collisioning, ColliderType col_type) {
+		// CREATE CHARACTER PREFAB
+		this->name = L"character";
+
+		textures.clear();
+
+		mesh = nullptr;
+
+		type = GameObjectType::GameObject;
+		position.x = 0;
+		position.y = 0;
+		this->height = height;
+
+		frame = 0;
+		last_action_time = currentTime;
+
+		sprite = sf::Sprite();
+
+		this->collisioning = collisioning;
+		colliders.clear();
+		colliders.push_back(new Collider(width, length, position, 0, 0, col_type));
+
+		mouseIsHover = false;
+
+		createTextname();
+
+		isInTheMainList = false;
+		isVisible = false;
+		isSelected = false;
+
 	}
 
 	GameObject(GameObject* go) {
@@ -296,7 +328,11 @@ public:
 		isSelected = false;
 	}
 
+	
+
 	GameObject(GameObjectType object_type, short id, float x, float y) {
+
+		// CREATE NEW BUILDING OR CHARACTER ON MAP
 
 		if (object_type == GameObjectType::Building) {
 			this->name = L"building_" + to_wstring(id);

@@ -138,30 +138,31 @@ void createWaterPrefabs() {
 
 	waterGameObjects.push_back(new WaterPrefab(L"empty", 0, nullptr));
 	waterGameObjects.push_back(new WaterPrefab(L"palette_lake", 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[0])));
-	countOfBasicWater = 2;
+	waterGameObjects.push_back(new WaterPrefab(L"swamp", 2, dynamic_cast<TerrainPrefab*>(terrainGameObjects[0])));
+	countOfBasicWater = 3;
 
 	/////////////////////////////////////////////////////
-	for (int i = 0; i < countOfBasicWater; i++) {
+	for (int i = 1; i < countOfBasicWater; i++) {
 
-		std::wstring shader_name = waterGameObjects[i + 1]->name;
+		std::wstring shader_name = waterGameObjects[i]->name;
 
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 0])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 1])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 2])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 3])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 4])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 5])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 6])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 7])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 0])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 1])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 2])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 3])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 4])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 5])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 6])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 7])));
 
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 8])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 9])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 10])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 11])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 12])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 13])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 14])));
-		waterGameObjects.push_back(new WaterPrefab(shader_name, i + 1, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + i * 16 + 15])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 8])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 9])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 10])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 11])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 12])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 13])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 14])));
+		waterGameObjects.push_back(new WaterPrefab(shader_name, i, dynamic_cast<TerrainPrefab*>(terrainGameObjects[countOfBasicTerrain + 15])));
 
 	}
 

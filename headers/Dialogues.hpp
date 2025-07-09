@@ -173,7 +173,7 @@ Dialogue* getDialogue(int id) {
 		if (d->id == id)
 			return d;
 
-	cout << "incorrect dialog id\n";
+	//wcout << L"incorrect dialog id: " << id << L"\n";
 	return nullptr;
 }
 
