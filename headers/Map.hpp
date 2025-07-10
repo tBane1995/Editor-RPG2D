@@ -1838,8 +1838,20 @@ public:
                         for (short x = 0; x < 16; x++) {
                             short t_val = reader.read_short();
                             ch->terrain->edit(x, y, t_val);
-                            (t_val == 0 || (t_val >= countOfBasicTerrain && t_val < countOfBasicTerrain + 16)) ? ch->lake->edit(x, y, t_val) : ch->lake->edit(x, y, -1);
+                        }
+                    }
 
+                    for (short y = 0; y < 16; y++) {
+                        for (short x = 0; x < 16; x++) {
+                            short t_val = reader.read_short();
+                            ch->lake->edit(x, y, t_val);
+                        }
+                    }
+
+                    for (short y = 0; y < 16; y++) {
+                        for (short x = 0; x < 16; x++) {
+                            short t_val = reader.read_short();
+                            ch->swamp->edit(x, y, t_val);
                         }
                     }
 
