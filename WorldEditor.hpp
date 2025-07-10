@@ -113,10 +113,15 @@ void Editor() {
                     map_size += chunk->terrain->tiles.size() * sizeof(chunk->terrain->tiles.front());
                     map_size += chunk->terrain->vertexes.getVertexCount() * sizeof(sf::Vertex);
 
-                    // water
-                    map_size += sizeof(*chunk->water);
-                    map_size += chunk->water->tiles.size() * sizeof(chunk->water->tiles.front());
-                    map_size += chunk->water->vertexes.getVertexCount() * sizeof(sf::Vertex);
+                    // lake
+                    map_size += sizeof(*chunk->lake);
+                    map_size += chunk->lake->tiles.size() * sizeof(chunk->lake->tiles.front());
+                    map_size += chunk->lake->vertexes.getVertexCount() * sizeof(sf::Vertex);
+
+                    // swamp
+                    map_size += sizeof(*chunk->swamp);
+                    map_size += chunk->swamp->tiles.size() * sizeof(chunk->swamp->tiles.front());
+                    map_size += chunk->swamp->vertexes.getVertexCount() * sizeof(sf::Vertex);
 
                     // borders
                     map_size += sizeof(*chunk->borders);
@@ -1275,7 +1280,7 @@ void editTiles() {
             if (chunk != nullptr) {
 
                 chunk->terrain->edit(tp->position, tp->id);
-                chunk->water->edit(tp->position, -1);
+                chunk->lake->edit(tp->position, -1);
                 chunk->swamp->edit(tp->position, -1);
 
                 mapa->generateBorders(chunk);
@@ -1291,21 +1296,22 @@ void editTiles() {
 
             Chunk* chunk = mapa->getChunk(wp->position);
             if (chunk != nullptr) {
-                chunk->terrain->edit(wp->position, wp->terrain->id);
+                
 
                 std::wstring prefab_name = dynamic_cast<WaterPrefab*>(prefab->_object)->name;
                 //std::wcout << prefab_name << L"\n";
                 
                 if (prefab_name == L"palette_lake") {
-                    chunk->water->edit(wp->position, wp->terrain->id);
+                    chunk->terrain->edit(wp->position, wp->terrain->id);
+                    chunk->lake->edit(wp->position, wp->terrain->id);
                     chunk->swamp->edit(wp->position, -1);
                 }
-
+                
                 if (prefab_name == L"palette_swamp") {
-                    chunk->water->edit(wp->position, -1);
+                    chunk->terrain->edit(wp->position, wp->terrain->id);
+                    chunk->lake->edit(wp->position, -1);
                     chunk->swamp->edit(wp->position, wp->terrain->id);
                     cout << wp->terrain->id << "\n";
-                    
                 }
 
                 mapa->generateBorders(chunk);

@@ -11,7 +11,7 @@ public:
 
 	WaterPrefab(std::wstring name, short id, TerrainPrefab* terrain) : GameObject(name) {
 		GameObject::type = GameObjectType::Water;
-
+		
 		this->terrain = terrain;
 		this->id = id;
 

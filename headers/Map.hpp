@@ -5,7 +5,7 @@ class Chunk {
 public:
     sf::Vector2i coords;
     Terrain* terrain;
-    Water* water;
+    Water* lake;
     Water* swamp;
     Borders* borders;
 
@@ -32,7 +32,7 @@ public:
         coords.y = y;
 
         terrain = new Terrain(x * 16, y * 16, 16, 16);
-        water = new Water(WaterType::Lake, x * 16, y * 16, 16, 16);
+        lake = new Water(WaterType::Lake, x * 16, y * 16, 16, 16);
         swamp = new Water(WaterType::Swamp, x * 16, y * 16, 16, 16);
         borders = new Borders();
 
@@ -98,7 +98,7 @@ public:
 
 
         delete terrain;
-        delete water;
+        delete lake;
         delete swamp;
     }
 
@@ -451,9 +451,9 @@ public:
     void draw() {
         renderer->getTheCurrentFrame()->draw(*terrain);
 
-        water->update();    // TO-DO
+        lake->update();    // TO-DO
         swamp->update();
-        renderer->getTheCurrentFrame()->draw(*water);
+        renderer->getTheCurrentFrame()->draw(*lake);
         renderer->getTheCurrentFrame()->draw(*swamp);
 
         if (renderer->WE_renderTilesBorders == true)
@@ -645,13 +645,29 @@ public:
 
             for (short y = 0; y < 16; y++) {
                 for (short x = 0; x < 16; x++) {
-
                     file << chunk->terrain->tiles[y * 16 + x];
+                    if (x != 15)
+                        file << " ";
+                }
+                file << "\n";
+            }
+
+            for (short y = 0; y < 16; y++) {
+                for (short x = 0; x < 16; x++) {
+                    file << chunk->lake->tiles[y * 16 + x];
 
                     if (x != 15)
                         file << " ";
                 }
+                file << "\n";
+            }
 
+            for (short y = 0; y < 16; y++) {
+                for (short x = 0; x < 16; x++) {
+                    file << chunk->swamp->tiles[y * 16 + x];
+                    if (x != 15)
+                        file << " ";
+                }
                 file << "\n";
             }
 
@@ -889,6 +905,21 @@ public:
                 }
             }
 
+            // save lake
+            Water* lak = chunk->lake;
+            for (short y = 0; y < 16; y++) {
+                for (short x = 0; x < 16; x++) {
+                    writer.write_short(lak->tiles[y * 16 + x]);
+                }
+            }
+
+            // save swamp
+            Water* swm = chunk->swamp;
+            for (short y = 0; y < 16; y++) {
+                for (short x = 0; x < 16; x++) {
+                    writer.write_short(swm->tiles[y * 16 + x]);
+                }
+            }
 
             // save objects
             writer.write_uint32(chunk->getAllGameObjects().size());
@@ -1041,7 +1072,7 @@ public:
 
         for (auto& chunk : chunks) {
             rtex.draw(*chunk->terrain);
-            rtex.draw(*chunk->water);
+            rtex.draw(*chunk->lake);
             rtex.draw(*chunk->swamp);
         
         }
@@ -1263,71 +1294,55 @@ public:
                             chunks.push_back(chunk);
                         }
 
-                        // check the correct of datas
-                        std::streampos pos = file.tellg(); // Zapisanie pozycji linii
-                        bool correct_data = true;
-                        std::string _line;
-                        int y = 0;
-                        int x;
+                        
 
-                        while (std::getline(file, _line) && _line[0] >= '0' && _line[0] <= '9') {
+                        // load the tiles
+                        short y = 0;
+                        while (y < 16 && std::getline(file, line)) {
 
-                            std::istringstream iss(_line);
-                            int val;
-                            x = 0;
+                            std::istringstream tileStream(line);
+                            short value;
+                            short x = 0;
 
-                            while (iss >> val)
+                            while (tileStream >> value) {
+                                chunk->terrain->edit(x, y, value);
                                 x += 1;
-
-                            if (x != 16) {
-                                //cout << x << "\n";
-                                correct_data = false;
                             }
-
                             y += 1;
-                        };
-
-                        if (y != 16) {
-                            //cout << y << "\n";
-                            correct_data = false;
                         }
 
-                        // predefine tiles
-                        std::vector < short > tiles(256, 0);
+                        // load the lake
+                        y = 0;
+                        while (y < 16 && std::getline(file, line)) {
 
-                        if (correct_data == true) {
-                            file.seekg(pos); // wczytanie pozycji linii
+                            std::istringstream tileStream(line);
+                            short value;
+                            short x = 0;
 
-                            // load tiles
-                            short y = 0;
-                            while (y < 16 && std::getline(file, line)) {
-
-                                std::istringstream tileStream(line);
-                                short value;
-                                short x = 0;
-
-                                while (tileStream >> value) {
-                                    tiles[y * 16 + x] = value;
-                                    x += 1;
-                                }
-
-                                y += 1;
+                            while (tileStream >> value) {
+                                chunk->lake->edit(x, y, value);
+                                x += 1;
                             }
-
-                            // set the tiles
-                            for (short i = 0; i < tiles.size(); i++) {
-
-                                chunk->terrain->edit(i % 16, i / 16, tiles[i]);
-
-                                // TO-DO
-                                if (tiles[i] == 0 || (tiles[i] >= countOfBasicTerrain && tiles[i] < countOfBasicTerrain + 16)) {
-                                    chunk->water->edit(i % 16, i / 16, tiles[i]);
-                                }
-                                else
-                                    chunk->water->edit(i % 16, i / 16, -1);
-
-                            }
+                            y += 1;
                         }
+
+                        // load the swamp
+                        y = 0;
+                        while (y < 16 && std::getline(file, line)) {
+
+                            std::istringstream tileStream(line);
+                            short value;
+                            short x = 0;
+
+                            while (tileStream >> value) {
+                                chunk->swamp->edit(x, y, value);
+                                x += 1;
+                            }
+                            y += 1;
+                        }
+
+                        
+
                     }
                 }
                 else {
@@ -1823,7 +1838,7 @@ public:
                         for (short x = 0; x < 16; x++) {
                             short t_val = reader.read_short();
                             ch->terrain->edit(x, y, t_val);
-                            (t_val == 0 || (t_val >= countOfBasicTerrain && t_val < countOfBasicTerrain + 16)) ? ch->water->edit(x, y, t_val) : ch->water->edit(x, y, -1);
+                            (t_val == 0 || (t_val >= countOfBasicTerrain && t_val < countOfBasicTerrain + 16)) ? ch->lake->edit(x, y, t_val) : ch->lake->edit(x, y, -1);
 
                         }
                     }
