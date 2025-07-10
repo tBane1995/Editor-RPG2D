@@ -48,6 +48,7 @@ void loadShaders() {
 	loadShader(L"shaders\\river", L"shaders\\vertex.vert", L"shaders\\river.frag");
 	loadShader(L"shaders\\swamp", L"shaders\\vertex.vert", L"shaders\\swamp.frag");
 	loadShader(L"shaders\\palette_lake", L"shaders\\vertex.vert", L"shaders\\palette_lake.frag");
+	loadShader(L"shaders\\palette_swamp", L"shaders\\vertex.vert", L"shaders\\palette_swamp.frag");
 	loadShader(L"shaders\\shadow", L"shaders\\vertex.vert", L"shaders\\shadow.frag");
 	loadShader(L"shaders\\renderer.frag");
 	loadShader(L"shaders\\highlighted.frag");
@@ -71,27 +72,33 @@ void updateShaders() {
 
 	sf::Vector2f resolution(screenWidth, screenHeight);
 
-	//for(auto & s : shaders)
-		//s->shader->setUniform("time", currentTime.asSeconds());
+	for(auto & s : shaders)
+		s->shader->setUniform("time", currentTime.asSeconds());
+
+	Shader* s;
 
 	// lake shader
-	Shader* s = getShader(L"shaders\\lake");
+	s = getShader(L"shaders\\lake");
 	s->shader->setUniform("resolution", resolution);
 
-	// palette_lak
-	s = getShader(L"shaders\\palette_lake");
+	// swamp shader
+	s = getShader(L"shaders\\swamp");
 	s->shader->setUniform("resolution", resolution);
-	s->shader->setUniform("camPosition", cam->position);
 
 	// river
 	s = getShader(L"shaders\\river");
 	s->shader->setUniform("resolution", resolution);
 	s->shader->setUniform("direction", sf::Vector2f(1.0f, -1.0f));
 
-	// swamp
-	s = getShader(L"shaders\\swamp");
+	// palette_lak
+	s = getShader(L"shaders\\palette_lake");
 	s->shader->setUniform("resolution", resolution);
-	s->shader->setUniform("time", currentTime.asSeconds());
+	s->shader->setUniform("camPosition", cam->position);
+
+	// palette swamp
+	s = getShader(L"shaders\\palette_swamp");
+	s->shader->setUniform("resolution", resolution);
+	s->shader->setUniform("camPosition", cam->position);
 }
 
 

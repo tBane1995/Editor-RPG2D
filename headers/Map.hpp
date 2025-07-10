@@ -6,6 +6,7 @@ public:
     sf::Vector2i coords;
     Terrain* terrain;
     Water* water;
+    Water* swamp;
     Borders* borders;
 
     sf::RectangleShape frame;
@@ -31,7 +32,8 @@ public:
         coords.y = y;
 
         terrain = new Terrain(x * 16, y * 16, 16, 16);
-        water = new Water(x * 16, y * 16, 16, 16);
+        water = new Water(WaterType::Lake, x * 16, y * 16, 16, 16);
+        swamp = new Water(WaterType::Swamp, x * 16, y * 16, 16, 16);
         borders = new Borders();
 
         short frameWidth = 2;
@@ -43,7 +45,7 @@ public:
 
         coordsText = sf::Text();
         coordsText.setFont(basicFont);
-        coordsText.setCharacterSize(16);
+        coordsText.setCharacterSize(17);
         coordsText.setString(std::to_string(coords.x) + " x " + std::to_string(coords.y));
         coordsText.setFillColor(dialoguesColor);
         coordsText.setPosition(coords.x * 256, coords.y * 256);
@@ -97,6 +99,7 @@ public:
 
         delete terrain;
         delete water;
+        delete swamp;
     }
 
     void addGameObjectsToMainLists() {
@@ -449,7 +452,9 @@ public:
         renderer->getTheCurrentFrame()->draw(*terrain);
 
         water->update();    // TO-DO
+        swamp->update();
         renderer->getTheCurrentFrame()->draw(*water);
+        renderer->getTheCurrentFrame()->draw(*swamp);
 
         if (renderer->WE_renderTilesBorders == true)
             renderer->getTheCurrentFrame()->draw(*borders);
@@ -1037,6 +1042,7 @@ public:
         for (auto& chunk : chunks) {
             rtex.draw(*chunk->terrain);
             rtex.draw(*chunk->water);
+            rtex.draw(*chunk->swamp);
         
         }
 
